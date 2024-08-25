@@ -5,7 +5,7 @@
       <div class="col-6">
         <img
           class="float-lg-right"
-          src="@/assets/imgs/new.jpg"
+          src="@/assets/img/new.jpg"
           alt="home-img"
           title="home-img"
           loading="lazy"
@@ -38,7 +38,7 @@
       </div>
       <div class="col-6">
         <img
-          src="@/assets/imgs/33.jpg"
+          src="@/assets/img/33.jpg"
           alt="home-img-2"
           title="home-img-2"
           loading="lazy"

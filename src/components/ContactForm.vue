@@ -8,7 +8,7 @@
         >
           <img
             class="img-fluid"
-            src="@/assets/imgs/speaker.jpg"
+            src="@/assets/img/speaker.jpg"
             alt="speaker"
             title="speaker"
           />
@@ -84,7 +84,7 @@ form {
   position: relative;
   border-radius: 0;
   resize: none;
-  scroll-behavior: none;
+  scroll-behavior: smooth;
 }
 
 .form-group input:valid ~ label,

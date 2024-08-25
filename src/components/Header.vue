@@ -8,6 +8,7 @@ import Logo from '@/components/Header/Logo.vue'
 import SearchBar from '@/components/Header/SearchBar.vue'
 import Profile from '@/components/Header/Profile.vue'
 import CartButton from '@/components/Header/CartButton.vue'
+import UserModal from '@/components/Header/UserModal.vue'
 
 // vars
 const cart = ref(false)
@@ -31,7 +32,7 @@ const cartState = () => (cart.value = !cart.value)
       </div>
     </nav>
     <!--User Modal-->
-    <!--    <UserModal />-->
+    <UserModal />
     <!--Cart Component-->
     <Cart :is-open="cart" @closeCart="cartState" />
   </div>
@@ -49,6 +50,8 @@ nav {
   background-color: #f8f8f8;
   padding-left: 20px;
   padding-right: 20px;
+  outline: 1px solid red;
+  margin: 1rem;
 }
 
 .navbar-group {

@@ -3,7 +3,7 @@ import { RouterLink } from 'vue-router'
 </script>
 
 <template>
-  <div class="dropdown d-xl-none d-lg-none mr-auto">
+  <div class="dropdown is-hidden-desktop is-pulled-left">
     <img
       src="https://img.icons8.com/office/35/menu--v1.png"
       width="28"

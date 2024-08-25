@@ -8,7 +8,7 @@
 .search {
   outline: none;
   border: 1px #f8f8f8;
-  background: #ededed url('@/assets/imgs/search.png') no-repeat 5px center;
+  background: #ededed url('@/assets/img/search.png') no-repeat 5px center;
   padding: 5px 8px 4px 26px;
   width: 10px;
   -webkit-border-radius: 10em;
@@ -30,7 +30,7 @@
     -moz-box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
     box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
     backface-visibility: hidden;
-    perspective: 1000;
+    //perspective: 1000;
   }
 }
 </style>

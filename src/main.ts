@@ -4,6 +4,7 @@ import { createHead } from '@vueuse/head'
 import './assets/styles/main.scss'
 import App from './App.vue'
 import router from '@/router'
+import 'bulma/css/bulma.css'
 
 const pinia = createPinia()
 const app = createApp(App)
