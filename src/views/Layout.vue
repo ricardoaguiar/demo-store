@@ -45,5 +45,14 @@ useHead({
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  margin: 2rem auto;
+  max-width: 1200px;
+  outline: 1px dashed green;
+  padding: 1rem;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background: rgba(211, 211, 211, 0.5);
 }
 </style>
