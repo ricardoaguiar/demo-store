@@ -21,4 +21,7 @@ export default defineConfig({
       '@types': fileURLToPath(new URL('./types', import.meta.url)), // add this for types
     },
   },
+  build: {
+    outDir: 'dist',
+  },
 })
