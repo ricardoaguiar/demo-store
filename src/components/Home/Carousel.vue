@@ -1,7 +1,9 @@
 <template>
-  <!--  <section class="section">-->
-  <div id="heroControls" class="carousel" data-bs-ride="carousel">
-    <div class="carousel-content">
+  <section class="carousel">
+    <div
+      class="carousel-content"
+      :style="{ transform: `translateX(${-100 * activeIndex}%)` }"
+    >
       <div
         v-for="(slide, index) in slides"
         :key="index"
@@ -19,15 +21,14 @@
       <button
         v-for="(slide, index) in slides"
         :key="index"
-        type="button"
         :data-slide-to="index"
         :class="['carousel-indicator', { 'is-active': index === activeIndex }]"
         @click="goToSlide(index)"
         :aria-label="'Slide ' + (index + 1)"
-      />
+        type="button"
+      ></button>
     </div>
-  </div>
-  <!--  </section>-->
+  </section>
 </template>
 
 <script setup lang="ts">
@@ -45,52 +46,39 @@ const getImageSrc = (path: string, ext: string): string => {
   return useAsset(path, ext)
 }
 
-const goToSlide = (index) => {
+const goToSlide = (index: number): void => {
   activeIndex.value = index
 }
 </script>
 
 <style scoped>
-/*.img-fluid {
-  min-width: 800px !important;
-  outline: 1px dashed maroon;
-}
-
-.carousel-indicators button {
-  background-color: white;
-  height: 20px;
-  width: 20px;
-  border-radius: 30px;
-  border: 0.6px solid rgb(129, 127, 127);
-}
-
-.carousel-indicators > .active {
-  background: #e0f0f8;
-}
-.carousel {
-  outline: 1px solid red;
-}*/
-
 .carousel {
   position: relative;
   overflow: hidden;
-  outline: 1px solid tomato;
-  margin: 1rem;
+  background: transparent;
+  padding-bottom: 0.5rem;
+  border: 1px solid #817f7f;
+  margin-block: 1rem;
 }
 
 .carousel-content {
   display: flex;
   transition: transform 0.5s ease;
+  width: 100%;
 }
 
 .carousel-item {
+  flex: 1 0 100%;
   min-width: 100%;
   transition: opacity 0.5s ease;
   opacity: 0;
+  position: relative;
 }
 
 .carousel-item.is-active {
   opacity: 1;
+  position: relative;
+  z-index: 1;
 }
 
 .carousel-indicators {
