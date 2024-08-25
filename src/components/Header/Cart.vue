@@ -37,7 +37,7 @@ const cart = defineProps({
       :class="['modal', cart.isOpen ? '' : 'off']"
       @click="$emit('closeCart')"
     >
-      <CartButton />
+      <!--      <CartButton />-->
     </div>
   </div>
 </template>
