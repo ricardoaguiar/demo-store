@@ -3,6 +3,7 @@ import { useMainStore } from '@/store'
 import Item from '@/components/Cart/Item.vue'
 import Notification from '@/components/Notification.vue'
 import CartButton from '@/components/Header/CartButton.vue'
+import Total from '@/components/Cart/Total.vue'
 
 const store = useMainStore()
 
@@ -35,7 +36,9 @@ const cart = defineProps({
     <div
       :class="['modal', cart.isOpen ? '' : 'off']"
       @click="$emit('closeCart')"
-    ></div>
+    >
+      <CartButton />
+    </div>
   </div>
 </template>
 
@@ -75,7 +78,7 @@ const cart = defineProps({
 /* Cart Body */
 .cart {
   position: fixed;
-  margin-right: 0px;
+  margin-right: 0;
   top: 0;
   right: 0;
   width: 360px;

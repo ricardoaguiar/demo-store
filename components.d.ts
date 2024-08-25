@@ -15,7 +15,6 @@ declare module 'vue' {
     Carousel: typeof import('./src/components/Home/Carousel.vue')['default']
     Cart: typeof import('./src/components/Header/Cart.vue')['default']
     CartButton: typeof import('./src/components/Header/CartButton.vue')['default']
-    Contact: typeof import('./src/views/Contact.vue')['default']
     ContactForm: typeof import('./src/components/ContactForm.vue')['default']
     DropDownFilters: typeof import('./src/components/Products/DropDownFilters.vue')['default']
     FilterBar: typeof import('./src/components/Products/FilterBar.vue')['default']

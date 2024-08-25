@@ -24,6 +24,7 @@
 <script setup lang="ts">
 import { Product } from '@/types'
 import { useMainStore } from '@/store'
+import { useAsset } from '@/composables'
 
 const store = useMainStore()
 
@@ -35,7 +36,7 @@ defineProps<{
 <style scoped lang="scss">
 .remove-btn {
   border-radius: 50%;
-  content: url('@/assets/imgs/imgs/multiply.png');
+  content: url('@/assets/imgs/multiply.png');
 
   :hover {
     background-color: grey;
