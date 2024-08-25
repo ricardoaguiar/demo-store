@@ -36,7 +36,7 @@ defineProps<{
 <style scoped lang="scss">
 .remove-btn {
   border-radius: 50%;
-  content: url('@/assets/imgs/multiply.png');
+  content: url('@/assets/img/multiply.png');
 
   :hover {
     background-color: grey;

@@ -87,7 +87,7 @@
               width="35"
               height="25"
               loading="lazy"
-              src="@/assets/imgs/twitter.png"
+              src="@/assets/img/twitter.png"
               alt="twitter-icon"
               title="twitter-icon"
             />
@@ -95,7 +95,7 @@
               width="35"
               height="25"
               loading="lazy"
-              src="@/assets/imgs/pinterest.png"
+              src="@/assets/img/pinterest.png"
               alt="pinterest-icon"
               title="pinterest-icon"
             />
@@ -103,7 +103,7 @@
               width="35"
               height="25"
               loading="lazy"
-              src="@/assets/imgs/facebook.png"
+              src="@/assets/img/facebook.png"
               alt="facebook-icon"
               title="facebook-icon"
             />
@@ -111,7 +111,7 @@
               width="35"
               height="25"
               loading="lazy"
-              src="@/assets/imgs/insta.png"
+              src="@/assets/img/insta.png"
               alt="instagram-icon"
               title="instagram-icon"
             />
