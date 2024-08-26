@@ -52,6 +52,15 @@ nav {
 .navbar-group {
   gap: 1rem;
 }
+@media only screen and (max-width: 768px) {
+  .navbar {
+    position: sticky;
+    top: 0;
+  }
+  .navbar-group {
+    margin-block: 0.75rem;
+  }
+}
 
 .navbar-item a {
   margin-left: 13px;
