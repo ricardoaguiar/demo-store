@@ -4,6 +4,8 @@
 
 <script setup lang="ts">
 import { useHead } from '@vueuse/head'
+
+// components
 import ContactForm from '@/components/ContactForm.vue'
 
 useHead({
