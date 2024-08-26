@@ -57,8 +57,6 @@ const goToSlide = (index: number): void => {
   overflow: hidden;
   background: transparent;
   padding-bottom: 0.5rem;
-  border: 1px solid #817f7f;
-  margin-block: 1rem;
 }
 
 .carousel-content {
@@ -84,7 +82,7 @@ const goToSlide = (index: number): void => {
 .carousel-indicators {
   display: flex;
   justify-content: center;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 .carousel-indicator {

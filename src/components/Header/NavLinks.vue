@@ -1,5 +1,7 @@
 <template>
-  <div class="navbar-item bc d-none d-xl-block d-lg-block py-0">
+  <div
+    class="navbar-item is-hidden-mobile bc d-none d-xl-block d-lg-block py-0"
+  >
     <RouterLink :to="link.Link" v-for="(link, idx) in navLinks" :id="idx">{{
       link.name
     }}</RouterLink>

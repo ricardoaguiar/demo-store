@@ -17,20 +17,20 @@ const routes = [
         meta: { title: 'Home' },
       },
       {
-        path: 'products',
+        path: '/products',
         name: 'Products',
         component: Products,
         meta: { title: 'Products' },
       },
       {
-        path: 'products/:id',
+        path: '/products/:id',
         name: 'ProductDetails',
         component: Details,
-        props: true, // Allow route params to be passed as props
+        props: true,
         meta: { title: 'Product Details' },
       },
       {
-        path: 'contact',
+        path: '/contact',
         name: 'Contact',
         component: Contact,
         meta: { title: 'Contact Us' },

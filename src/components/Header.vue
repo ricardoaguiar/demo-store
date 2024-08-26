@@ -10,22 +10,24 @@ import Profile from '@/components/Header/Profile.vue'
 import CartButton from '@/components/Header/CartButton.vue'
 import UserModal from '@/components/Header/UserModal.vue'
 
-// vars
+// Reactive cart state
 const cart = ref(false)
 
-// functions
+// Toggle cart state
 const cartState = () => (cart.value = !cart.value)
 </script>
 
 <template>
   <div>
-    <nav class="navbar">
+    <nav
+      class="navbar is-flex is-align-items-center is-justify-content-space-between"
+    >
       <MobileMenu />
-      <div class="navbar-group">
+      <div class="navbar-group is-flex is-align-items-center">
         <Logo />
         <NavLinks />
       </div>
-      <div class="navbar-group">
+      <div class="navbar-group is-flex is-align-items-center">
         <SearchBar />
         <Profile />
         <CartButton @open="cartState" />
@@ -38,45 +40,32 @@ const cartState = () => (cart.value = !cart.value)
   </div>
 </template>
 
-<style lang="scss">
+<style scoped>
 nav {
   z-index: 100;
 }
 
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid #dcdcdc;
-  background-color: #f8f8f8;
-  padding-left: 20px;
-  padding-right: 20px;
-  outline: 1px solid red;
-  margin: 1rem;
+  padding: 1rem;
 }
 
 .navbar-group {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  gap: 1rem;
 }
 
-.navbar-item {
-  a {
-    margin-left: 13px;
-    font-size: 17px;
-    text-decoration: none;
-    color: black;
-  }
-
-  .bc {
-    a:hover,
-    a:active {
-      color: #ffd700;
-    }
-  }
+.navbar-item a {
+  margin-left: 13px;
+  font-size: 17px;
+  text-decoration: none;
+  color: black;
 }
 
-.close {
+.navbar-item .bc a:hover,
+.navbar-item .bc a:active {
+  color: #ffd700;
+}
+
+/*.close {
   position: relative;
   bottom: 20px;
   left: 10px;
@@ -90,7 +79,6 @@ nav {
 
 form .btn-xl.btn-success.mt-3 {
   position: relative;
-  -webkit-transition-duration: 100ms;
   transition-duration: 100ms;
   width: 100%;
   height: 50px;
@@ -100,9 +88,5 @@ form .btn-xl.btn-success.mt-3 {
   box-shadow:
     0 26px 38px 0 rgba(0, 0, 0, 0.2),
     0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.user {
-  cursor: pointer;
-}
+}*/
 </style>

@@ -1,160 +1,104 @@
 <template>
-  <footer class="footer_area">
-    <div class="container">
-      <div class="row justify-content-between">
-        <div class="col-3 col-xl-2 col-lg-3 col-md-3 col-sm-3">
-          <div class="footer-widget">
-            <div class="footer-title">Navigate</div>
-            <ul class="list-unstyled">
-              <RouterLink to="/">
-                <li>About Us</li>
-              </RouterLink>
-              <RouterLink to="/">
-                <li>Blog</li>
-              </RouterLink>
-              <RouterLink to="/">
-                <li>Contact Us</li>
-              </RouterLink>
-              <RouterLink to="/">
-                <li>Sitemap</li>
-              </RouterLink>
-            </ul>
-          </div>
-        </div>
+  <footer class="grid footer has-background-light">
+    <div class="grid links">
+      <div v-for="(section, index) in footerData.sections" :key="index">
+        <h3 class="title is-5">{{ section.title }}</h3>
+        <ul class="links-list">
+          <li v-for="(link, linkIndex) in section.links" :key="linkIndex">
+            <RouterLink :to="link.url">{{ link.text }}</RouterLink>
+          </li>
+        </ul>
+      </div>
+    </div>
 
-        <div class="col-3 col-xl-2 col-lg-3 col-md-3 col-sm-3">
-          <div class="footer-widget">
-            <div class="footer-title">Collection</div>
-            <ul class="list-unstyled">
-              <RouterLink to="/products">
-                <li>New arrivals</li>
-              </RouterLink>
-              <RouterLink to="/products">
-                <li>Featured</li>
-              </RouterLink>
-              <RouterLink to="/products">
-                <li>Catalog</li>
-              </RouterLink>
-              <RouterLink to="/products">
-                <li>Brands</li>
-              </RouterLink>
-            </ul>
-          </div>
-        </div>
-
-        <div class="col-3 col-xl-2 col-lg-3 col-md-3 col-sm-3">
-          <div class="footer-widget">
-            <div class="footer-title">Categories</div>
-            <ul class="list-unstyled">
-              <RouterLink to="/products">
-                <li>Tables</li>
-              </RouterLink>
-              <RouterLink to="/products">
-                <li>Lamps</li>
-              </RouterLink>
-              <RouterLink to="/products">
-                <li>Chairs</li>
-              </RouterLink>
-              <RouterLink to="/products">
-                <li>Sofas</li>
-              </RouterLink>
-            </ul>
-          </div>
-        </div>
-
-        <div
-          class="col-12 col-xl-6 col-lg-3 col-md-3 col-sm-12 text-left text-md-right pb-5"
-        >
-          <div class="footer-widget">
-            <h3>399 Crowfield Road,</h3>
-            <h4>Phoenix, Arizona 85012</h4>
-            <a href="mailto:#">asff@fdsfsdc.com</a>
-            <h5>+602-926-5809</h5>
-          </div>
+    <div class="grid social-copyright">
+      <div class="social">
+        <h3 class="title is-5">Get Social</h3>
+        <div class="flex social-links">
+          <a
+            v-for="(social, i) in footerData.social"
+            :key="i"
+            :href="social.url"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="icon is-small"
+          >
+            <span v-html="social.icon"></span>
+          </a>
         </div>
       </div>
-
-      <div class="row justify-content-between">
-        <div class="col-xl-7 col-lg-6 col-md-6 col-sm-6 col-6">
-          <div class="tiny-footer">
-            <p>Copyright © All Rights Reserved 2020</p>
-          </div>
-        </div>
-        <div class="col-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 text-right">
-          <div class="social-info">
-            <strong>Get social</strong>
-            <img
-              width="35"
-              height="25"
-              loading="lazy"
-              src="@/assets/img/twitter.png"
-              alt="twitter-icon"
-              title="twitter-icon"
-            />
-            <img
-              width="35"
-              height="25"
-              loading="lazy"
-              src="@/assets/img/pinterest.png"
-              alt="pinterest-icon"
-              title="pinterest-icon"
-            />
-            <img
-              width="35"
-              height="25"
-              loading="lazy"
-              src="@/assets/img/facebook.png"
-              alt="facebook-icon"
-              title="facebook-icon"
-            />
-            <img
-              width="35"
-              height="25"
-              loading="lazy"
-              src="@/assets/img/insta.png"
-              alt="instagram-icon"
-              title="instagram-icon"
-            />
-          </div>
-        </div>
+      <div class="copyright">
+        <p>{{ footerData.copyright }}</p>
       </div>
     </div>
   </footer>
 </template>
 
-<style scoped lang="scss">
-.footer_area {
-  position: relative;
-  z-index: 1;
-  color: #2c3539;
-  background-color: #fefefe;
+<script setup lang="ts">
+import { FooterData } from '@/types'
+import footerDataJson from '@data/footer.json'
+const footerData = footerDataJson as FooterData
+</script>
+
+<style scoped>
+.footer {
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
 }
 
-.footer-widget {
-  padding-top: 60px;
+.footer > .links {
+  grid-column: span 3; /* Spans three columns */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
 }
 
-.footer-title {
-  padding-bottom: 20px;
-  font-weight: bold;
+.footer > .social-copyright {
+  grid-template-columns: 1fr 1fr;
+  grid-column: span 2;
+  gap: 20px;
+  align-items: end;
 }
 
-.list-unstyled {
-  a {
-    text-decoration: none;
+.footer > .social-copyright > .social {
+  text-align: left;
 
-    li {
-      color: #2c3e50;
-      margin-bottom: 10px;
-    }
+  .title {
+    margin-bottom: 0.75rem;
   }
 }
 
-.social-info > img {
-  padding-left: 10px;
+.social-links {
+  flex-direction: row;
+  justify-content: left;
+  gap: 2rem;
 }
 
-.social-info > img:hover {
-  opacity: 0.7;
+.icon.is-small {
+  height: auto;
+}
+
+.footer > .social-copyright > .copyright {
+  text-align: right;
+}
+
+@media (max-width: 600px) {
+  .footer > .links {
+    grid-template-columns: 1fr; /* Stacks links vertically on small screens */
+  }
+
+  .footer > .social-copyright {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .footer > .social-copyright > .social,
+  .footer > .social-copyright > .copyright {
+    text-align: center;
+  }
+
+  .social-links {
+    justify-content: center;
+    padding-bottom: 1rem;
+  }
 }
 </style>

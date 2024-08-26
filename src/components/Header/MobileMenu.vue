@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
+import { useAsset } from '@/composables/useAsset'
 </script>
 
 <template>
   <div class="dropdown is-hidden-desktop is-pulled-left">
     <img
-      src="https://img.icons8.com/office/35/menu--v1.png"
+      :src="useAsset('menu', 'svg')"
       width="28"
       height="28"
       data-bs-toggle="dropdown"
@@ -16,9 +17,9 @@ import { RouterLink } from 'vue-router'
       title="mobile-menu"
     />
     <div class="dropdown-menu hb" aria-labelledby="navd">
-      <RouterLink class="dropdown-item" to="/">Home</RouterLink>
-      <RouterLink class="dropdown-item" to="/Products">Products</RouterLink>
-      <!--      <RouterLink class="dropdown-item" to="/Contact">Contact us</RouterLink>-->
+      <router-link class="dropdown-item" to="/">Home</router-link>
+      <router-link class="dropdown-item" to="/Products">Products</router-link>
+      <router-link class="dropdown-item" to="/Contact">Contact us</router-link>
     </div>
   </div>
 </template>

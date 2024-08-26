@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useMainStore } from '@/store'
+import { useAsset } from '@/composables'
 
 const store = useMainStore()
 
@@ -9,36 +10,46 @@ defineEmits(['open'])
 <template>
   <div class="bag" @click="$emit('open')">
     <img
-      class="pb-1"
-      src="https://img.icons8.com/ultraviolet/70/shopping-cart.png"
+      :src="useAsset('cart', 'svg')"
       alt="move-by-trolley"
       title="cart-trolley"
+      class="image"
+      width="25"
+      height="25"
     />
-    <span class="mb-3" v-if="store.itemsNumber">{{ store.itemsNumber }}</span>
+    <span class="badge is-badge-danger" v-if="store.itemsNumber">{{
+      store.itemsNumber
+    }}</span>
   </div>
 </template>
 
 <style scoped lang="scss">
 .bag {
-  span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  .image {
+    cursor: pointer;
+    min-width: 25px;
+    min-height: 25px;
+  }
+
+  .badge {
     background-color: #6394f8;
-    border-radius: 10px;
     color: white;
-    position: absolute;
-    font-size: 15px;
+    border-radius: 50%;
+    font-size: 12px;
     line-height: 1;
-    padding: 2px 3px 3px 3px;
+    padding: 2px 5px;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    min-width: 18px;
     text-align: center;
     vertical-align: middle;
     white-space: nowrap;
-    margin-left: -9px;
-    bottom: 1rem;
-  }
-
-  img {
-    cursor: pointer;
-    width: 30px;
-    height: auto;
   }
 }
 </style>

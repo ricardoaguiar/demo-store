@@ -1,20 +1,7 @@
-<template>
-  <div>
-    <Header />
-    <slot />
-    <Newsletter v-if="route.path !== '/contact'" />
-    <router-view />
-    <Footer />
-  </div>
-</template>
-
 <script setup lang="ts">
-import { useRoute } from 'vue-router'
 import { useHead } from '@vueuse/head'
 import { useAsset } from '@/composables/useAsset'
-
-// components
-import Newsletter from '@/components/Newsletter.vue'
+import { useRoute } from 'vue-router'
 
 const route = useRoute()
 
@@ -25,7 +12,7 @@ useHead({
       property: 'og:title',
       content: `V-Store - ${route.meta.title || 'Not set'}`,
     },
-    { property: 'og:image', content: useAsset('jum1.jpg') },
+    { property: 'og:image', content: useAsset('jump1', 'jpg') },
   ],
   link: [
     {
@@ -38,6 +25,13 @@ useHead({
 })
 </script>
 
+<template>
+  <Header />
+  <slot />
+  <router-view />
+  <Footer />
+</template>
+
 <style>
 #app {
   background-color: #f8f8f8 !important;
@@ -45,14 +39,5 @@ useHead({
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  margin: 2rem auto;
-  max-width: 1200px;
-  outline: 1px dashed green;
-  padding: 1rem;
-}
-body {
-  margin: 0;
-  padding: 0;
-  background: rgba(211, 211, 211, 0.5);
 }
 </style>
