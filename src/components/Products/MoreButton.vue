@@ -1,14 +1,15 @@
 <template>
-  <div class="d-flex justify-content-center mx-5 mx-sm-0 pt-1">
+  <div class="is-flex is-justify-content-center mx-5 mx-sm-0 pt-1">
     <button
       type="button"
       @click="$emit('incrementCards')"
-      class="flex-fill button btn-outline-secondary"
+      class="button is-fullwidth is-outlined"
     >
       More +
     </button>
   </div>
 </template>
+
 <script setup lang="ts">
 defineEmits<{
   (e: 'incrementCards'): void
@@ -16,7 +17,7 @@ defineEmits<{
 </script>
 
 <style scoped>
-.btn-outline-secondary {
-  border-radius: 0 !important;
+.button {
+  border-radius: 0;
 }
 </style>

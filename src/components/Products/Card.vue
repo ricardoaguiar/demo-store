@@ -1,22 +1,21 @@
 <template>
-  <div class="row justify-content-center text-center">
-    <div
-      v-for="item in cards"
-      class="col-10 col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-4 pb-3"
-      :key="item.id"
-    >
-      <div class="card">
-        <img
-          class="card-img-top"
-          :src="useAsset(item.img as string)"
-          alt="Card-image-cap"
-          title="Card-image-cap"
-          loading="lazy"
-        />
+  <div class="products-grid">
+    <template v-for="item in store.items" :key="item.id">
+      <div class="card p-0">
+        <div class="card-image">
+          <figure class="image is-4by3">
+            <img
+              :src="useAsset(item.img)"
+              alt="Card image"
+              title="Card image"
+              loading="lazy"
+            />
+          </figure>
+        </div>
         <div class="overlay">
           <button
             type="button"
-            class="btn btn-light btn-lg"
+            class="button is-light is-large"
             @click="store.inCart(item)"
           >
             Add +
@@ -24,24 +23,27 @@
           <RouterLink :to="`/details/${item.id}`">
             <button
               type="button"
-              @click="store.addtoInfo(item.id as number)"
-              class="btn btn-light btn-lg"
+              @click="store.addToInfo(item.id as number)"
+              class="button is-light is-large"
             >
               Info
             </button>
           </RouterLink>
         </div>
-        <div class="card-body">
-          <h5 class="card-title">{{ item.title }}</h5>
-          <p class="card-text">${{ item.price }}</p>
+        <div class="card-content">
+          <h5 class="title is-5">{{ item.title }}</h5>
+          <p class="subtitle">${{ item.price }}</p>
         </div>
       </div>
-    </div>
+    </template>
   </div>
 </template>
 
 <script setup lang="ts">
-import { Product } from '../types'
+import { Product } from '@/types'
+
+import { useMainStore } from '@/store'
+import { useAsset } from '@/composables'
 
 const store = useMainStore()
 
@@ -50,28 +52,38 @@ defineProps<{
 }>()
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 1rem;
+}
+
 /* Card Style */
 .card {
   transition: 300ms;
   position: relative;
   overflow: hidden;
+  border-radius: 0.25rem;
+  margin: 0;
 
-  img {
+  .image img {
     z-index: 1;
+    transition: filter 0.3s ease-in-out;
   }
 
-  button {
+  .button {
     width: 140px;
     margin-bottom: 10px;
+    border-radius: 0.25rem;
   }
 
-  &:hover img {
+  &:hover .image img {
     filter: blur(4px);
   }
 
   &:hover .overlay {
-    opacity: 0.4;
+    opacity: 0.8;
   }
 
   .overlay {
@@ -81,19 +93,21 @@ defineProps<{
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 70%;
-    background-color: #232b34;
+    height: 100%;
+    background-color: rgba(35, 43, 52, 0.7);
     opacity: 0;
-    z-index: 100;
-    transition: all 0.3s ease-in;
+    z-index: 2;
+    transition: opacity 0.3s ease-in-out;
+    top: 0;
+    left: 0;
   }
 
   &:hover,
   &:active {
-    transform: scaleY(1.02) scaleX(1.02);
+    transform: scale(1.02);
     box-shadow:
       0 4px 10px rgba(0, 0, 0, 0.25),
-      0 0px 40px rgba(0, 0, 0, 0.22);
+      0 0 40px rgba(0, 0, 0, 0.22);
   }
 }
 </style>

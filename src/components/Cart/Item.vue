@@ -1,30 +1,24 @@
 <template>
-  <div class="col4 col-xl-4 col-lg-4 col-md-4 col-sm-4">
+  <div class="column is-4">
     <img
-      :src="useAsset(item.img!)"
-      style="width: 90px"
+      :src="item.img"
+      class="image is-96x96"
       alt="cart-item"
       title="cart-item"
     />
   </div>
-  <div class="col6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
-    <h4>{{ item.title }}</h4>
-    <h6>${{ item.price }}</h6>
+  <div class="column is-6">
+    <h4 class="title is-4">{{ item.title }}</h4>
+    <h6 class="subtitle is-6">${{ item.price }}</h6>
   </div>
-  <div class="col2 col-xl-2 col-lg-2 col-md-2 col-sm-2 pt-4">
-    <span
-      class="remove-btn"
-      style="cursor: pointer"
-      @click="store.outCart(item.id!)"
-      >remove</span
-    >
+  <div class="column is-2 pt-4">
+    <span class="remove-btn" @click="store.outCart(item.id!)">remove</span>
   </div>
 </template>
 
 <script setup lang="ts">
 import { Product } from '@/types'
 import { useMainStore } from '@/store'
-import { useAsset } from '@/composables'
 
 const store = useMainStore()
 
@@ -33,12 +27,18 @@ defineProps<{
 }>()
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .remove-btn {
   border-radius: 50%;
-  content: url('@/assets/img/multiply.png');
+  background-image: url('@/assets/img/multiply.png');
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  cursor: pointer;
 
-  :hover {
+  &:hover {
     background-color: grey;
   }
 }

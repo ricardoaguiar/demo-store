@@ -1,17 +1,31 @@
 <script setup lang="ts">
 import { useAsset } from '@/composables'
+import { ref } from 'vue'
+
+const showModal = ref(false)
+
+const toggleModal = () => {
+  showModal.value = !showModal.value
+}
 </script>
 
 <template>
   <div class="user">
     <img
-      data-bs-toggle="modal"
-      data-bs-target="#userModal"
+      @click="toggleModal"
       :src="useAsset('user', 'svg')"
       alt="gender-neutral-user"
       title="gender-neutral-user"
-      class="image is-25x25"
+      class="image"
     />
+    <!-- Modal -->
+    <div class="modal" :class="{ 'is-active': showModal }" @click="toggleModal">
+      <div class="modal-background"></div>
+      <div class="modal-content">
+        <!-- Modal content goes here -->
+      </div>
+      <button class="modal-close is-large" aria-label="close"></button>
+    </div>
   </div>
 </template>
 
@@ -24,8 +38,8 @@ import { useAsset } from '@/composables'
   .image {
     cursor: pointer;
     display: block;
-    min-width: 25px;
-    min-height: 25px;
+    width: 25px;
+    height: 25px;
   }
 }
 </style>

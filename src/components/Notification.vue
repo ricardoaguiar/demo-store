@@ -1,5 +1,7 @@
 <template>
-    <div class="d-flex align-items-center justify-content-center text-center font-italic">
-        <slot></slot>
-    </div>
+  <div
+    class="notification is-flex is-align-items-center is-justify-content-center has-text-centered is-italic"
+  >
+    <slot />
+  </div>
 </template>

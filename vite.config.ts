@@ -13,6 +13,14 @@ export default defineConfig({
       deep: true,
     }),
   ],
+
+  server: {
+    host: '0.0.0.0',
+    port: 3000,
+    open: true,
+  },
+  base: '/', // Ensure this matches your BASE_URL
+
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),

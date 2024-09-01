@@ -37,9 +37,9 @@ import { useAsset } from '@/composables/useAsset'
 
 const activeIndex = ref(0)
 const slides = [
-  { src: 'jum1', ext: 'jpg', alt: 'First-slide', title: 'First-slide' },
-  { src: 'jum2', ext: 'jpg', alt: 'Second-slide', title: 'Second-slide' },
-  { src: 'jum3', ext: 'jpg', alt: 'Third-slide', title: 'Third-slide' },
+  { src: 'jum1', ext: 'jpg', alt: 'First slide', title: 'First slide' },
+  { src: 'jum2', ext: 'jpg', alt: 'Second slide', title: 'Second slide' },
+  { src: 'jum3', ext: 'jpg', alt: 'Third slide', title: 'Third slide' },
 ]
 
 const getImageSrc = (path: string, ext: string): string => {

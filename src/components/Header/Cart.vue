@@ -19,13 +19,19 @@ const cart = defineProps({
   <div>
     <div :class="['cart', cart.isOpen ? 'on' : '']">
       <div class="cart-menu">
-        <p class="text-center mt-4 pb-2 h3">Cart</p>
+        <p class="has-text-centered mt-4 pb-2 is-size-3">Cart</p>
         <hr />
         <Notification v-if="!store.itemsNumber">
-          Your cart is empty, try to Add stuff.
+          Your cart is empty, try to add some items.
         </Notification>
-        <div class="row" v-for="item in store.cartItems" :key="item.id">
-          <Item :item="item" />
+        <div
+          class="columns is-mobile is-multiline"
+          v-for="item in store.cartItems"
+          :key="item.id"
+        >
+          <div class="column is-full">
+            <Item :item="item" />
+          </div>
         </div>
         <div v-if="store.itemsNumber">
           <hr />
@@ -34,17 +40,17 @@ const cart = defineProps({
       </div>
     </div>
     <div
-      :class="['modal', cart.isOpen ? '' : 'off']"
+      :class="['modal-background', cart.isOpen ? '' : 'is-hidden']"
       @click="$emit('closeCart')"
     >
-      <!--      <CartButton />-->
+      <CartButton />
     </div>
   </div>
 </template>
 
 <style scoped>
 /* Modal Overlay */
-.modal {
+.modal-background {
   display: block;
   z-index: 1050;
   position: fixed;
@@ -52,33 +58,17 @@ const cart = defineProps({
   left: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
-  /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0);
-  /* Fallback color */
   background-color: rgba(0, 0, 0, 0.4);
-  /* Black w/ opacity */
-}
-
-.modal.off {
-  display: none;
-}
-
-/* Transitions */
-.fade-enter-active,
-.fade-leave-active {
   transition: opacity 0.5s;
 }
 
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
+.is-hidden {
+  display: none;
 }
 
 /* Cart Body */
 .cart {
   position: fixed;
-  margin-right: 0;
   top: 0;
   right: 0;
   width: 360px;
@@ -86,30 +76,24 @@ const cart = defineProps({
   background: #303e49;
   overflow-y: auto;
   z-index: 1051;
-  -webkit-overflow-scrolling: touch;
   transform: translateX(360px);
-  transition-property: transform;
-  transition-duration: 0.4s;
+  transition: transform 0.4s;
 }
 
 .cart.on {
   transform: translateX(0);
-  -webkit-overflow-scrolling: touch;
-  transition-property: transform;
-  transition-duration: 0.4s;
 }
 
 .cart-menu {
   color: #eee;
-  margin-left: 10px;
-  margin-right: 15px;
+  padding: 1rem;
 }
 
 hr {
   border-color: white;
 }
 
-.row {
+.columns {
   margin-top: 10px;
   margin-bottom: 10px;
 }

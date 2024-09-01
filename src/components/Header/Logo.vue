@@ -1,5 +1,5 @@
 <template>
-  <span class="navbar-brand">
+  <span class="navbar-item">
     <img
       src="/src/assets/img/fi-logo.svg"
       width="40"
@@ -11,12 +11,13 @@
   </span>
 </template>
 
-<style>
+<style scoped>
+/* Responsive adjustments */
 @media only screen and (max-width: 768px) {
-  .navbar-brand {
+  .navbar-item {
     position: absolute;
     left: 50%;
-    transform: translate(-50%, 0);
+    transform: translateX(-50%);
   }
   .logo {
     width: 50px;

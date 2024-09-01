@@ -17,9 +17,11 @@ defineEmits(['open'])
       width="25"
       height="25"
     />
-    <span class="badge is-badge-danger" v-if="store.itemsNumber">{{
-      store.itemsNumber
-    }}</span>
+    <span
+      class="badge is-badge-danger is-badge-top-right"
+      v-if="store.itemsNumber"
+      :data-badge="store.itemsNumber"
+    ></span>
   </div>
 </template>
 
@@ -29,9 +31,9 @@ defineEmits(['open'])
   align-items: center;
   justify-content: center;
   position: relative;
+  cursor: pointer;
 
   .image {
-    cursor: pointer;
     min-width: 25px;
     min-height: 25px;
   }

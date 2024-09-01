@@ -1,25 +1,43 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
 import { useAsset } from '@/composables/useAsset'
+import { ref } from 'vue'
+
+const isOpen = ref(false)
+
+const toggleDropdown = () => {
+  isOpen.value = !isOpen.value
+}
 </script>
 
 <template>
-  <div class="dropdown is-hidden-desktop is-pulled-left">
+  <div
+    class="dropdown is-hidden-desktop is-pulled-left"
+    :class="{ 'is-active': isOpen }"
+  >
     <img
       :src="useAsset('menu', 'svg')"
       width="28"
       height="28"
-      data-bs-toggle="dropdown"
-      data-bs-target="#navd"
-      aria-haspopup="true"
-      aria-expanded="false"
+      @click="toggleDropdown"
       alt="mobile-menu"
       title="mobile-menu"
+      style="cursor: pointer"
     />
-    <div class="dropdown-menu hb" aria-labelledby="navd">
+    <div class="dropdown-menu" role="menu">
       <router-link class="dropdown-item" to="/">Home</router-link>
       <router-link class="dropdown-item" to="/Products">Products</router-link>
       <router-link class="dropdown-item" to="/Contact">Contact us</router-link>
     </div>
   </div>
 </template>
+
+<style scoped>
+.dropdown.is-active .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu {
+  display: none;
+}
+</style>

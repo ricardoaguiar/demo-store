@@ -16,13 +16,19 @@
           />
         </div>
         <div class="about-us-text">
-          <h2 class="subtitle is-4">New minimalist<br />–components</h2>
+          <h2 class="subtitle is-4">Crafted With Love<br />For Your Space</h2>
           <p>
-            Gravity will force your feet to the ground. Don’t be afraid, your
-            mind will find your freedom. You won’t miss a sunrise. You’ll rise
-            with the sun. <br />You’ll never run away from the storm. You will
-            flow with the wind. <br />Don’t hesitate to pause. Follow the flow
-            of the moment. And then, take the first step towards the new you.
+            Welcome to our boutique, where every piece of furniture is a labor
+            of love, meticulously crafted to bring personality and warmth to
+            your home. We believe in the beauty of simplicity and the power of
+            unique design to transform a space. Our collections are carefully
+            curated, blending timeless aesthetics with modern functionality.
+            <br /><br />
+            At our boutique, we embrace the spirit of independence, focusing on
+            quality over quantity, and always staying true to our passion for
+            creating beautiful, sustainable furniture that tells a story.
+            Discover the perfect piece that resonates with your style and
+            values.
           </p>
         </div>
       </div>
@@ -39,13 +45,18 @@
           />
         </div>
         <div class="about-us-text">
-          <h2 class="subtitle is-4">Save Space<br />more freedom</h2>
+          <h2 class="subtitle is-4">Small Batch,<br />Big Impact</h2>
           <p>
-            Gravity will force your feet to the ground. Don’t be afraid, your
-            mind will find your freedom. You won’t miss a sunrise. You’ll rise
-            with the sun. You’ll never run away from the storm. You will flow
-            with the wind. Don’t hesitate to pause. Follow the flow of the
-            moment. And then, take the first step towards the new you.
+            We believe in making a big impact with a small footprint. Our
+            furniture is produced in limited quantities, ensuring that each
+            piece is special and responsibly made. We partner with local
+            artisans who share our commitment to quality craftsmanship and
+            sustainable practices.
+            <br /><br />
+            Whether you’re looking for a statement piece or something subtle,
+            our boutique offers a range of designs that celebrate individuality
+            and thoughtful design. Join us in creating spaces that are as unique
+            as you are.
           </p>
         </div>
       </div>

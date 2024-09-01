@@ -1,24 +1,26 @@
 <template>
   <div>
-    <nav class="row justify-content-start" aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+      <ul>
+        <li>
           <RouterLink to="/">Home</RouterLink>
         </li>
-        <li class="breadcrumb-item">
+        <li>
           <RouterLink to="/products">Products</RouterLink>
         </li>
-        <li class="breadcrumb-item">
+        <li>
           <RouterLink to="/products">{{ details.type }}</RouterLink>
         </li>
-        <li class="breadcrumb-item active">{{ details.title }}</li>
-      </ol>
+        <li class="is-active">
+          <a aria-current="page">{{ details.title }}</a>
+        </li>
+      </ul>
     </nav>
   </div>
 </template>
 
 <script setup lang="ts">
-import { Product } from '../types'
+import { Product } from '@/types'
 
 defineProps<{
   details: Product
@@ -29,21 +31,19 @@ defineProps<{
 .breadcrumb {
   background: inherit;
 
-  li {
-    a {
-      text-decoration: none;
-      color: #2c3539 !important;
-      font-size: 18px;
+  a {
+    text-decoration: none;
+    color: #2c3539 !important;
+    font-size: 18px;
 
-      &:hover {
-        text-decoration: underline;
-      }
+    &:hover {
+      text-decoration: underline;
     }
   }
 
-  .active {
-    text-decoration: none !important;
+  .is-active a {
     color: #f2be00 !important;
+    pointer-events: none;
   }
 }
 </style>

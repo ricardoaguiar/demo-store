@@ -1,13 +1,15 @@
 <template>
   <div>
-    <h1 class="pt-3 text-center">New arrivals</h1>
-    <nav class="d-flex justify-content-center" aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
+    <h1 class="title pt-3 has-text-centered">New Arrivals</h1>
+    <nav class="breadcrumb is-centered" aria-label="breadcrumbs">
+      <ul>
+        <li>
           <RouterLink to="/">Home</RouterLink>
         </li>
-        <li class="breadcrumb-item active" aria-current="page">Products</li>
-      </ol>
+        <li class="is-active">
+          <a aria-current="page">Products</a>
+        </li>
+      </ul>
     </nav>
   </div>
 </template>
@@ -18,14 +20,13 @@
   color: #2c3539 !important;
   font-size: 20px;
 
-  li {
-    text-decoration: none !important;
-    color: #f2be00 !important;
-  }
-
   a {
     text-decoration: none !important;
     color: #2c3539 !important;
+  }
+
+  .is-active a {
+    color: #f2be00 !important;
   }
 }
 </style>

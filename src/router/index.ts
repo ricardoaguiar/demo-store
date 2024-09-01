@@ -1,38 +1,33 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Layout from '@/views/Layout.vue'
-import Home from '@/views/Home.vue'
-import Products from '@/views/Products.vue'
-import Contact from '@/views/Contact.vue'
-import Details from '@/views/Details/[id].vue'
 
 const routes = [
   {
     path: '/',
-    component: Layout,
+    component: () => import('@/views/Layout.vue'),
     children: [
       {
         path: '',
         name: 'Home',
-        component: Home,
+        component: () => import('@/views/Home.vue'),
         meta: { title: 'Home' },
       },
       {
         path: '/products',
         name: 'Products',
-        component: Products,
+        component: () => import('@/views/Products.vue'),
         meta: { title: 'Products' },
       },
       {
         path: '/products/:id',
         name: 'ProductDetails',
-        component: Details,
+        component: () => import('@/views/Products.vue'),
         props: true,
         meta: { title: 'Product Details' },
       },
       {
         path: '/contact',
         name: 'Contact',
-        component: Contact,
+        component: () => import('@/views/Contact.vue'),
         meta: { title: 'Contact Us' },
       },
     ],
@@ -44,7 +39,7 @@ const routes = [
   },
 ]
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(),
   routes,
 })
 

@@ -1,7 +1,17 @@
+<script setup lang="ts">
+import footerDataJson from '@data/footer.json'
+
+const footerData = footerDataJson
+</script>
+
 <template>
-  <footer class="grid footer has-background-light">
-    <div class="grid links">
-      <div v-for="(section, index) in footerData.sections" :key="index">
+  <footer class="footer has-background-light">
+    <div class="columns">
+      <div
+        v-for="(section, index) in footerData.sections"
+        :key="index"
+        class="column"
+      >
         <h3 class="title is-5">{{ section.title }}</h3>
         <ul class="links-list">
           <li v-for="(link, linkIndex) in section.links" :key="linkIndex">
@@ -11,10 +21,10 @@
       </div>
     </div>
 
-    <div class="grid social-copyright">
-      <div class="social">
+    <div class="columns is-vcentered">
+      <div class="column is-half">
         <h3 class="title is-5">Get Social</h3>
-        <div class="flex social-links">
+        <div class="social-links">
           <a
             v-for="(social, i) in footerData.social"
             :key="i"
@@ -27,78 +37,41 @@
           </a>
         </div>
       </div>
-      <div class="copyright">
+      <div class="column is-half has-text-right">
         <p>{{ footerData.copyright }}</p>
       </div>
     </div>
   </footer>
 </template>
 
-<script setup lang="ts">
-import { FooterData } from '@/types'
-import footerDataJson from '@data/footer.json'
-const footerData = footerDataJson as FooterData
-</script>
-
 <style scoped>
-.footer {
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-
-.footer > .links {
-  grid-column: span 3; /* Spans three columns */
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
-
-.footer > .social-copyright {
-  grid-template-columns: 1fr 1fr;
-  grid-column: span 2;
-  gap: 20px;
-  align-items: end;
-}
-
-.footer > .social-copyright > .social {
-  text-align: left;
-
-  .title {
-    margin-bottom: 0.75rem;
-  }
+.links-list {
+  list-style: none;
+  padding-left: 0;
 }
 
 .social-links {
-  flex-direction: row;
-  justify-content: left;
-  gap: 2rem;
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
 }
 
 .icon.is-small {
   height: auto;
 }
 
-.footer > .social-copyright > .copyright {
-  text-align: right;
-}
-
 @media (max-width: 600px) {
-  .footer > .links {
-    grid-template-columns: 1fr; /* Stacks links vertically on small screens */
+  .columns {
+    flex-direction: column;
   }
 
-  .footer > .social-copyright {
-    grid-template-columns: 1fr;
+  .column.is-half {
     text-align: center;
-  }
-
-  .footer > .social-copyright > .social,
-  .footer > .social-copyright > .copyright {
-    text-align: center;
+    margin-bottom: 1rem;
   }
 
   .social-links {
     justify-content: center;
-    padding-bottom: 1rem;
   }
 }
 </style>

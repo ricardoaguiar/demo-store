@@ -9,6 +9,7 @@ import SearchBar from '@/components/Header/SearchBar.vue'
 import Profile from '@/components/Header/Profile.vue'
 import CartButton from '@/components/Header/CartButton.vue'
 import UserModal from '@/components/Header/UserModal.vue'
+import Cart from '@/components/Header/Cart.vue' // Assuming Cart component is imported
 
 // Reactive cart state
 const cart = ref(false)
@@ -24,8 +25,8 @@ const cartState = () => (cart.value = !cart.value)
     >
       <MobileMenu />
       <div class="navbar-group is-flex is-align-items-center">
-        <Logo />
-        <NavLinks />
+        <Logo class="logo" />
+        <NavLinks class="nav-links" />
       </div>
       <div class="navbar-group is-flex is-align-items-center">
         <SearchBar />
@@ -33,25 +34,26 @@ const cartState = () => (cart.value = !cart.value)
         <CartButton @open="cartState" />
       </div>
     </nav>
-    <!--User Modal-->
     <UserModal />
-    <!--Cart Component-->
     <Cart :is-open="cart" @closeCart="cartState" />
   </div>
 </template>
 
 <style scoped>
-nav {
-  z-index: 100;
-}
-
 .navbar {
   padding: 1rem;
+  z-index: 100;
 }
 
 .navbar-group {
   gap: 1rem;
 }
+@media only screen and (max-width: 1023px) {
+  .nav-links {
+    display: none;
+  }
+}
+
 @media only screen and (max-width: 768px) {
   .navbar {
     position: sticky;
@@ -61,41 +63,4 @@ nav {
     margin-block: 0.75rem;
   }
 }
-
-.navbar-item a {
-  margin-left: 13px;
-  font-size: 17px;
-  text-decoration: none;
-  color: black;
-}
-
-.navbar-item .bc a:hover,
-.navbar-item .bc a:active {
-  color: #ffd700;
-}
-
-/*.close {
-  position: relative;
-  bottom: 20px;
-  left: 10px;
-  font-size: 31px;
-  color: #000;
-}
-
-.btn-sm {
-  border-radius: 0;
-}
-
-form .btn-xl.btn-success.mt-3 {
-  position: relative;
-  transition-duration: 100ms;
-  width: 100%;
-  height: 50px;
-  font-size: 20px;
-  outline: none;
-  cursor: pointer;
-  box-shadow:
-    0 26px 38px 0 rgba(0, 0, 0, 0.2),
-    0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}*/
 </style>
