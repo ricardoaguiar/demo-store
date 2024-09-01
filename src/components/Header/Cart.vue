@@ -25,11 +25,11 @@ const cart = defineProps({
           Your cart is empty, try to add some items.
         </Notification>
         <div
-          class="columns is-mobile is-multiline"
+          class="cart-container is-mobile"
           v-for="item in store.cartItems"
           :key="item.id"
         >
-          <div class="column is-full">
+          <div class="cart-item column is-full">
             <Item :item="item" />
           </div>
         </div>
@@ -49,6 +49,16 @@ const cart = defineProps({
 </template>
 
 <style scoped>
+.cart-container {
+  position: relative;
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 0.5rem;
+  position: relative;
+}
 /* Modal Overlay */
 .modal-background {
   display: block;
@@ -73,7 +83,7 @@ const cart = defineProps({
   right: 0;
   width: 360px;
   height: 100%;
-  background: #303e49;
+  background: #ffffff;
   overflow-y: auto;
   z-index: 1051;
   transform: translateX(360px);
@@ -85,12 +95,12 @@ const cart = defineProps({
 }
 
 .cart-menu {
-  color: #eee;
+  color: black;
   padding: 1rem;
 }
 
 hr {
-  border-color: white;
+  border-color: black;
 }
 
 .columns {

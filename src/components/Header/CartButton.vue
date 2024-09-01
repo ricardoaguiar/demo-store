@@ -20,8 +20,8 @@ defineEmits(['open'])
     <span
       class="badge is-badge-danger is-badge-top-right"
       v-if="store.itemsNumber"
-      :data-badge="store.itemsNumber"
-    ></span>
+      >{{ store.itemsNumber }}</span
+    >
   </div>
 </template>
 
@@ -39,12 +39,13 @@ defineEmits(['open'])
   }
 
   .badge {
-    background-color: #6394f8;
+    background-color: #000000;
     color: white;
     border-radius: 50%;
-    font-size: 12px;
+    font-size: 10px;
     line-height: 1;
-    padding: 2px 5px;
+    font-weight: bold;
+    padding: 4px;
     position: absolute;
     top: -5px;
     right: -5px;
