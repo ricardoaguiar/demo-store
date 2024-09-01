@@ -2,7 +2,7 @@
   <div>
     <div class="columns is-variable is-5 mb-5">
       <div class="column is-6">
-        <img class="img-fluid" :src="item.img" />
+        <img class="img-fluid" :src="item.img" :alt="item.title" />
       </div>
 
       <div

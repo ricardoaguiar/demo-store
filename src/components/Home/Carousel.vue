@@ -19,7 +19,7 @@
     </div>
     <div class="carousel-indicators">
       <button
-        v-for="(slide, index) in slides"
+        v-for="(_, index) in slides"
         :key="index"
         :data-slide-to="index"
         :class="['carousel-indicator', { 'is-active': index === activeIndex }]"

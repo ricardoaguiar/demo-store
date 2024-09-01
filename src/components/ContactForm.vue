@@ -93,7 +93,7 @@ form {
   color: #71acd6;
   font-size: 1rem;
   top: -10px;
-  left: 0px;
+  left: 0;
 }
 
 .button {
