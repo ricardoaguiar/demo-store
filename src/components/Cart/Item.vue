@@ -1,24 +1,25 @@
 <template>
-  <div class="column is-4">
+  <div class="column p-0">
     <img
-      :src="item.img"
+      :src="useAsset(item.img)"
       class="image is-96x96"
       alt="cart-item"
       title="cart-item"
     />
   </div>
-  <div class="column is-6">
-    <h4 class="title is-4">{{ item.title }}</h4>
-    <h6 class="subtitle is-6">${{ item.price }}</h6>
+  <div class="title-container column p-0 m-0">
+    <h4 class="title">{{ item.title }}</h4>
+    <h6 class="subtitle">${{ item.price }}</h6>
   </div>
-  <div class="column is-2 pt-4">
-    <span class="remove-btn" @click="store.outCart(item.id!)">remove</span>
+  <div class="remove-btn-container column p-0">
+    <span class="remove-btn" @click="store.outCart(item.id!)">&#10006;</span>
   </div>
 </template>
 
 <script setup lang="ts">
 import { Product } from '@/types'
 import { useMainStore } from '@/store'
+import { useAsset } from '@/composables'
 
 const store = useMainStore()
 
@@ -28,18 +29,29 @@ defineProps<{
 </script>
 
 <style scoped>
-.remove-btn {
-  border-radius: 50%;
-  background-image: url('@/assets/img/multiply.png');
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  cursor: pointer;
+.title-container {
+  align-self: center;
+}
 
-  &:hover {
-    background-color: grey;
-  }
+.remove-btn {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: transparent;
+  border-radius: 50%;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.remove-btn:hover {
+  background-color: black;
+  border-radius: 20px;
+  color: white;
 }
 </style>
