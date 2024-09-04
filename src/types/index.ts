@@ -1,10 +1,10 @@
 export interface Product {
-  id?: number
-  img?: string
-  title?: string
-  price?: number
-  color?: string
-  type?: string
+  id: number
+  img?: string | undefined
+  title?: string | undefined
+  price?: number | undefined
+  color?: string | undefined
+  type?: string | undefined
 }
 
 export interface State {
@@ -15,48 +15,48 @@ export interface State {
 
 // footer
 export interface FooterLink {
-  text: string
-  url: string
+  text?: string | undefined
+  url?: string | undefined
 }
 
 export interface FooterSection {
-  title: string
+  title?: string | undefined
   links: FooterLink[]
 }
 
 export interface ContactInfo {
-  address: string
-  email: string
-  phone: string
+  address?: string | undefined
+  email?: string | undefined
+  phone?: string | undefined
 }
 
 export interface SocialLink {
-  platform: string
-  icon: string
-  url: string
+  platform?: string | undefined
+  icon?: string | undefined
+  url?: string | undefined
 }
 
 export interface FooterData {
   sections: FooterSection[]
   contactInfo: ContactInfo
   social: SocialLink[]
-  copyright: string
+  copyright?: string | undefined
 }
 
 // top nav
 export interface NavLink {
-  text: string
-  url: string
+  text?: string | undefined
+  url?: string | undefined
 }
 
 export interface NavIcons {
-  search: string
-  account: string
-  cart: string
+  search?: string | undefined
+  account?: string | undefined
+  cart?: string | undefined
 }
 
 export interface Nav {
-  mobileBurgerMenu: string
+  mobileBurgerMenu?: string | undefined
   links: NavLink[]
   icons: NavIcons
 }

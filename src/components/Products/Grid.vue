@@ -30,12 +30,19 @@ import FilterBar from '@/components/Products/FilterBar.vue'
 import Card from '@/components/Products/Card.vue'
 import MoreButton from '@/components/Products/MoreButton.vue'
 import Notification from '@/components/Notification.vue'
+import { Product } from '@/types' // Import Product type
 
 const store = useMainStore()
 
-const grid = reactive({
+// Explicitly type the grid state
+const grid = reactive<{
+  cards: Product[] // Define that grid.cards is an array of Product
+  showCards: number
+  sortButton: string // Add sortButton to grid state
+}>({
   cards: [],
   showCards: 6,
+  sortButton: '', // Initialize sortButton as an empty string
 })
 
 onMounted(() => reSet())
@@ -47,12 +54,19 @@ const reSet = () => {
 const slicedCards = computed(() => grid.cards.slice(0, grid.showCards))
 
 const sortItems = (value: string) => {
-  grid.cards.sort((a, b) => {
-    if (value === 'newset') return a.title.length * 2 - b.title.length * 4
-    if (value === 'price') return a.price - b.price
-    if (value === 'trending') return a.type.length - b.type.length
+  grid.cards.sort((a: Product, b: Product) => {
+    if (value === 'newset') {
+      return (a.title?.length ?? 0) * 2 - (b.title?.length ?? 0) * 4
+    }
+    if (value === 'price') {
+      return (a.price ?? 0) - (b.price ?? 0) // Fallback to 0 if price is undefined
+    }
+    if (value === 'trending') {
+      return (a.type?.length ?? 0) - (b.type?.length ?? 0) // Fallback to 0 if type is undefined
+    }
+    return 0
   })
-  return (grid.sortButton = value.toUpperCase())
+  grid.sortButton = value.toUpperCase() // Update the sortButton state
 }
 </script>
 

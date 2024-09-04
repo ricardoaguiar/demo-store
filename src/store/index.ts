@@ -1,12 +1,16 @@
 import { defineStore } from 'pinia'
 import products from '@data/products.json' // Ensure the path is correct
-import { Product, State } from '@/types' // Import both Product and State types
+import { Product } from '@/types' // Import both Product and State types
 
 export const useMainStore = defineStore('main', {
-  state: (): State => ({
+  state: (): {
+    cartItems: Product[]
+    items: Product[]
+    productInfo: Product
+  } => ({
     productInfo: {} as Product, // Initialized as an empty Product object
     cartItems: [],
-    items: products as Product[], // Cast JSON data to Product[]
+    items: products as Product[], // Correctly type as Product[]
   }),
 
   getters: {

@@ -2,7 +2,7 @@
   <div>
     <div class="columns is-variable is-5 mb-5">
       <div class="column is-6">
-        <img class="img-fluid" :src="item.img" :alt="item.title" />
+        <img class="img-fluid" :src="useAsset(item.img)" :alt="item.title" />
       </div>
 
       <div
@@ -45,6 +45,7 @@
 import { ref } from 'vue'
 import { Product } from '@/types'
 import { useMainStore } from '@/store'
+import { useAsset } from '@/composables'
 
 const store = useMainStore()
 

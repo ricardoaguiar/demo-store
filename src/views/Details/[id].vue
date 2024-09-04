@@ -23,6 +23,7 @@ import Card from '@/components/Products/Card.vue'
 import Breadcrumb from '@/components/Details/Breadcrumb.vue'
 import Box from '@/components/Details/Box.vue'
 import Text from '@/components/Details/Text.vue'
+import { Product } from '@/types'
 
 // Store and routing
 const store = useMainStore()
@@ -30,7 +31,10 @@ const route = useRoute()
 const router = useRouter()
 
 // State
-const item = reactive({
+const item = reactive<{
+  details: Product | null // Allow details to be either Product or null
+  relatedItems: Product[] // Related items should be an array of Product
+}>({
   details: null,
   relatedItems: [],
 })
