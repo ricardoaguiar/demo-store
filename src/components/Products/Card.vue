@@ -1,6 +1,18 @@
+<script setup lang="ts">
+import { useMainStore } from '@/store'
+import { useAsset } from '@/composables'
+
+const store = useMainStore()
+</script>
+
 <template>
-  <div class="products-grid">
-    <template v-for="item in store.items" :key="item.id">
+  <!--  <div class="container">-->
+  <div class="columns is-multiline">
+    <div
+      v-for="item in store.items"
+      :key="item.id"
+      class="column is-12-mobile is-6-tablet is-4-desktop"
+    >
       <div class="card p-0">
         <div class="card-image">
           <figure class="image is-4by3">
@@ -23,7 +35,7 @@
           <RouterLink :to="`/details/${item.id}`">
             <button
               type="button"
-              @click="store.addToInfo(item.id as number)"
+              @click="store.addToInfo(item.id)"
               class="button is-light is-large"
             >
               Info
@@ -35,22 +47,10 @@
           <p class="subtitle">${{ item.price }}</p>
         </div>
       </div>
-    </template>
+    </div>
   </div>
+  <!--  </div>-->
 </template>
-
-<script setup lang="ts">
-import { Product } from '@/types'
-
-import { useMainStore } from '@/store'
-import { useAsset } from '@/composables'
-
-const store = useMainStore()
-
-defineProps<{
-  cards: Product[]
-}>()
-</script>
 
 <style scoped lang="scss">
 .products-grid {
@@ -65,7 +65,6 @@ defineProps<{
   position: relative;
   overflow: hidden;
   border-radius: 0.25rem;
-  margin: 0;
 
   .image img {
     z-index: 1;

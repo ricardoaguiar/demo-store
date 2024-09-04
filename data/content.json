@@ -1,0 +1,16 @@
+{
+  "aboutUs": [
+    {
+      "title": "Crafted With Love For Your Space",
+      "text": "Welcome to our boutique, where every piece of furniture is a labor of love, meticulously crafted to bring personality and warmth to your home. We believe in the beauty of simplicity and the power of unique design to transform a space. Our collections are carefully curated, blending timeless aesthetics with modern functionality.\n\nAt our boutique, we embrace the spirit of independence, focusing on quality over quantity, and always staying true to our passion for creating beautiful, sustainable furniture that tells a story.",
+      "image": "new.jpg",
+      "reverse": false
+    },
+    {
+      "title": "Small Batch, Big Impact",
+      "text": "We believe in making a big impact with a small footprint. Our furniture is produced in limited quantities, ensuring that each piece is special and responsibly made. We partner with local artisans who share our commitment to quality craftsmanship and sustainable practices.\n\nWhether you’re looking for a statement piece or something subtle, our boutique offers a range of designs that celebrate individuality and thoughtful design. Join us in creating spaces that are as unique as you are.",
+      "image": "33.jpg",
+      "reverse": true
+    }
+  ]
+}

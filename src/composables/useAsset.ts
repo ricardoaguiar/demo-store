@@ -1,4 +1,7 @@
-export function useAsset(path: string, ext?: string): string {
+export function useAsset(
+  path: string | undefined,
+  ext?: string | undefined
+): string {
   // If the extension is provided separately, concatenate it with the path.
   // If the path already includes the extension, return it as is.
   const fullPath = ext ? `${path}.${ext}` : path

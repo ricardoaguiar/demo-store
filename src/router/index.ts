@@ -18,9 +18,9 @@ const routes = [
         meta: { title: 'Products' },
       },
       {
-        path: '/products/:id',
+        path: '/details/:id',
         name: 'ProductDetails',
-        component: () => import('@/views/Products.vue'),
+        component: () => import('@/views/Details/[id].vue'),
         props: true,
         meta: { title: 'Product Details' },
       },
