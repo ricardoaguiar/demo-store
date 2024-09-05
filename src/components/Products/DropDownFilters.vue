@@ -47,8 +47,11 @@ function reSet(): void {
 </script>
 
 <template>
-  <div class="is-flex">
-    <div class="dropdown is-fullwidth px-4 px-sm-0">
+  <div
+    class="is-flex is-align-items-center is-justify-content-flex-center is-justify-content-tablet-flex-start"
+    style="gap: 1rem"
+  >
+    <div class="dropdown is-fullwidth">
       <div class="dropdown-trigger">
         <button
           class="button is-light is-fullwidth"
@@ -56,9 +59,9 @@ function reSet(): void {
           aria-controls="dropdown-menu"
           @click="toggleDropdown('sort')"
         >
-          <span
-            >SORT BY <span style="color: #f2be00">{{ sort }}</span></span
-          >
+          <span>
+            SORT BY <span style="color: #f2be00">{{ sort }}</span>
+          </span>
           <span class="icon is-small">
             <i class="fas fa-angle-down" aria-hidden="true"></i>
           </span>
@@ -76,7 +79,8 @@ function reSet(): void {
         </div>
       </div>
     </div>
-    <div class="dropdown is-block is-hidden-desktop px-4 px-sm-0">
+
+    <div class="dropdown is-hidden-desktop">
       <div class="dropdown-trigger">
         <button
           class="button is-light is-fullwidth"

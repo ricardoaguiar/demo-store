@@ -4,10 +4,4 @@
   <router-view />
 </template>
 
-<style lang="scss">
-#app {
-  flex: 1;
-  min-height: 100vh;
-}
-</style>
-/
+<style lang="scss"></style>

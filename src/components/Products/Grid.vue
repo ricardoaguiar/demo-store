@@ -1,8 +1,8 @@
 <template>
-  <div class="container mb-4">
-    <div class="block">
-      <DropDownFilters @sort-item="sortItems" />
-    </div>
+  <div class="product-page__container">
+    <!--    <div class="block">-->
+    <DropDownFilters @sort-item="sortItems" />
+    <!--    </div>-->
     <div v-if="grid.cards.length !== 0" class="product-page">
       <div class="column">
         <FilterBar />
@@ -71,6 +71,13 @@ const sortItems = (value: string) => {
 </script>
 
 <style scoped>
+.product-page__container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
 .product-page {
   display: grid;
   grid-template-columns: 0.75fr 2fr;

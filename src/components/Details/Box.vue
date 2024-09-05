@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="columns is-variable is-5 mb-5">
+    <div class="product-detail columns is-variable is-5 mt-3 mb-5">
       <div class="column is-6">
         <img class="img-fluid" :src="useAsset(item.img)" :alt="item.title" />
       </div>
@@ -66,6 +66,12 @@ function addToCart(item: Product) {
 </script>
 
 <style scoped lang="scss">
+.product-detail {
+  background: lightgrey;
+  display: flex;
+  width: 100%;
+  margin: auto;
+}
 .img-fluid {
   width: 100%;
   box-shadow:
