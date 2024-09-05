@@ -13,6 +13,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+#app {
+  min-height: 100vh;
+}
+
 a, a:hover, a:visited {
   font-weight: 500;
   color: #000000;
@@ -20,12 +24,18 @@ a, a:hover, a:visited {
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
+  margin: 0 auto;
+  /*display: flex;*/
+  /*place-items: center;*/
   min-width: 320px;
   min-height: 100vh;
   background: #ffffff;
+}
+
+main, .navbar {
+  margin: 0.5rem;
+  padding: 0.5rem;
+  outline: 2px dashed red;
 }
 
 h1 {
