@@ -1,0 +1,186 @@
+// Mixin for handling various breakpoints including retina and HD screens
+/*
+usage
+.my-container {
+  @include responsive(mobile) {
+    flex-direction: column;
+    background-color: lightblue;
+  }
+
+  @include responsive(tablet) {
+    flex-direction: row;
+    background-color: lightgreen;
+  }
+
+  @include responsive(desktop) {
+    flex-direction: row;
+    background-color: lightcoral;
+  }
+
+  @include responsive(fullhd) {
+    background-color: lightyellow;
+  }
+ */
+
+@mixin responsive($breakpoint) {
+  @if $breakpoint == mobile {
+    // Mobile phones (both Android & iOS)
+    @media screen and (max-width: 768px) {
+      @content;
+    }
+  } @else if $breakpoint == tablet {
+    // Tablets (iOS iPads and Android tablets)
+    @media screen and (min-width: 769px) and (max-width: 1024px) {
+      @content;
+    }
+  } @else if $breakpoint == desktop {
+    // Desktops and laptops
+    @media screen and (min-width: 1025px) and (max-width: 1440px) {
+      @content;
+    }
+  } @else if $breakpoint == widescreen {
+    // Large desktops (HD desktops)
+    @media screen and (min-width: 1441px) and (max-width: 1920px) {
+      @content;
+    }
+  } @else if $breakpoint == fullhd {
+    // Full HD screens and larger
+    @media screen and (min-width: 1921px) {
+      @content;
+    }
+  } @else if $breakpoint == retina {
+    // Retina display (Apple devices with high DPI)
+    @media screen and (-webkit-min-device-pixel-ratio: 2),
+    screen and (min--moz-device-pixel-ratio: 2),
+    screen and (-o-min-device-pixel-ratio: 2/1),
+    screen and (min-device-pixel-ratio: 2),
+    screen and (min-resolution: 192dpi),
+    screen and (min-resolution: 2dppx) {
+      @content;
+    }
+  } @else if $breakpoint == hdpi {
+    // High-DPI screens for Android and non-Apple devices
+    @media screen and (-webkit-min-device-pixel-ratio: 1.5),
+    screen and (min-resolution: 144dpi),
+    screen and (min-resolution: 1.5dppx) {
+      @content;
+    }
+  }
+}
+
+
+@mixin flex($direction: row, $justify: flex-start, $align: stretch, $gap: 0) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  gap: $gap;
+}
+
+@mixin grid($columns: repeat(auto-fill, minmax(100px, 1fr)), $rows: auto, $gap: 1rem) {
+  display: grid;
+  grid-template-columns: $columns;
+  grid-template-rows: $rows;
+  gap: $gap;
+}
+
+@mixin font-size($size-mobile, $size-tablet: null, $size-desktop: null, $size-widescreen: null, $size-fullhd: null) {
+  font-size: $size-mobile;
+
+  @if $size-tablet != null {
+    @media screen and (min-width: 769px) {
+      font-size: $size-tablet;
+    }
+  }
+
+  @if $size-desktop != null {
+    @media screen and (min-width: 1025px) {
+      font-size: $size-desktop;
+    }
+  }
+
+  @if $size-widescreen != null {
+    @media screen and (min-width: 1216px) {
+      font-size: $size-widescreen;
+    }
+  }
+
+  @if $size-fullhd != null {
+    @media screen and (min-width: 1408px) {
+      font-size: $size-fullhd;
+    }
+  }
+}
+
+/* Mixin to prevent zoom on iOS with max() and declarative animation, using rem */
+@mixin prevent-ios-zoom($font-size-rem) {
+  // Use max() to ensure the font size is never less than 1rem (16px on most browsers)
+  font-size: max($font-size-rem, 1rem);
+
+  // Declarative animation name to prevent iOS zoom
+  @keyframes prevent-ios-input-zoom {
+    0% {
+      font-size: 1rem;
+      opacity: 0;
+    }
+    100% {
+      font-size: var(--font-size-paragraph-l, 0.875rem); // 0.875rem = 14px
+      opacity: 1;
+      line-height: var(--line-height-paragraph-l, 1.5);
+      letter-spacing: var(--letter-spacing-paragraph-l, 0.03125rem); // 0.03125rem = 0.5px
+      text-transform: none;
+      font-stretch: var(--font-stretch-normal, 100%);
+      font-weight: var(--font-weight-light, 300);
+    }
+  }
+
+  // Apply the animation to inputs on focus
+  input[type="text"]:focus,
+  input[type="password"]:focus,
+  input[type="tel"]:focus,
+  textarea:focus {
+    animation-duration: 0.01s;
+    animation-name: prevent-ios-input-zoom;
+  }
+}
+
+// Function to convert px to rem
+@function px-to-rem($px, $root-size: 16px) {
+  @return $px / $root-size * 1rem;
+}
+
+// Mixin for setting font-size, line-height, and letter-spacing using rem units
+// Optional parameters: line-height and letter-spacing
+@mixin responsive-typography(
+  $font-size-px,
+  $line-height: 1.5,          // Optional line-height (default is 1.5)
+  $letter-spacing-px: 0px,    // Optional letter-spacing (default is 0px)
+  $root-size: 16px            // Optional root size (default is 16px)
+) {
+  font-size: px-to-rem($font-size-px, $root-size);
+  line-height: $line-height; // Use line-height as a unitless number
+  letter-spacing: px-to-rem($letter-spacing-px, $root-size);
+}
+
+
+// Space mixin for padding and margin based on project font size
+@mixin space($property, $size, $root-size: 16px) {
+  @if $property == padding or $property == margin {
+    #{$property}: px-to-rem($size * $root-size, $root-size);
+  }
+  @else if $property == padding-top or $property == margin-top {
+    #{$property}: px-to-rem($size * $root-size, $root-size);
+  }
+  @else if $property == padding-right or $property == margin-right {
+    #{$property}: px-to-rem($size * $root-size, $root-size);
+  }
+  @else if $property == padding-bottom or $property == margin-bottom {
+    #{$property}: px-to-rem($size * $root-size, $root-size);
+  }
+  @else if $property == padding-left or $property == margin-left {
+    #{$property}: px-to-rem($size * $root-size, $root-size);
+  }
+  @else {
+    @error "Invalid property. Use padding or margin.";
+  }
+}
