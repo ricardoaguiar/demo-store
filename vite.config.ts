@@ -14,6 +14,13 @@ export default defineConfig({
     }),
   ],
 
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "@/assets/styles/mixins.scss";`,
+      },
+    },
+  },
   server: {
     host: '0.0.0.0',
     port: 3000,
