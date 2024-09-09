@@ -7,10 +7,14 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    404: typeof import('./src/components/404.vue')['default']
     AboutUs: typeof import('./src/components/Home/AboutUs.vue')['default']
+    Basket: typeof import('./src/components/Header/Basket.vue')['default']
+    BasketButton: typeof import('./src/components/Header/BasketButton.vue')['default']
     Box: typeof import('./src/components/Details/Box.vue')['default']
     Breadcrumb: typeof import('./src/components/Details/Breadcrumb.vue')['default']
     BreadCrumbs: typeof import('./src/components/Products/BreadCrumbs.vue')['default']
+    ButtonComponent: typeof import('./src/components/UI/ButtonComponent.vue')['default']
     Card: typeof import('./src/components/Products/Card.vue')['default']
     Carousel: typeof import('./src/components/Home/Carousel.vue')['default']
     Cart: typeof import('./src/components/Header/Cart.vue')['default']
@@ -29,7 +33,11 @@ declare module 'vue' {
     NavLinks: typeof import('./src/components/Header/NavLinks.vue')['default']
     Newsletter: typeof import('./src/components/Newsletter.vue')['default']
     Notification: typeof import('./src/components/Notification.vue')['default']
+    PDPText: typeof import('./src/components/Details/PDPText.vue')['default']
+    PLP: typeof import('./src/components/Products/PLP.vue')['default']
+    ProductTile: typeof import('./src/components/Details/ProductTile.vue')['default']
     Profile: typeof import('./src/components/Header/Profile.vue')['default']
+    RelatedProducts: typeof import('./src/components/Products/RelatedProducts.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SearchBar: typeof import('./src/components/Header/SearchBar.vue')['default']

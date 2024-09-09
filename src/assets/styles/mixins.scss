@@ -1,3 +1,5 @@
+@use 'sass:math'; // Import Sass math functions
+
 // Mixin for handling various breakpoints including retina and HD screens
 @mixin responsive($breakpoint) {
   @if $breakpoint == mobile {
@@ -122,7 +124,7 @@
 
 // Function to convert px to rem
 @function px-to-rem($px, $root-size: 16px) {
-  @return $px / $root-size * 1rem;
+  @return calc($px / $root-size) * 1rem;
 }
 
 // Mixin for setting font-size, line-height, and letter-spacing using rem units

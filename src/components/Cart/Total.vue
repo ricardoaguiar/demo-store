@@ -1,7 +1,7 @@
 <template>
   <div class="columns is-align-items-center p-2" style="background: #7dcf85">
     <div class="column pl-3 pt-3">
-      <h4 class="title is-4">Subtotal</h4>
+      <h4 class="title is-4">Total</h4>
       <p class="is-size-6 px-3" style="color: #303e49; margin-top: -8px">
         {{ `(${store.itemsNumber} items)` }}
       </p>
