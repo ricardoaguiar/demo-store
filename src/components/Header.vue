@@ -9,7 +9,7 @@ import SearchBar from '@/components/Header/SearchBar.vue'
 import Profile from '@/components/Header/Profile.vue'
 import CartButton from '@/components/Header/BasketButton.vue'
 import UserModal from '@/components/Header/UserModal.vue'
-import Cart from '@/components/Header/Basket.vue' // Assuming Cart component is imported
+import Basket from '@/components/Header/Basket.vue' // Assuming Cart component is imported
 
 // Reactive cart state
 const cart = ref(false)
@@ -30,12 +30,12 @@ const cartState = () => (cart.value = !cart.value)
       </div>
       <div class="navbar-group is-flex is-align-items-center">
         <SearchBar />
-        <Profile />
+        <!--        <Profile />-->
         <CartButton @open="cartState" />
       </div>
     </nav>
     <UserModal />
-    <Cart :is-open="cart" @closeCart="cartState" />
+    <Basket :is-open="cart" @closeCart="cartState" />
   </div>
 </template>
 
