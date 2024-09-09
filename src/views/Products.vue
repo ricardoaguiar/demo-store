@@ -1,7 +1,7 @@
 <template>
   <div>
     <BreadCrumbs />
-    <Grid />
+    <PLP />
   </div>
 </template>
 
@@ -10,7 +10,7 @@ import { useHead } from '@vueuse/head'
 
 // Components
 import BreadCrumbs from '@/components/Products/BreadCrumbs.vue'
-import Grid from '@/components/Products/Grid.vue'
+import PLP from '@/components/Products/PLP.vue'
 
 useHead({
   title: 'Products - Vue Demo Store',

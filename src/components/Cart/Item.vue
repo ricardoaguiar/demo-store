@@ -17,14 +17,13 @@
 </template>
 
 <script setup lang="ts">
-import { Product } from '@/types'
 import { useMainStore } from '@/store'
 import { useAsset } from '@/composables'
 
 const store = useMainStore()
 
 defineProps<{
-  item: Product
+  item: Object
 }>()
 </script>
 
