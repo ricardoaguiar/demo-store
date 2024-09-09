@@ -1,15 +1,21 @@
 <template>
-  <div class="container py-5">
+  <div class="container py-5" v-if="item.details">
     <!-- Ensure there is info to display before allowing access -->
-    <Breadcrumb v-if="item.details" :details="item.details" />
-    <Box v-if="item.details" :item="item.details" />
-    <Text v-if="item.details" />
+    <Breadcrumb :details="item.details" />
+    <ProductTile :item="item.details" />
+    <ProductDescription v />
 
     <div class="related-item" v-if="sliceItems.length > 0">
       <hr />
       <h6 class="pb-4">RELATED PRODUCTS</h6>
       <Card :cards="sliceItems" />
     </div>
+  </div>
+
+  <div v-else>
+    <p>Product not found.</p>
+    <!-- Optionally provide a link to go back to the products page -->
+    <router-link to="/">Back to Products</router-link>
   </div>
 </template>
 
@@ -19,10 +25,10 @@ import { onMounted, reactive, computed } from 'vue'
 import { useMainStore } from '@/store'
 
 // Components
-import Card from '@/components/Products/Card.vue'
+import Card from '@/components/Products/RelatedProducts.vue'
 import Breadcrumb from '@/components/Details/Breadcrumb.vue'
-import Box from '@/components/Details/Box.vue'
-import Text from '@/components/Details/Text.vue'
+import ProductTile from '@/components/Details/ProductTile.vue'
+import ProductDescription from '@/components/Details/PDPText.vue'
 import { Product } from '@/types'
 
 // Store and routing
@@ -42,11 +48,16 @@ const item = reactive<{
 // Fetch item details on mount
 onMounted(() => {
   const itemId = Number(route.params.id)
-  item.details = store.items[itemId]
+  item.details = store.products[itemId]
+
+  // Check if itemId is a valid number and within the bounds of available products
+  if (!isNaN(itemId) && itemId >= 0 && itemId < store.products.length) {
+    item.details = store.products[itemId]
+  }
 
   // Redirect if item details are not found
   if (!item.details) {
-    router.push('/not-found') // Redirect to a not-found page or another appropriate route
+    router.push('/404') // Redirect to a not-found page or another appropriate route
   }
 })
 
@@ -54,8 +65,8 @@ onMounted(() => {
 const sliceItems = computed(() => {
   if (item.details) {
     while (item.relatedItems.length < 3) {
-      const randomIndex = Math.floor(Math.random() * store.items.length)
-      const relatedItem = store.items[randomIndex]
+      const randomIndex = Math.floor(Math.random() * store.products.length)
+      const relatedItem = store.products[randomIndex]
 
       // Ensure we don't include the current item or duplicates
       if (
@@ -77,8 +88,6 @@ hr {
 }
 
 .related-item {
-  padding-left: 8rem;
-  padding-right: 8rem;
   height: auto;
   text-align: center;
 }

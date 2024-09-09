@@ -7,9 +7,9 @@ import NavLinks from '@/components/Header/NavLinks.vue'
 import Logo from '@/components/Header/Logo.vue'
 import SearchBar from '@/components/Header/SearchBar.vue'
 import Profile from '@/components/Header/Profile.vue'
-import CartButton from '@/components/Header/CartButton.vue'
+import CartButton from '@/components/Header/BasketButton.vue'
 import UserModal from '@/components/Header/UserModal.vue'
-import Cart from '@/components/Header/Cart.vue' // Assuming Cart component is imported
+import Cart from '@/components/Header/Basket.vue' // Assuming Cart component is imported
 
 // Reactive cart state
 const cart = ref(false)
