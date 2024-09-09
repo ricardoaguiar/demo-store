@@ -23,6 +23,15 @@ const routes = [
         component: () => import('@/views/Details/[id].vue'),
         props: true,
         meta: { title: 'Product Details' },
+        beforeEnter: (to, from, next) => {
+          const productId = parseInt(to.params.id, 10)
+          if (isNaN(productId) || productId < 0) {
+            // Redirect to 404 if the ID is not a valid number or out of range
+            next({ name: 'NotFound' })
+          } else {
+            next() // Continue to the product details page
+          }
+        },
       },
       {
         path: '/contact',
@@ -30,12 +39,40 @@ const routes = [
         component: () => import('@/views/Contact.vue'),
         meta: { title: 'Contact Us' },
       },
+      {
+        path: '/thank-you',
+        name: 'ThankYou',
+        component: () => import('@/views/ThankYou.vue'),
+        beforeEnter: (to, from, next) => {
+          const store = useMainStore()
+
+          // Safely retrieve purchasedItems from the store or localStorage
+          const purchasedItems = store.purchasedItems || []
+          const localStorageItems = JSON.parse(
+            localStorage.getItem('purchasedItems') || '[]'
+          )
+
+          // Check if purchasedItems exist in either the store or localStorage
+          if (purchasedItems.length === 0 && localStorageItems.length === 0) {
+            // Redirect to the home page or cart if there are no purchased items
+            next({ name: 'Home' })
+          } else {
+            // Proceed to Thank You page if purchasedItems exist
+            next()
+          }
+        },
+      },
     ],
   },
-  // Catch-all route for 404 or redirection
+  {
+    path: '/404',
+    name: 'NotFound',
+    component: () => import('@/components/404.vue'),
+    meta: { title: '404' },
+  },
   {
     path: '/:pathMatch(.*)*',
-    redirect: '/',
+    redirect: '/404',
   },
 ]
 const router = createRouter({
