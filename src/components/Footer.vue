@@ -1,17 +1,25 @@
 <script setup lang="ts">
-import footerDataJson from '@data/footer.json'
+import { ref, onMounted } from 'vue'
 
-const footerData = footerDataJson
+const footerData = ref(null)
+
+onMounted(async () => {
+  try {
+    const response = await fetch('/data/footer.json')
+    if (response.ok) {
+      footerData.value = await response.json()
+    } else {
+      console.error('Failed to load footer data')
+    }
+  } catch (error) {
+    console.error('Error fetching footer data:', error)
+  }
+})
 </script>
-
 <template>
   <footer class="footer has-background-light">
     <div class="columns">
-      <div
-        v-for="(section, index) in footerData.sections"
-        :key="index"
-        class="column"
-      >
+      <div v-for="(section, index) in footerData" :key="index" class="column">
         <h3 class="title is-5">{{ section.title }}</h3>
         <ul class="links-list">
           <li v-for="(link, linkIndex) in section.links" :key="linkIndex">
@@ -26,7 +34,7 @@ const footerData = footerDataJson
         <h3 class="title is-5">Get Social</h3>
         <div class="social-links">
           <a
-            v-for="(social, i) in footerData.social"
+            v-for="(social, i) in footerData"
             :key="i"
             :href="social.url"
             target="_blank"
@@ -37,9 +45,9 @@ const footerData = footerDataJson
           </a>
         </div>
       </div>
-      <div class="column is-half has-text-right">
-        <p>{{ footerData.copyright }}</p>
-      </div>
+      <!--      <div class="column is-half has-text-right">-->
+      <!--        <p>{{ copyright }}</p>-->
+      <!--      </div>-->
     </div>
   </footer>
 </template>
