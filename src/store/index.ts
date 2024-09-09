@@ -78,10 +78,15 @@ export const useMainStore = defineStore('main', {
     },
 
     handleCheckout(purchasedItems) {
+      const orderId = `ORD-${Date.now()}-${Math.floor(Math.random() * 10000)}`
+
       this.purchasedItems = purchasedItems
       localStorage.setItem('purchasedItems', JSON.stringify(purchasedItems)) // Save purchased items to localStorage
+      localStorage.setItem('orderId', orderId)
       this.cartItems = [] // Clear cart items
       this.updateLocalStorage()
+
+      return orderId
     },
 
     checkout() {

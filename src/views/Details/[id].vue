@@ -3,7 +3,7 @@
     <!-- Ensure there is info to display before allowing access -->
     <Breadcrumb :details="item.details" />
     <ProductTile :item="item.details" />
-    <ProductDescription v />
+    <ProductDescription />
 
     <div class="related-item" v-if="sliceItems.length > 0">
       <hr />
@@ -46,18 +46,25 @@ const item = reactive<{
 })
 
 // Fetch item details on mount
-onMounted(() => {
+onMounted(async () => {
   const itemId = Number(route.params.id)
   item.details = store.products[itemId]
 
-  // Check if itemId is a valid number and within the bounds of available products
-  if (!isNaN(itemId) && itemId >= 0 && itemId < store.products.length) {
-    item.details = store.products[itemId]
+  // // Check if itemId is a valid number and within the bounds of available products
+  // if (!isNaN(itemId) && itemId >= 0 && itemId < store.products.length) {
+  //   item.details = store.products[itemId]
+  // }
+  if (store.products.length === 0) {
+    // If products are not loaded, fetch them
+    await store.fetchProducts()
   }
+
+  // Once products are loaded, set item details
+  item.details = store.products.find((product) => product.id === itemId)
 
   // Redirect if item details are not found
   if (!item.details) {
-    router.push('/404') // Redirect to a not-found page or another appropriate route
+    await router.push('/404') // Redirect to a not-found page or another appropriate route
   }
 })
 

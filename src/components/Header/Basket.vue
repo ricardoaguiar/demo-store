@@ -74,7 +74,8 @@ function handleRemoveItem(itemId: number) {
           <Total />
         </div>
         <ButtonComponent
-          buttonText="checkout"
+          v-if="store.cartItems.length > 0"
+          buttonText="finish checkout"
           :class="'checkout-button'"
           @click="handleCheckout"
         />
@@ -91,7 +92,7 @@ function handleRemoveItem(itemId: number) {
 .checkout-button {
   padding: 1rem 1.5rem;
   width: 100%;
-  font-size: 2rem;
+  font-size: 1rem;
   background: rgb(125, 207, 133);
 }
 
