@@ -1,33 +1,16 @@
 <script setup lang="ts">
-import { useMainStore } from '@/store'
 import { onMounted, ref, computed } from 'vue'
 import { useAsset } from '@/composables'
+import { Product } from '@/types'
 
-// Safely retrieve purchased items from Pinia or localStorage
-const store = useMainStore()
 const orderId = ref('')
-// const isExpired = ref(false)
-// const EXPIRATION_TIME = 3600 * 1000 // 1 hour in milliseconds
-
-const purchasedItems = ref([])
-
-function deleteOrder() {
-  localStorage.removeItem('orderId')
-  localStorage.removeItem('purchasedItems')
-  orderId.value = ''
-  purchasedItems.value = []
-}
+const purchasedItems = ref<Product[]>([])
 
 onMounted(() => {
   try {
-    // Retrieve order ID, purchased items, and timestamp from localStorage
+    // Retrieve order ID, purchased items from localStorage
     const storedOrderId = localStorage.getItem('orderId')
     const storedItems = localStorage.getItem('purchasedItems')
-    // const purchaseTimestamp = parseInt(
-    //   localStorage.getItem('purchaseTimestamp') || '0',
-    //   10
-    // )
-
     // Check if the data exists
     if (storedOrderId && storedItems) {
       orderId.value = storedOrderId
@@ -35,24 +18,23 @@ onMounted(() => {
     } else {
       console.warn('No order data found in localStorage.')
     }
-
-    // Check if the timestamp is valid and if the order has expired
-    //   const currentTime = Date.now()
-    //   if (currentTime - purchaseTimestamp > EXPIRATION_TIME) {
-    //     isExpired.value = true
-    //     deleteOrder() // Automatically delete expired order
-    //   }
   } catch (error) {
     console.error('Error retrieving order data from localStorage:', error)
   }
 })
 
-// Computed property to calculate the total price of the order
-const orderTotal = computed(() => {
+const orderTotal = computed((): number => {
   return purchasedItems.value.reduce((total, item) => {
     return total + item.price * item.quantity
   }, 0)
 })
+
+function deleteOrder() {
+  localStorage.removeItem('orderId')
+  localStorage.removeItem('purchasedItems')
+  orderId.value = ''
+  purchasedItems.value = []
+}
 </script>
 
 <template>
@@ -87,7 +69,13 @@ const orderTotal = computed(() => {
       </div>
     </div>
 
-    <h2 class="title" v-else>Nothing here. Go shopping!</h2>
+    <div v-else class="nothing-here">
+      <h2 class="title">Nothing here. Go shopping!</h2>
+      <div
+        class="nothing-here-img"
+        :style="{ backgroundImage: `url(${useAsset('empty-basket', 'jpg')})` }"
+      />
+    </div>
 
     <div class="action-buttons">
       <button
@@ -98,18 +86,26 @@ const orderTotal = computed(() => {
         Delete Order
       </button>
 
-      <router-link to="/products" class="button">Continue Shopping</router-link>
+      <router-link to="/products" class="button continue-shopping"
+        >Continue Shopping</router-link
+      >
     </div>
   </div>
-
-  <!--  <div v-else>-->
-  <!--    <h1 class="title">Order Expired</h1>-->
-  <!--    <p>Your order has expired and is no longer available.</p>-->
-  <!--    <router-link to="/products" class="button">Continue Shopping</router-link>-->
-  <!--  </div>-->
 </template>
 
 <style scoped>
+.continue-shopping {
+  margin-top: 1rem;
+}
+
+.nothing-here-img {
+  margin-left: calc(-1 * (100vw - 100%) / 2);
+  width: 100vw;
+  height: 30rem;
+  background-size: cover;
+  background-position: top left;
+}
+
 .order-total .subtitle {
   font-weight: bold;
 }

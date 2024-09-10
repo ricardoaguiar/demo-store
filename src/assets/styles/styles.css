@@ -32,12 +32,6 @@ body {
   background: #ffffff;
 }
 
-main, .navbar {
-  margin: 0.5rem;
-  padding: 0.5rem;
-  outline: 2px dashed red;
-}
-
 h1 {
   font-size: 3.2em;
   line-height: 1.1;

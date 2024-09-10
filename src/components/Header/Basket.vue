@@ -79,6 +79,13 @@ function handleRemoveItem(itemId: number) {
           :class="'checkout-button'"
           @click="handleCheckout"
         />
+
+        <ButtonComponent
+          v-if="store.cartItems.length === 0"
+          buttonText="Go Shopping"
+          :routerLink="`/products`"
+          buttonClass="empty-basket__go-shopping"
+        />
       </div>
     </div>
     <div
@@ -89,6 +96,15 @@ function handleRemoveItem(itemId: number) {
 </template>
 
 <style scoped>
+.empty-basket__go-shopping {
+  &:deep(button) {
+    display: block;
+    width: 100%;
+    background: black;
+    color: white;
+  }
+}
+
 .checkout-button {
   padding: 1rem 1.5rem;
   width: 100%;

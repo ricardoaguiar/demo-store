@@ -1,19 +1,28 @@
 <template>
   <!--  Render RouterLink if routerLink prop is passed-->
-  <RouterLink v-if="routerLink" :to="routerLink" class="button-wrapper">
+  <RouterLink
+    v-if="routerLink"
+    :to="routerLink"
+    :class="buttonClass"
+    class="button-wrapper"
+  >
     <button :class="buttonClass" :style="customStyle" :disabled="disabled">
       <slot>{{ buttonText }}</slot>
     </button>
   </RouterLink>
 
-  <button v-else :class="buttonClass" @click="handleClick" :style="customStyle" :disabled="disabled">
+  <button
+    v-else
+    :class="buttonClass"
+    @click="handleClick"
+    :style="customStyle"
+    :disabled="disabled"
+  >
     <slot>{{ buttonText }}</slot>
   </button>
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue'
-
 const props = defineProps({
   actionType: {
     type: String,
@@ -62,7 +71,6 @@ function handleClick() {
 </script>
 
 <style scoped>
-/* Shared styles for the button */
 button {
   padding: 0.5rem 1rem;
   border-radius: 5px;
