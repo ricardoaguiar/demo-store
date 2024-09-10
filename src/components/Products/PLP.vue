@@ -15,9 +15,13 @@
         <FilterBar />
       </div>
       <div class="column">
-        <Card :cards="slicedCards" />
+        <RelatedProducts :cards="slicedCards" />
         <!-- Render paginated products -->
-        <MoreButton v-if="products.length !== 0" @increment-cards="grid.showCards += 6" class="mt-4" />
+        <MoreButton
+          v-if="products.length !== 0"
+          @increment-cards="grid.showCards += 6"
+          class="mt-4"
+        />
       </div>
     </div>
 
@@ -33,7 +37,7 @@ import { computed, onMounted, reactive } from 'vue'
 import { useMainStore } from '@/store'
 import DropDownFilters from '@/components/Products/DropDownFilters.vue'
 import FilterBar from '@/components/Products/FilterBar.vue'
-import Card from '@/components/Products/RelatedProducts.vue'
+import RelatedProducts from '@/components/Products/RelatedProducts.vue'
 import MoreButton from '@/components/Products/MoreButton.vue'
 import Notification from '@/components/Notification.vue'
 

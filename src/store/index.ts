@@ -8,34 +8,36 @@ export const useMainStore = defineStore('main', {
     productInfo: Product
     loading: boolean
     error: string | null
+    purchasedItems: Product[]
   } => ({
     productInfo: {} as Product,
     // Initialize the cartItems with a quantity field
-    cartItems: JSON.parse(localStorage.getItem('cartItems') || '[]').map(
-      (item) => ({
-        ...item,
-        quantity: item.quantity || 1, // Ensure quantity is present if not already
-      })
-    ),
+    cartItems: (
+      JSON.parse(localStorage.getItem('cartItems') || '[]') as Product[]
+    ).map((item: Product) => ({
+      ...item,
+      quantity: item.quantity || 1, // Ensure quantity is present if not already
+    })),
     products: [],
     loading: false,
     error: null,
+    purchasedItems: [],
   }),
 
   getters: {
     itemsNumber: (state) =>
-      state.cartItems.reduce((total, item) => total + item.quantity, 0),
+      state.cartItems.reduce((total, item) => total + (item.quantity || 0), 0),
 
     totalPrice: (state) => {
       return state.cartItems.reduce(
-        (acc, item) => acc + item.price * item.quantity,
+        (acc, item) => acc + (item.price || 0) * (item.quantity || 1),
         0
       )
     },
   },
 
   actions: {
-    async fetchProducts() {
+    async fetchProducts(): Promise<void> {
       this.loading = true
       this.error = null
       try {
@@ -44,7 +46,7 @@ export const useMainStore = defineStore('main', {
           throw new Error('Failed to fetch products')
         }
         this.products = await response.json()
-      } catch (err) {
+      } catch (err: any) {
         this.error = err.message || 'Error fetching products'
 
         throw err
@@ -53,35 +55,42 @@ export const useMainStore = defineStore('main', {
       }
     },
 
-    inCart(item: Product) {
+    inCart(item: Product): void {
       const existingItem = this.cartItems.find(
-        (cartItem) => cartItem.id === item.id
+        (cartItem): boolean => cartItem.id === item.id
       )
       if (existingItem) {
-        existingItem.quantity += 1 // Increment quantity if item already exists
+        existingItem.quantity = (existingItem.quantity || 0) + 1 // Increment quantity if item already exists
       } else {
         this.cartItems.push({ ...item, quantity: 1 }) // Add new item with quantity 1
       }
       this.updateLocalStorage()
     },
 
-    outCart(itemId: number) {
-      const existingItem = this.cartItems.find((item) => item.id === itemId)
-      if (existingItem) {
-        if (existingItem.quantity > 1) {
-          existingItem.quantity -= 1 // Decrease quantity if more than 1
-        } else {
-          this.cartItems = this.cartItems.filter((item) => item.id !== itemId) // Remove item if only 1 left
-        }
-        this.updateLocalStorage()
+    outCart(itemId: number): void {
+      const existingItem = this.cartItems.find(
+        (item): boolean => item.id === itemId
+      )
+      if (!existingItem) return
+
+      if ((existingItem.quantity || 1) > 1) {
+        existingItem.quantity = (existingItem.quantity || 1) + 1 // Decrease quantity if more than 1
+      } else {
+        this.cartItems = this.cartItems.filter((item) => item.id !== itemId) // Remove item if only 1 left
       }
+      this.updateLocalStorage()
     },
 
-    handleCheckout(purchasedItems) {
+    handleCheckout(purchasedItems: Product[]): string {
+      const orderId = `ORD-${Date.now()}-${Math.floor(Math.random() * 10000)}`
+
       this.purchasedItems = purchasedItems
       localStorage.setItem('purchasedItems', JSON.stringify(purchasedItems)) // Save purchased items to localStorage
+      localStorage.setItem('orderId', orderId)
       this.cartItems = [] // Clear cart items
       this.updateLocalStorage()
+
+      return orderId
     },
 
     checkout() {

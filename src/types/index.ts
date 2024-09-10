@@ -1,10 +1,12 @@
 export interface Product {
   id: number
-  img?: string | undefined
-  title?: string | undefined
-  price?: number | undefined
-  color?: string | undefined
-  type?: string | undefined
+  img?: string
+  name?: string
+  title?: string
+  price: number
+  color?: string
+  type?: string
+  quantity: number
 }
 
 export interface State {

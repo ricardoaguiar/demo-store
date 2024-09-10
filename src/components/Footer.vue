@@ -1,14 +1,29 @@
 <script setup lang="ts">
-import footerDataJson from '@data/footer.json'
+import { ref, onMounted } from 'vue'
 
-const footerData = footerDataJson
+const footerData = ref(null)
+
+onMounted(async () => {
+  try {
+    const response = await fetch('/data/footer.json')
+    if (response.ok) {
+      footerData.value = await response.json()
+    } else {
+      console.error('Failed to load footer data')
+    }
+  } catch (error) {
+    console.error('Error fetching footer data:', error)
+  }
+})
 </script>
 
 <template>
-  <footer class="footer has-background-light">
+  <footer class="footer has-background-light" v-if="footerData">
+    <!-- Navigation and Links Section -->
     <div class="columns">
       <div
-        v-for="(section, index) in footerData.sections"
+        v-if="footerData"
+        v-for="(section, index) in footerData.footer"
         :key="index"
         class="column"
       >
@@ -21,6 +36,7 @@ const footerData = footerDataJson
       </div>
     </div>
 
+    <!-- Social Media and Contact Section -->
     <div class="columns is-vcentered">
       <div class="column is-half">
         <h3 class="title is-5">Get Social</h3>
@@ -33,17 +49,36 @@ const footerData = footerDataJson
             rel="noopener noreferrer"
             class="icon is-small"
           >
+            <!-- Render the social media icons using v-html to use the provided SVGs -->
             <span v-html="social.icon"></span>
           </a>
         </div>
       </div>
+
+      <!-- Contact Information Section -->
       <div class="column is-half has-text-right">
-        <p>{{ footerData.copyright }}</p>
+        <p>{{ footerData.contactInfo.address }}</p>
+        <p>
+          Email:
+          <a :href="'mailto:' + footerData.contactInfo.email">{{
+            footerData.contactInfo.email
+          }}</a>
+        </p>
+        <p>
+          Phone:
+          <a :href="'tel:' + footerData.contactInfo.phone">{{
+            footerData.contactInfo.phone
+          }}</a>
+        </p>
       </div>
+    </div>
+
+    <!-- Copyright Section -->
+    <div class="has-text-centered">
+      <p>{{ footerData.copyright }}</p>
     </div>
   </footer>
 </template>
-
 <style scoped>
 .links-list {
   list-style: none;

@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useMainStore } from '@/store'
 
 const routes = [
   {
@@ -25,6 +26,7 @@ const routes = [
         meta: { title: 'Product Details' },
         beforeEnter: (to, from, next) => {
           const productId = parseInt(to.params.id, 10)
+
           if (isNaN(productId) || productId < 0) {
             // Redirect to 404 if the ID is not a valid number or out of range
             next({ name: 'NotFound' })

@@ -69,6 +69,15 @@ import ButtonComponent from '@/components/UI/ButtonComponent.vue'
 const store = useMainStore()
 const route = useRouter()
 
+// const productId = parseInt(route.params.id, 10)
+
+// const loading = computed(() => store.loading)
+
+// Fetch the product by ID
+// const product = computed(() =>
+//   store.products.find((product) => product.id === productId)
+// )
+
 const { item, isRelatedProduct } = defineProps({
   item: Object,
   isRelatedProduct: Boolean,
