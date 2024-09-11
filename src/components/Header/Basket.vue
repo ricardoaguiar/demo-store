@@ -1,14 +1,19 @@
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
 import { useMainStore } from '@/store'
+
+// components
 import Item from '@/components/Cart/Item.vue'
 import Notification from '@/components/Notification.vue'
 import Total from '@/components/Cart/Total.vue'
 import ButtonComponent from '@/components/UI/ButtonComponent.vue'
-import { useRouter } from 'vue-router'
 
+// variables
 const store = useMainStore()
 const router = useRouter()
+const emit = defineEmits(['closeCart'])
 
+//  props
 const cart = defineProps({
   isOpen: {
     type: Boolean,
@@ -16,31 +21,21 @@ const cart = defineProps({
   },
 })
 
-// function handleChekout(item: Product) {
-//   for (let i = 0; i < quantity.value; i++) {
-//     store.inCart(item)
-//   }
-// }
-
+// functions
 function handleCheckout() {
-  // Capture the current cart items
   const purchasedItems = store.cartItems.map((item) => ({
     ...item,
     quantity: item.quantity,
   }))
-
   store.handleCheckout(purchasedItems)
-
-  // Empty the cart
   store.cartItems = []
   store.updateLocalStorage()
-
-  // Redirect to the thank you page with purchased items
   router.push({ name: 'ThankYou' })
 }
 
-function handleRemoveItem(itemId: number) {
-  store.outCart(itemId)
+function goShopping() {
+  router.push({ path: '/products' })
+  emit('closeCart')
 }
 </script>
 
@@ -60,13 +55,6 @@ function handleRemoveItem(itemId: number) {
         >
           <div class="cart-item column is-full">
             <Item :item="item" />
-            <p>Quantity: {{ item.quantity }}</p>
-            <!-- Display quantity -->
-            <p>Subtotal: ${{ item.price * item.quantity }}</p>
-            <!-- Display total price for the item -->
-            <button @click="store.inCart(item)">+</button>
-            <button @click="handleRemoveItem(item.id)">-</button>
-            <!-- Decrease quantity by 1 or remove -->
           </div>
         </div>
         <div v-if="store.itemsNumber">
@@ -83,8 +71,8 @@ function handleRemoveItem(itemId: number) {
         <ButtonComponent
           v-if="store.cartItems.length === 0"
           buttonText="Go Shopping"
-          :routerLink="`/products`"
           buttonClass="empty-basket__go-shopping"
+          @click="goShopping"
         />
       </div>
     </div>
@@ -95,7 +83,7 @@ function handleRemoveItem(itemId: number) {
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .empty-basket__go-shopping {
   &:deep(button) {
     display: block;
@@ -114,6 +102,7 @@ function handleRemoveItem(itemId: number) {
 
 .cart-container {
   position: relative;
+  width: 100%;
 }
 
 .cart-item {
@@ -145,7 +134,7 @@ function handleRemoveItem(itemId: number) {
   position: fixed;
   top: 0;
   right: 0;
-  width: 360px;
+  //width: 360px;
   height: 100%;
   background: #ffffff;
   overflow-y: auto;
@@ -156,6 +145,10 @@ function handleRemoveItem(itemId: number) {
 
 .cart.on {
   transform: translateX(0);
+
+  @include responsive(mobile) {
+    width: 100%;
+  }
 }
 
 .cart-menu {

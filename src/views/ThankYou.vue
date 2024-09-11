@@ -2,9 +2,13 @@
 import { onMounted, ref, computed } from 'vue'
 import { useAsset } from '@/composables'
 import { Product } from '@/types'
+import ButtonComponent from '@/components/UI/ButtonComponent.vue'
+import { useRouter } from 'vue-router'
 
 const orderId = ref('')
 const purchasedItems = ref<Product[]>([])
+
+const router = useRouter()
 
 onMounted(() => {
   try {
@@ -35,10 +39,14 @@ function deleteOrder() {
   orderId.value = ''
   purchasedItems.value = []
 }
+
+function goShopping() {
+  router.push({ path: '/products' })
+}
 </script>
 
 <template>
-  <div class="container py-5">
+  <div class="thank-you-page py-5 mx-4">
     <template v-if="orderId">
       <h1 class="title pb-3">Thank you for your purchase!</h1>
       <p class="subtitle">Here are the items you purchased:</p>
@@ -78,17 +86,19 @@ function deleteOrder() {
     </div>
 
     <div class="action-buttons">
-      <button
+      <ButtonComponent
         v-if="purchasedItems.length !== 0"
-        class="button is-danger"
+        buttonClass="delete-order"
         @click="deleteOrder"
-      >
-        Delete Order
-      </button>
+        buttonText="Delete Order"
+        class="button delete-order"
+      />
 
-      <router-link to="/products" class="button continue-shopping"
-        >Continue Shopping</router-link
-      >
+      <ButtonComponent
+        buttonText="Continue Shopping"
+        buttonClass="empty-basket__go-shopping"
+        @click="goShopping"
+      />
     </div>
   </div>
 </template>

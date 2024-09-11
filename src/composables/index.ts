@@ -1,5 +1,3 @@
-import {useAsset} from "@/composables/useAsset";
+import { useAsset } from '@/composables/useAsset'
 
-export {
-    useAsset
-}
+export { useAsset }

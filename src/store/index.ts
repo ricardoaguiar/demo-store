@@ -68,16 +68,7 @@ export const useMainStore = defineStore('main', {
     },
 
     outCart(itemId: number): void {
-      const existingItem = this.cartItems.find(
-        (item): boolean => item.id === itemId
-      )
-      if (!existingItem) return
-
-      if ((existingItem.quantity || 1) > 1) {
-        existingItem.quantity = (existingItem.quantity || 1) + 1 // Decrease quantity if more than 1
-      } else {
-        this.cartItems = this.cartItems.filter((item) => item.id !== itemId) // Remove item if only 1 left
-      }
+      this.cartItems = this.cartItems.filter((item) => item.id !== itemId) // Remove item if only 1 left
       this.updateLocalStorage()
     },
 

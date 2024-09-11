@@ -86,7 +86,7 @@ const sortItems = (value: string) => {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .product-page__container {
   display: grid;
   grid-template-columns: 1fr;
@@ -97,6 +97,10 @@ const sortItems = (value: string) => {
 .product-page {
   display: grid;
   grid-template-columns: 0.75fr 2fr;
+
+  @include responsive(mobile) {
+    outline: 2px dotted red;
+  }
 }
 
 @media screen and (max-width: 1023px) {

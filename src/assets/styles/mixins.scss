@@ -3,32 +3,26 @@
 // Mixin for handling various breakpoints including retina and HD screens
 @mixin responsive($breakpoint) {
   @if $breakpoint == mobile {
-    // Mobile phones (both Android & iOS)
     @media screen and (max-width: 768px) {
       @content;
     }
   } @else if $breakpoint == tablet {
-    // Tablets (iOS iPads and Android tablets)
     @media screen and (min-width: 769px) and (max-width: 1024px) {
       @content;
     }
   } @else if $breakpoint == desktop {
-    // Desktops and laptops
     @media screen and (min-width: 1025px) and (max-width: 1440px) {
       @content;
     }
   } @else if $breakpoint == widescreen {
-    // Large desktops (HD desktops)
     @media screen and (min-width: 1441px) and (max-width: 1920px) {
       @content;
     }
   } @else if $breakpoint == fullhd {
-    // Full HD screens and larger
     @media screen and (min-width: 1921px) {
       @content;
     }
   } @else if $breakpoint == retina {
-    // Retina display (Apple devices with high DPI)
     @media screen and (-webkit-min-device-pixel-ratio: 2),
     screen and (min--moz-device-pixel-ratio: 2),
     screen and (-o-min-device-pixel-ratio: 2/1),
@@ -38,7 +32,6 @@
       @content;
     }
   } @else if $breakpoint == hdpi {
-    // High-DPI screens for Android and non-Apple devices
     @media screen and (-webkit-min-device-pixel-ratio: 1.5),
     screen and (min-resolution: 144dpi),
     screen and (min-resolution: 1.5dppx) {
@@ -46,6 +39,7 @@
     }
   }
 }
+
 
 @mixin flex($direction: row, $justify: flex-start, $align: stretch, $gap: 0) {
   display: flex;

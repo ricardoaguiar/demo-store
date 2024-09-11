@@ -24,7 +24,7 @@
             actionType="decrement"
             :quantity="quantity"
             @quantity="updateQuantity"
-            buttonClass="button decrement-button"
+            buttonClass="button update-quantity"
             buttonText="−"
           />
           <span>{{ quantity }}</span>
@@ -32,17 +32,17 @@
             actionType="increment"
             :quantity="quantity"
             @quantity="updateQuantity"
-            buttonClass="button increment-button"
+            buttonClass="button update-quantity"
             buttonText="+"
           />
         </div>
 
         <ButtonComponent
           v-if="isRelatedProduct"
-          buttonClass="button is-light is-large"
+          buttonClass="button"
           buttonText="view details"
           :isRelatedProduct="true"
-          :routerLink="`/details/${item.id}`"
+          @click="navigateToProduct"
           :item="item"
         />
 
@@ -65,18 +65,10 @@ import { useMainStore } from '@/store'
 import { useAsset } from '@/composables'
 import { useRouter } from 'vue-router'
 import ButtonComponent from '@/components/UI/ButtonComponent.vue'
+import router from '@/router'
 
 const store = useMainStore()
 const route = useRouter()
-
-// const productId = parseInt(route.params.id, 10)
-
-// const loading = computed(() => store.loading)
-
-// Fetch the product by ID
-// const product = computed(() =>
-//   store.products.find((product) => product.id === productId)
-// )
 
 const { item, isRelatedProduct } = defineProps({
   item: Object,
@@ -97,19 +89,18 @@ function handleAddToCart(item: Product) {
     store.updateLocalStorage()
   }
 }
+
+function navigateToProduct() {
+  router.push(`/details/${item.id}`).then(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  })
+}
 </script>
 
 <style scoped lang="scss">
-pre {
-  font-size: 14px;
-}
-
 .product-detail {
   width: 100%;
   margin: auto;
-  padding: 2rem;
-
-  outline: 1px solid red;
 
   @include flex($direction: row, $gap: 2rem);
 

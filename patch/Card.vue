@@ -7,7 +7,7 @@ const store = useMainStore()
 
 <template>
   <!--  <div class="container">-->
-  <div class="columns is-multiline">
+  <div class="columns is-multiline card-component">
     <div
       v-for="item in store.items"
       :key="item.id"
@@ -53,6 +53,10 @@ const store = useMainStore()
 </template>
 
 <style scoped lang="scss">
+.card-component {
+  background-color: lightgray;
+}
+
 .products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
