@@ -134,12 +134,12 @@ function goShopping() {
   position: fixed;
   top: 0;
   right: 0;
-  //width: 360px;
+  width: 25rem;
   height: 100%;
   background: #ffffff;
   overflow-y: auto;
   z-index: 1051;
-  transform: translateX(360px);
+  transform: translateX(100%);
   transition: transform 0.4s;
 }
 
