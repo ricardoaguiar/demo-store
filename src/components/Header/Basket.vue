@@ -112,7 +112,6 @@ function goShopping() {
   white-space: nowrap;
   color: #ffffff;
   background: transparent;
-  z-index: 10;
 }
 
 .empty-basket__go-shopping {
