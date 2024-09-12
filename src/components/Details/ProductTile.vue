@@ -6,7 +6,7 @@
     ]"
   >
     <div class="is-6">
-      <img class="img-fluid" :src="useAsset(item.img)" :alt="item.title" />
+      <img class="img-fluid" :src="useAsset(item?.img)" :alt="item?.title" />
     </div>
 
     <div class="grid product-info">
@@ -15,10 +15,10 @@
         <h6 class="is-size-6" style="width: 190px">3 reviews</h6>
       </template>
 
-      <h1 class="title">{{ item.title }}</h1>
-      <h3 class="price">${{ item.price }}</h3>
+      <h1 class="title">{{ item?.title }}</h1>
+      <h3 class="price">${{ item?.price }}</h3>
 
-      <div class="control number has-text-centered">
+      <div class="flex counter-container has-text-centered">
         <ButtonComponent
           actionType="decrement"
           :quantity="quantity"
@@ -26,7 +26,7 @@
           buttonClass="button update-quantity"
           buttonText="−"
         />
-        <span>{{ quantity }}</span>
+        <span class="quantity">{{ quantity }}</span>
         <ButtonComponent
           actionType="increment"
           :quantity="quantity"
@@ -76,7 +76,7 @@ const { item, isRelatedProduct } = defineProps({
 const quantity = ref(1)
 
 // Handle the quantity update event
-function updateQuantity(newQuantity) {
+function updateQuantity(newQuantity: number): void {
   quantity.value = newQuantity // Update the quantity state
 }
 
@@ -89,20 +89,43 @@ function handleAddToCart(item: Product) {
 }
 
 function navigateToProduct() {
-  router.push(`/details/${item.id}`).then(() => {
+  router.push(`/details/${item?.id}`).then(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   })
 }
 </script>
 
 <style scoped lang="scss">
+.counter-container {
+  gap: 0.25rem;
+  align-items: center;
+  justify-content: center;
+
+  &:deep(button) {
+    line-height: 2;
+  }
+}
+.quantity {
+  font-weight: bolder;
+  padding: 0.25rem 0.5rem;
+}
+
+.update-quantity {
+  border-radius: 0;
+  border: none;
+  outline: none;
+}
+
 .title {
   margin: 0.5rem 0 0;
+  font-size: 1.8rem;
 }
+
 .price {
   font-size: 1.2rem;
   font-weight: bolder;
 }
+
 .product-info {
   grid-template-columns: 1fr;
   width: 100%;
@@ -110,11 +133,12 @@ function navigateToProduct() {
 }
 
 .product-detail {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
   width: 100%;
   margin: auto;
 
   @include flex($direction: row, $gap: 2rem);
-
   @include responsive(mobile) {
     @include flex($direction: column);
   }
@@ -122,14 +146,14 @@ function navigateToProduct() {
 
 .product-detail__related-product {
   @include flex($direction: column);
-  padding: 1rem;
+  padding: 0 1rem 1rem;
 }
 
 .img-fluid {
   width: 100%;
-  box-shadow:
-    0 4px 8px rgba(0, 0, 0, 0.2),
-    0 6px 20px rgba(0, 0, 0, 0.19);
+  //box-shadow:
+  //  0 4px 8px rgba(0, 0, 0, 0.2),
+  //  0 6px 20px rgba(0, 0, 0, 0.19);
 }
 
 .control {

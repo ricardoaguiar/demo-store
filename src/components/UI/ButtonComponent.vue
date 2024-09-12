@@ -93,6 +93,10 @@ function handleClick() {
 }
 */
 
+button {
+  outline: none;
+}
+
 button:disabled {
   cursor: not-allowed;
 }
