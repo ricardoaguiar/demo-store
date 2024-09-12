@@ -110,14 +110,9 @@ function goShopping() {
   transition: all 0.3s ease;
   overflow: hidden;
   white-space: nowrap;
-  color: white;
+  color: #ffffff;
   background: transparent;
-
-  &:hover {
-    background-color: white;
-    border-radius: 20px;
-    color: black;
-  }
+  z-index: 10;
 }
 
 .empty-basket__go-shopping {
