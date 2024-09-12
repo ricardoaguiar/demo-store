@@ -1,6 +1,6 @@
 <template>
   <!--  <div class="column">-->
-  <div class="card card-selector is-hidden-touch">
+  <div class="card card-selector">
     <div class="card-content">
       <div class="search-title">
         <h4 class="title is-4">Categories +</h4>
@@ -64,7 +64,7 @@ function filterByColor(color: string) {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .card {
   border-radius: 0.25rem;
 }
@@ -80,6 +80,10 @@ function filterByColor(color: string) {
   box-shadow:
     0 8px 6px rgba(0, 0, 0, 0.1),
     0 10px 25px rgba(0, 0, 0, 0.2);
+
+  @include responsive(mobile) {
+    display: none;
+  }
 }
 
 .search-title {

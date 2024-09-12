@@ -47,10 +47,7 @@ function reSet(): void {
 </script>
 
 <template>
-  <div
-    class="is-flex is-align-items-center is-justify-content-flex-center is-justify-content-tablet-flex-start"
-    style="gap: 1rem"
-  >
+  <div class="filters flex">
     <div class="dropdown is-fullwidth">
       <div class="dropdown-trigger">
         <button
@@ -126,6 +123,10 @@ function reSet(): void {
 </template>
 
 <style scoped lang="scss">
+.filters {
+  justify-content: flex-start;
+  padding-left: 1rem;
+}
 .button.is-light {
   color: black;
   background: white;

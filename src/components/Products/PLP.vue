@@ -4,16 +4,15 @@
     <DropDownFilters @sort-item="sortItems" />
 
     <!-- Loading state -->
-    <div v-if="loading">Loading products...</div>
+    <!--    <div v-if="loading">Loading products...</div>-->
 
     <!-- Error state -->
-    <div v-else-if="error">Error loading products: {{ error }}</div>
+    <!--    <div v-else-if="error">Error loading products: {{ error }}</div>-->
 
     <!-- Product grid when products are available -->
-    <div v-else-if="products.length > 0" class="product-page">
-      <div class="column">
-        <FilterBar />
-      </div>
+    <div v-if="products.length > 0" class="product-page">
+      <FilterBar />
+
       <div class="column">
         <RelatedProducts />
         <!-- Render paginated products -->
@@ -92,26 +91,20 @@ const sortItems = (value: string) => {
   grid-template-columns: 1fr;
   gap: 1rem;
   margin-top: 1rem;
-
-  @include responsive('mobile') {
-    outline: 1px solid blue;
-  }
 }
 
 .product-page {
   display: grid;
   grid-template-columns: 0.75fr 2fr;
-
-  @include responsive(mobile) {
-    outline: 2px dotted red;
-  }
 }
 
-@media screen and (max-width: 1023px) {
-  .product-page {
-    grid-template-columns: 1fr;
-    /* Single column layout */
-    margin-inline: 1rem;
+.product-page {
+  grid-template-columns: 1fr;
+  /* Single column layout */
+  margin-inline: 1rem;
+
+  @include responsive(mobile) {
+    margin-inline: 0.25rem;
   }
 }
 </style>
