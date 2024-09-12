@@ -9,51 +9,49 @@
       <img class="img-fluid" :src="useAsset(item.img)" :alt="item.title" />
     </div>
 
-    <div
-      class="column is-6 is-flex is-align-items-center is-justify-content-start"
-    >
-      <div class="product-name info pt-0">
-        <template v-if="!isRelatedProduct">
-          <span class="pr-3">★★★★★</span>
-          <h6 class="is-size-6" style="width: 190px">3 reviews</h6>
-        </template>
-        <h1 class="title is-3 is-uppercase pt-3">{{ item.title }}</h1>
-        <h4 class="subtitle is-4">${{ item.price }}</h4>
-        <div class="control number has-text-centered">
-          <ButtonComponent
-            actionType="decrement"
-            :quantity="quantity"
-            @quantity="updateQuantity"
-            buttonClass="button update-quantity"
-            buttonText="−"
-          />
-          <span>{{ quantity }}</span>
-          <ButtonComponent
-            actionType="increment"
-            :quantity="quantity"
-            @quantity="updateQuantity"
-            buttonClass="button update-quantity"
-            buttonText="+"
-          />
-        </div>
+    <div class="grid product-info">
+      <template v-if="!isRelatedProduct">
+        <span class="pr-3">★★★★★</span>
+        <h6 class="is-size-6" style="width: 190px">3 reviews</h6>
+      </template>
 
+      <h1 class="title">{{ item.title }}</h1>
+      <h3 class="price">${{ item.price }}</h3>
+
+      <div class="control number has-text-centered">
         <ButtonComponent
-          v-if="isRelatedProduct"
-          buttonClass="button"
-          buttonText="view details"
-          :isRelatedProduct="true"
-          @click="navigateToProduct"
-          :item="item"
+          actionType="decrement"
+          :quantity="quantity"
+          @quantity="updateQuantity"
+          buttonClass="button update-quantity"
+          buttonText="−"
         />
-
+        <span>{{ quantity }}</span>
         <ButtonComponent
-          actionType="addToCart"
-          :item="item"
-          buttonClass="button add-to-cart-button"
-          @cart="handleAddToCart"
-          buttonText="add to cart"
+          actionType="increment"
+          :quantity="quantity"
+          @quantity="updateQuantity"
+          buttonClass="button update-quantity"
+          buttonText="+"
         />
       </div>
+
+      <ButtonComponent
+        v-if="isRelatedProduct"
+        buttonClass="button"
+        buttonText="view details"
+        :isRelatedProduct="true"
+        @click="navigateToProduct"
+        :item="item"
+      />
+
+      <ButtonComponent
+        actionType="addToCart"
+        :item="item"
+        buttonClass="button add-to-cart-button"
+        @cart="handleAddToCart"
+        buttonText="add to cart"
+      />
     </div>
   </div>
 </template>
@@ -98,6 +96,19 @@ function navigateToProduct() {
 </script>
 
 <style scoped lang="scss">
+.title {
+  margin: 0.5rem 0 0;
+}
+.price {
+  font-size: 1.2rem;
+  font-weight: bolder;
+}
+.product-info {
+  grid-template-columns: 1fr;
+  width: 100%;
+  gap: 0.75rem;
+}
+
 .product-detail {
   width: 100%;
   margin: auto;
@@ -113,12 +124,6 @@ function navigateToProduct() {
   @include flex($direction: column);
   padding: 1rem;
 }
-
-//.product-name {
-//  @include responsive(mobile) {
-//    @include flex($gap: 1rem);
-//  }
-//}
 
 .img-fluid {
   width: 100%;

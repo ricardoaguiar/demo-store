@@ -1,5 +1,3 @@
-@use 'sass:math'; // Import Sass math functions
-
 // Mixin for handling various breakpoints including retina and HD screens
 @mixin responsive($breakpoint) {
   @if $breakpoint == mobile {
@@ -155,4 +153,14 @@
   @else {
     @error "Invalid property. Use padding or margin.";
   }
+}
+
+@mixin full-width {
+  width: 100%;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  max-width: 100vw;
 }

@@ -6,18 +6,21 @@ const store = useMainStore()
 </script>
 
 <template>
-  <div class="columns is-multiline">
-    <div
-      v-for="item in store.products"
-      :key="item.id"
-      class="column is-12-mobile is-6-tablet is-4-desktop"
-    >
+  <div class="grid related-products">
+    <template v-for="item in store.products" :key="item.id">
       <ProductTile :item="item" :isRelatedProduct="true" />
-    </div>
+    </template>
   </div>
 </template>
 
 <style scoped lang="scss">
+.related-products {
+  grid-template-columns: repeat(3, 1fr);
+
+  @include responsive(mobile) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
 .products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));

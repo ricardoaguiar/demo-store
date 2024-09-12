@@ -43,7 +43,7 @@ import ButtonComponent from '@/components/UI/ButtonComponent.vue'
 import { ref } from 'vue'
 
 const props = defineProps<{
-  item?: Object
+  item: Object
   quantity?: Number
 }>()
 

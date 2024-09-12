@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Exo+2');
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -60,7 +61,7 @@ h1 {
 
 
 .grid {
-  display: grid;
+    display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 1em;
 }
@@ -87,6 +88,17 @@ h1 {
     background-color: #f9f9f9;
   }
 }
+
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.5s;
+}
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  filter: blur(1rem);
+}
+
 
 
 

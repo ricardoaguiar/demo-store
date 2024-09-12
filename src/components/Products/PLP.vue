@@ -15,7 +15,7 @@
         <FilterBar />
       </div>
       <div class="column">
-        <RelatedProducts :cards="slicedCards" />
+        <RelatedProducts />
         <!-- Render paginated products -->
         <MoreButton
           v-if="products.length !== 0"
@@ -92,6 +92,10 @@ const sortItems = (value: string) => {
   grid-template-columns: 1fr;
   gap: 1rem;
   margin-top: 1rem;
+
+  @include responsive('mobile') {
+    outline: 1px solid blue;
+  }
 }
 
 .product-page {

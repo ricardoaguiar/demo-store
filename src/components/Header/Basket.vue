@@ -42,9 +42,15 @@ function goShopping() {
 <template>
   <div>
     <div :class="['cart', cart.isOpen ? 'on' : '']">
+      <!--      <div class="remove-btn-container column p-0">-->
+      <div class="cart-title">
+        <ButtonComponent buttonClass="close-basket" @click="$emit('closeCart')"
+          >&#10006;</ButtonComponent
+        >
+        <h2 class="has-text-centered is-size-3">Cart</h2>
+      </div>
+      <!--      </div>-->
       <div class="cart-menu">
-        <p class="has-text-centered mt-4 pb-2 is-size-3">Cart</p>
-        <hr />
         <Notification v-if="!store.itemsNumber">
           Your cart is empty, try to add some items.
         </Notification>
@@ -84,6 +90,36 @@ function goShopping() {
 </template>
 
 <style scoped lang="scss">
+.cart-title {
+  border-bottom: 1px solid rgba(211, 211, 211, 0.5);
+  background: #1f2229;
+  width: 100%;
+  color: white;
+  padding: 0.5rem 0;
+}
+
+.close-basket {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  white-space: nowrap;
+  color: white;
+  background: transparent;
+
+  &:hover {
+    background-color: white;
+    border-radius: 20px;
+    color: black;
+  }
+}
+
 .empty-basket__go-shopping {
   &:deep(button) {
     display: block;
