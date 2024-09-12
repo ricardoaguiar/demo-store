@@ -119,6 +119,11 @@ function navigateToProduct() {
 .title {
   margin: 0.5rem 0 0;
   font-size: 1.8rem;
+
+  @include responsive(mobile) {
+    font-size: 1.25rem;
+    margin: 0;
+  }
 }
 
 .price {
@@ -130,6 +135,10 @@ function navigateToProduct() {
   grid-template-columns: 1fr;
   width: 100%;
   gap: 0.75rem;
+
+  @include responsive(retina) {
+    gap: 0.75rem;
+  }
 }
 
 .product-detail {
