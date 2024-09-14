@@ -1,5 +1,5 @@
 <template>
-  <section class="products-page-view">
+  <section class="products-page-view container py-5">
     <div>
       <h1 class="title pt-3 has-text-centered">New Arrivals</h1>
       <BreadCrumbs />
@@ -36,7 +36,6 @@ useHead({
   grid-template-areas:
     'breadCrumbs breadCrumbs'
     'filterBar productList';
-  //grid-template-rows: auto 1fr;
   grid-template-columns: 1fr;
   gap: 16px;
 
