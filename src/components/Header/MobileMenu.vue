@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
-import { useAsset } from '@/composables/useAsset'
+import { useAsset } from '@/composables'
 import { ref } from 'vue'
 
 const isOpen = ref(false)
@@ -26,8 +26,8 @@ const toggleDropdown = () => {
     />
     <div class="dropdown-menu" role="menu">
       <router-link class="dropdown-item" to="/">Home</router-link>
-      <router-link class="dropdown-item" to="/Products">Products</router-link>
-      <router-link class="dropdown-item" to="/Contact">Contact us</router-link>
+      <router-link class="dropdown-item" to="/products">Products</router-link>
+      <router-link class="dropdown-item" to="/contact">Contact us</router-link>
     </div>
   </div>
 </template>

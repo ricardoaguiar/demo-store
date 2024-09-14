@@ -1,6 +1,5 @@
 <template>
   <div class="container py-5" v-if="item.details">
-    <!-- Ensure there is info to display before allowing access -->
     <Breadcrumb :details="item.details" />
     <ProductTile :item="item.details" />
     <ProductDescription />
@@ -26,9 +25,9 @@ import { useMainStore } from '@/store'
 
 // Components
 import Card from '@/components/Products/RelatedProducts.vue'
-import Breadcrumb from '@/components/Details/Breadcrumb.vue'
-import ProductTile from '@/components/Details/ProductTile.vue'
-import ProductDescription from '@/components/Details/PDPText.vue'
+import Breadcrumb from '@/components/PDP/Breadcrumb.vue'
+import ProductTile from '@/components/PDP/ProductTile.vue'
+import ProductDescription from '@/components/PDP/PDPText.vue'
 import { Product } from '@/types'
 
 // Store and routing

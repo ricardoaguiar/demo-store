@@ -4,10 +4,7 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
+  color-scheme: light;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -26,17 +23,23 @@ a, a:hover, a:visited {
 
 body {
   margin: 0 auto;
-  /*display: flex;*/
-  /*place-items: center;*/
-  min-width: 320px;
   min-height: 100vh;
   background: #ffffff;
+}
+
+main {
+  margin: 0 auto;
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
+
+li, ol {
+  list-style: none;
+}
+
 
 .button {
   border-radius: 8px;
@@ -56,22 +59,40 @@ h1 {
 
 .button:focus,
 .button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: none;
 }
 
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1em;
+    grid-template-columns: repeat(12, 1fr);
+    gap: $half-spacing
 }
 
 .flex {
     display: flex;
-    gap: 1em;
+    gap: $half-spacing;
     justify-content: center;
+    align-items: center;
 }
 
+
+.caret-down {
+  @include caret(down);
+}
+
+.caret-up {
+  @include caret(up);
+}
+
+.caret {
+  margin-left: 8px;
+  display: inline-block;
+  width: 0;
+  height: 0;
+}
+
+/*
 .card {
   padding: 2em;
 }
@@ -98,6 +119,7 @@ h1 {
   opacity: 0;
   filter: blur(1rem);
 }
+*/
 
 
 

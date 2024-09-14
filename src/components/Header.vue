@@ -19,7 +19,7 @@ const cartState = () => (cart.value = !cart.value)
 </script>
 
 <template>
-  <div>
+  <header class="header">
     <nav
       class="navbar is-flex is-align-items-center is-justify-content-space-between"
     >
@@ -36,31 +36,41 @@ const cartState = () => (cart.value = !cart.value)
     </nav>
     <UserModal />
     <Basket :is-open="cart" @closeCart="cartState" />
-  </div>
+  </header>
 </template>
 
-<style scoped>
-.navbar {
-  padding: 1rem;
-  z-index: 100;
+<style scoped lang="scss">
+.header {
+  background-color: #ffffff;
+  @include space(padding-block, $half-spacing, $one-spacing);
 }
 
-.navbar-group {
-  gap: 1rem;
-}
-@media only screen and (max-width: 1023px) {
-  .nav-links {
+.nav-links {
+  @include responsive(tablet) {
     display: none;
   }
 }
-
-@media only screen and (max-width: 768px) {
-  .navbar {
-    position: sticky;
-    top: 0;
-  }
-  .navbar-group {
-    margin-block: 0.75rem;
-  }
-}
+//.navbar {
+//  z-index: 100;
+//  padding: 1rem;
+//}
+//
+//.navbar-group {
+//  gap: 1rem;
+//}
+//@media only screen and (max-width: 1023px) {
+//  .nav-links {
+//    display: none;
+//  }
+//}
+//
+//@media only screen and (max-width: 768px) {
+//  .navbar {
+//    position: sticky;
+//    top: 0;
+//  }
+//  .navbar-group {
+//    margin-block: 0.75rem;
+//  }
+//}
 </style>

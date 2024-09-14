@@ -1,57 +1,57 @@
 <template>
   <div
     :class="[
-      'product-detail',
-      { 'product-detail__related-product': isRelatedProduct },
+      isRelatedProduct ? 'product-detail__related-product' : 'product-detail',
     ]"
   >
-    <div class="is-6">
+    <ButtonComponent
+      buttonClass="view-item-button"
+      :isRelatedProduct="true"
+      @click="navigateToProduct"
+      :item="item"
+    >
       <img class="img-fluid" :src="useAsset(item?.img)" :alt="item?.title" />
-    </div>
+    </ButtonComponent>
 
-    <div class="grid product-info">
+    <div class="product-info">
       <template v-if="!isRelatedProduct">
-        <span class="pr-3">★★★★★</span>
-        <h6 class="is-size-6" style="width: 190px">3 reviews</h6>
+        <h1 class="title">{{ item?.title }}</h1>
+        <h6 class="is-size-6" style="width: 190px">
+          <span class="pr-3">{{ item.stars }}</span>
+          {{ item.reviews }} reviews
+        </h6>
+        <p>{{ item.description }}</p>
       </template>
 
-      <h1 class="title">{{ item?.title }}</h1>
+      <h1 class="title" v-if="isRelatedProduct">{{ item?.title }}</h1>
       <h3 class="price">${{ item?.price }}</h3>
 
       <div class="flex counter-container has-text-centered">
+        <div>
+          <ButtonComponent
+            actionType="decrement"
+            :quantity="quantity"
+            @quantity="updateQuantity"
+            buttonClass="button update-quantity"
+            buttonText="−"
+          />
+          <span class="quantity">{{ quantity }}</span>
+          <ButtonComponent
+            actionType="increment"
+            :quantity="quantity"
+            @quantity="updateQuantity"
+            buttonClass="button update-quantity"
+            buttonText="+"
+          />
+        </div>
         <ButtonComponent
-          actionType="decrement"
-          :quantity="quantity"
-          @quantity="updateQuantity"
-          buttonClass="button update-quantity"
-          buttonText="−"
-        />
-        <span class="quantity">{{ quantity }}</span>
-        <ButtonComponent
-          actionType="increment"
-          :quantity="quantity"
-          @quantity="updateQuantity"
-          buttonClass="button update-quantity"
-          buttonText="+"
+          actionType="addToCart"
+          :item="item"
+          buttonClass="button add-to-cart-button"
+          @cart="handleAddToCart"
+          buttonText="add to cart"
         />
       </div>
-
-      <ButtonComponent
-        v-if="isRelatedProduct"
-        buttonClass="button"
-        buttonText="view details"
-        :isRelatedProduct="true"
-        @click="navigateToProduct"
-        :item="item"
-      />
-
-      <ButtonComponent
-        actionType="addToCart"
-        :item="item"
-        buttonClass="button add-to-cart-button"
-        @cart="handleAddToCart"
-        buttonText="add to cart"
-      />
     </div>
   </div>
 </template>
@@ -96,10 +96,20 @@ function navigateToProduct() {
 </script>
 
 <style scoped lang="scss">
+.view-item-button {
+  background: #ffffff;
+  @include space(padding-inline, $half-spacing, $base-spacing);
+  flex: 100%;
+}
 .counter-container {
-  gap: 0.25rem;
+  gap: 1rem;
   align-items: center;
   justify-content: center;
+  @include flex($direction: row);
+
+  @include responsive(mobile) {
+    flex-direction: row;
+  }
 
   &:deep(button) {
     line-height: 2;
@@ -132,11 +142,18 @@ function navigateToProduct() {
 }
 
 .product-info {
-  grid-template-columns: 1fr;
   width: 100%;
   gap: 0.75rem;
 
-  @include responsive(retina) {
+  @include flex(
+    $direction: column,
+    $gap: $half-spacing,
+    $align: flex-start,
+    $justify: center
+  );
+  @include space(margin-right, $one-and-half-spacing, $base-spacing);
+
+  @include responsive(mobile) {
     gap: 0.75rem;
   }
 }
@@ -148,14 +165,37 @@ function navigateToProduct() {
   margin: auto;
 
   @include flex($direction: row, $gap: 2rem);
+  @include space(margin-block, $one-spacing, $base-spacing);
   @include responsive(mobile) {
     @include flex($direction: column);
+
+    width: fit-content;
+  }
+
+  .product-info {
+    @include responsive(mobile) {
+      @include space(padding, $double-spacing, $base-spacing);
+    }
+    @include responsive(tablet) {
+      @include space(padding, $one-and-half-spacing, $base-spacing);
+    }
   }
 }
 
 .product-detail__related-product {
-  @include flex($direction: column);
-  padding: 0 1rem 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  @include flex($direction: column, $align: center);
+  @include space(margin-block, 0, 0);
+
+  .product-info {
+    align-items: center;
+    margin: 0 0 1rem 0;
+  }
+  .counter-container {
+    flex-direction: column;
+    gap: $quarter-spacing;
+  }
 }
 
 .img-fluid {
@@ -191,9 +231,10 @@ function navigateToProduct() {
   font-size: 15px;
   cursor: pointer;
   border: none;
-  box-shadow:
-    0 26px 38px rgba(0, 0, 0, 0.2),
-    0 6px 20px rgba(0, 0, 0, 0.19);
+  //box-shadow:
+  //  0 26px 38px rgba(0, 0, 0, 0.2),
+  //  0 6px 20px rgba(0, 0, 0, 0.19);
+  border-radius: 2px;
 
   &:hover,
   &:focus {

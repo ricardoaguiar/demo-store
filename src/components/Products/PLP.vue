@@ -1,41 +1,37 @@
 <template>
-  <div class="product-page__container">
-    <!-- Dropdown filter -->
-    <DropDownFilters @sort-item="sortItems" />
-
+  <section class="product-page__container">
     <!-- Loading state -->
     <!--    <div v-if="loading">Loading products...</div>-->
 
     <!-- Error state -->
     <!--    <div v-else-if="error">Error loading products: {{ error }}</div>-->
 
-    <!-- Product grid when products are available -->
     <div v-if="products.length > 0" class="product-page">
-      <FilterBar />
+      <!--      <FilterBar />-->
 
-      <div class="column">
-        <RelatedProducts />
-        <!-- Render paginated products -->
-        <MoreButton
-          v-if="products.length !== 0"
-          @increment-cards="grid.showCards += 6"
-          class="mt-4"
-        />
-      </div>
+      <!--      <div class="column">-->
+      <RelatedProducts />
+      <!-- Render paginated products -->
+      <MoreButton
+        v-if="products.length !== 0"
+        @increment-cards="grid.showCards += 6"
+        class="mt-4"
+      />
     </div>
+    <!--    </div>-->
 
     <!-- No products notification -->
     <Notification v-else class="my-5 py-5 has-text-centered">
       <h4>Sorry, we can't find any product with these features</h4>
     </Notification>
-  </div>
+  </section>
 </template>
 
 <script setup lang="ts">
 import { computed, onMounted, reactive } from 'vue'
 import { useMainStore } from '@/store'
 import DropDownFilters from '@/components/Products/DropDownFilters.vue'
-import FilterBar from '@/components/Products/FilterBar.vue'
+import FilterBar from '@/components/Products/Sidebar.vue'
 import RelatedProducts from '@/components/Products/RelatedProducts.vue'
 import MoreButton from '@/components/Products/MoreButton.vue'
 import Notification from '@/components/Notification.vue'
@@ -87,19 +83,17 @@ const sortItems = (value: string) => {
 
 <style scoped lang="scss">
 .product-page__container {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-  margin-top: 1rem;
+  //display: grid;
+  //grid-template-columns: 1fr;
+  //gap: 1rem;
 }
 
 .product-page {
-  display: grid;
-  grid-template-columns: 0.75fr 2fr;
+  //display: grid;
+  //grid-template-columns: 0.75fr 2fr;
 }
 
 .product-page {
-  grid-template-columns: 1fr;
   /* Single column layout */
   margin-inline: 1rem;
 

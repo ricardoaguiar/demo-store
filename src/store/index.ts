@@ -5,12 +5,17 @@ export const useMainStore = defineStore('main', {
   state: (): {
     cartItems: Product[]
     products: Product[]
-    productInfo: Product
+    productInfo: Product | null
     loading: boolean
     error: string | null
     purchasedItems: Product[]
+    selectedCategory: string | null
+    selectedColor: string | null
+    selectedSorting: string | null
+    categories: Array<{ name: string; value: string }>
+    sortingOptions: Array<{ name: string; value: string }>
   } => ({
-    productInfo: {} as Product,
+    productInfo: null,
     // Initialize the cartItems with a quantity field
     cartItems: (
       JSON.parse(localStorage.getItem('cartItems') || '[]') as Product[]
@@ -22,6 +27,14 @@ export const useMainStore = defineStore('main', {
     loading: false,
     error: null,
     purchasedItems: [],
+    selectedCategory: null,
+    selectedColor: null,
+    selectedSorting: null,
+    categories: {
+      types: [],
+      colors: [],
+    },
+    sortingOptions: [],
   }),
 
   getters: {
@@ -33,6 +46,27 @@ export const useMainStore = defineStore('main', {
         (acc, item) => acc + (item.price || 0) * (item.quantity || 1),
         0
       )
+    },
+
+    filteredProducts(state) {
+      let filtered = [...state.products]
+      if (state.selectedCategory) {
+        filtered = filtered.filter(
+          (product) => product.category === state.selectedCategory
+        )
+      }
+      if (state.selectedColor) {
+        filtered = filtered.filter(
+          (product) => product.color === state.selectedColor
+        )
+      }
+      if (state.selectedSorting === 'price') {
+        filtered = filtered.sort((a, b) => a.price - b.price)
+      } else if (state.selectedSorting === 'newest') {
+        filtered = filtered.sort((a, b) => b.dateAdded - a.dateAdded)
+      } else if (state.selectedSorting === 'trending') {
+      }
+      return filtered
     },
   },
 
@@ -53,6 +87,38 @@ export const useMainStore = defineStore('main', {
       } finally {
         this.loading = false
       }
+    },
+
+    async fetchFilters(): Promise<void> {
+      this.loading = true
+      this.error = null
+      try {
+        const response = await fetch('/data/filters.json')
+        if (!response.ok) {
+          throw new Error('Failed to fetch filters')
+        }
+        const data = await response.json()
+        this.categories.types = data.filters.categories.types
+        this.categories.colors = data.filters.categories.colors
+        this.sortingOptions = data.filters.sorting.options
+      } catch (err: any) {
+        this.error = err.message || 'Error fetching filters'
+        throw err
+      } finally {
+        this.loading = false
+      }
+    },
+
+    setCategoryFilter(category: string | null) {
+      this.selectedCategory = category
+    },
+
+    setColorFilter(color: string | null) {
+      this.selectedColor = color
+    },
+
+    setSortingFilter(value: string | null) {
+      this.selectedSorting = value
     },
 
     inCart(item: Product): void {

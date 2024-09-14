@@ -1,0 +1,25 @@
+{
+  "filters": {
+    "categories": {
+      "types": [
+        { "name": "Table", "value": "table" },
+        { "name": "Lamps", "value": "lamp" },
+        { "name": "Chairs", "value": "chair" },
+        { "name": "Sofas", "value": "sofa" }
+      ],
+      "colors": [
+        { "name": "Yellow", "value": "#FFC015" },
+        { "name": "Blue", "value": "#829FAA" },
+        { "name": "White", "value": "#BFB8AE" },
+        { "name": "Silver", "value": "#817A77" }
+      ]
+    },
+    "sorting": {
+      "options": [
+        { "name": "Newest", "value": "newest" },
+        { "name": "Price", "value": "price" },
+        { "name": "Trending", "value": "trending" }
+      ]
+    }
+  }
+}

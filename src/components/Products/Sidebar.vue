@@ -1,7 +1,37 @@
+<script setup lang="ts">
+import { reactive } from 'vue'
+import DropDownFilters from '@/components/Products/DropDownFilters.vue'
+
+const info = reactive({
+  types: [
+    { name: 'Table', value: 'table' },
+    { name: 'Lamps', value: 'lamp' },
+    { name: 'Chairs', value: 'chair' },
+    { name: 'Sofas', value: 'sofa' },
+  ],
+  colors: [
+    { name: 'Yellow', value: '#FFC015' },
+    { name: 'Blue', value: '#829FAA' },
+    { name: 'White', value: '#BFB8AE' },
+    { name: 'Silver', value: '#817A77' },
+  ],
+})
+
+function filterByCategory(category: string) {
+  console.log('Filter by category:', category)
+  // Emit or handle the category filtering logic here
+}
+
+function filterByColor(color: string) {
+  console.log('Filter by color:', color)
+  // Emit or handle the color filtering logic here
+}
+</script>
+
 <template>
-  <!--  <div class="column">-->
-  <div class="card card-selector">
-    <div class="card-content">
+  <aside class="sidebar-navigation">
+    <DropDownFilters @sort-item="sortItems" />
+    <div class="categories">
       <div class="search-title">
         <h4 class="title is-4">Categories +</h4>
         <h6
@@ -31,55 +61,31 @@
         <input type="range" min="0" max="100" value="50" class="slider" />
       </div>
     </div>
-  </div>
-  <!--  </div>-->
+  </aside>
 </template>
 
-<script setup lang="ts">
-import { reactive } from 'vue'
-
-const info = reactive({
-  types: [
-    { name: 'Table', value: 'table' },
-    { name: 'Lamps', value: 'lamp' },
-    { name: 'Chairs', value: 'chair' },
-    { name: 'Sofas', value: 'sofa' },
-  ],
-  colors: [
-    { name: 'Yellow', value: '#FFC015' },
-    { name: 'Blue', value: '#829FAA' },
-    { name: 'White', value: '#BFB8AE' },
-    { name: 'Silver', value: '#817A77' },
-  ],
-})
-
-function filterByCategory(category: string) {
-  console.log('Filter by category:', category)
-  // Emit or handle the category filtering logic here
-}
-
-function filterByColor(color: string) {
-  console.log('Filter by color:', color)
-  // Emit or handle the color filtering logic here
-}
-</script>
-
 <style scoped lang="scss">
-.card {
-  border-radius: 0.25rem;
+.sidebar-navigation {
+  @include flex($direction: column);
+  @include space(margin, $half-spacing, $base-spacing);
+
+  gap: $base-spacing;
 }
 
-.card-content {
-  padding: 0;
+.categories {
+  border-radius: 0.25rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+
+  @include space(padding, $one-spacing, $base-spacing);
+  @include responsive(mobile) {
+    display: none;
+  }
 }
 
 .card-selector {
   color: #dcdcdc;
   height: fit-content;
   background: white;
-  box-shadow:
-    0 8px 6px rgba(0, 0, 0, 0.1),
-    0 10px 25px rgba(0, 0, 0, 0.2);
 
   @include responsive(mobile) {
     display: none;

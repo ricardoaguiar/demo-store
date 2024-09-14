@@ -23,7 +23,7 @@ const routes = [
         name: 'ProductDetails',
         component: () => import('@/views/Details/[id].vue'),
         props: true,
-        meta: { title: 'Product Details' },
+        meta: { title: 'Product PDP' },
         beforeEnter: (to, from, next) => {
           const productId = parseInt(to.params.id, 10)
 

@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { useMainStore } from '@/store'
-import ProductTile from '@/components/Details/ProductTile.vue'
+import ProductTile from '@/components/PDP/ProductTile.vue'
 
 const store = useMainStore()
 </script>
 
 <template>
-  <div class="grid related-products">
+  <div class="related-products">
     <template v-for="item in store.products" :key="item.id">
       <ProductTile :item="item" :isRelatedProduct="true" />
     </template>
@@ -15,12 +15,16 @@ const store = useMainStore()
 
 <style scoped lang="scss">
 .related-products {
+  display: grid;
   grid-template-columns: repeat(3, 1fr);
+  gap: $one-spacing;
 
   @include responsive(mobile) {
     grid-template-columns: 1fr 1fr;
+    gap: $half-spacing;
   }
 }
+
 .products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -34,7 +38,7 @@ const store = useMainStore()
   overflow: hidden;
   border-radius: 0.25rem;
 
-  @include space(margin, 0.5, 14px);
+  //@include space(margin, 0.5, 14px);
 
   .image img {
     z-index: 1;

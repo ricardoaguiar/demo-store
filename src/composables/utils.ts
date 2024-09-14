@@ -1,3 +1,19 @@
+// composables/utils.ts
+import { ref } from 'vue'
+
+export function useDropdown() {
+  const dropdownActive = ref(false)
+
+  function toggleDropdown() {
+    dropdownActive.value = !dropdownActive.value
+  }
+
+  return {
+    dropdownActive,
+    toggleDropdown,
+  }
+}
+
 export function useAsset(
   path: string | undefined,
   ext?: string | undefined

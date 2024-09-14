@@ -125,7 +125,6 @@ function reSet(): void {
 <style scoped lang="scss">
 .filters {
   justify-content: flex-start;
-  padding-left: 1rem;
 }
 .button.is-light {
   color: black;
