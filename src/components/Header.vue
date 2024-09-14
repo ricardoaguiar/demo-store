@@ -24,11 +24,11 @@ const cartState = () => (cart.value = !cart.value)
       class="navbar is-flex is-align-items-center is-justify-content-space-between"
     >
       <MobileMenu />
-      <div class="navbar-group is-flex is-align-items-center">
+      <div class="navbar-group left-side is-flex is-align-items-center">
         <Logo class="logo" />
         <NavLinks class="nav-links" />
       </div>
-      <div class="navbar-group is-flex is-align-items-center">
+      <div class="navbar-group right-side is-flex is-align-items-center">
         <SearchBar />
         <!--        <Profile />-->
         <CartButton @open="cartState" />
@@ -49,28 +49,15 @@ const cartState = () => (cart.value = !cart.value)
   @include responsive(tablet) {
     display: none;
   }
+  gap: 1rem;
 }
-//.navbar {
-//  z-index: 100;
-//  padding: 1rem;
-//}
-//
-//.navbar-group {
-//  gap: 1rem;
-//}
-//@media only screen and (max-width: 1023px) {
-//  .nav-links {
-//    display: none;
-//  }
-//}
-//
-//@media only screen and (max-width: 768px) {
-//  .navbar {
-//    position: sticky;
-//    top: 0;
-//  }
-//  .navbar-group {
-//    margin-block: 0.75rem;
-//  }
-//}
+
+.navbar-group {
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.right-side {
+  @include space(margin-right, $one-spacing, $one-spacing);
+}
 </style>

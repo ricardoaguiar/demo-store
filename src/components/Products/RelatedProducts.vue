@@ -16,8 +16,12 @@ const store = useMainStore()
 <style scoped lang="scss">
 .related-products {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: $one-spacing;
+
+  @include responsive(desktop) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 
   @include responsive(mobile) {
     grid-template-columns: 1fr 1fr;
@@ -29,6 +33,7 @@ const store = useMainStore()
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-gap: 1rem;
+  outline: 1px solid red;
 }
 
 /* Card Style */
