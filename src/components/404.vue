@@ -1,5 +1,6 @@
 <template>
-  <div class="not-found-container">
+  <Header />
+  <div class="not-found-container pt-6">
     <h1 class="not-found-title">Oops! 404 - Page Not Found</h1>
     <p class="not-found-message">
       It looks like the page you're looking for doesn't exist or has been moved.
@@ -16,8 +17,8 @@
 </template>
 
 <script setup lang="ts">
-// No special logic required for this component
 import { useAsset } from '@/composables'
+import Header from '@/components/Header.vue'
 </script>
 
 <style scoped>

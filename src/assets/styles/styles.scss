@@ -36,6 +36,11 @@ h1 {
   line-height: 1.1;
 }
 
+:is(h1, h2, h3, h4, h5, h6) {
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
 li, ol {
   list-style: none;
 }
@@ -92,24 +97,6 @@ li, ol {
   height: 0;
 }
 
-/*
-.card {
-  padding: 2em;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
-
 .page-enter-active,
 .page-leave-active {
   transition: all 0.5s;
@@ -119,7 +106,7 @@ li, ol {
   opacity: 0;
   filter: blur(1rem);
 }
-*/
+
 
 
 

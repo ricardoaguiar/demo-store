@@ -5,11 +5,12 @@
     "title": "Cabriole",
     "price": 159,
     "color": "yellow",
-    "type": "Sofa",
+    "categoryName": "Sofa",
     "description": "A stylish yellow Cabriole sofa that combines elegance with comfort, perfect for enhancing your living space. Its curvy and classic silhouette makes it an eye-catching centerpiece in any room, while the plush seating ensures maximum comfort. Ideal for those who appreciate both form and function.",
     "sale": true,
     "reviews": 34,
-    "stars": "★★★★½"
+    "stars": "★★★★½",
+    "dateAdded": "2023-06-18"
   },
   {
     "id": 1,
@@ -17,11 +18,12 @@
     "title": "Torchiere",
     "price": 749,
     "color": "yellow",
-    "type": "Lamp",
+    "categoryName": "Lamp",
     "description": "An elegant yellow Torchiere lamp that adds a soft and ambient uplighting effect to any room. The tall, slender design makes it suitable for corners or spaces that require subtle, indirect lighting. Its classic design pairs well with a variety of decor styles, offering both style and function.",
     "sale": false,
     "reviews": 78,
-    "stars": "★★★★"
+    "stars": "★★★★",
+    "dateAdded": "2023-08-22"
   },
   {
     "id": 2,
@@ -29,11 +31,12 @@
     "title": "Arm Chair",
     "price": 367,
     "color": "yellow",
-    "type": "Chair",
+    "categoryName": "Chair",
     "description": "This yellow Arm Chair offers a sturdy frame with plush cushioning, ensuring both comfort and durability. It is perfect for relaxing or reading in any living room or bedroom setting. With its bright color, this chair not only stands out but adds warmth to your space. A practical and stylish choice.",
     "sale": true,
     "reviews": 42,
-    "stars": "★★★★"
+    "stars": "★★★★",
+    "dateAdded": "2023-07-05"
   },
   {
     "id": 3,
@@ -41,11 +44,12 @@
     "title": "Wing Chair",
     "price": 499,
     "color": "red",
-    "type": "Chair",
+    "categoryName": "Chair",
     "description": "The bold red Wing Chair features a high back and elegant wings, creating a statement piece for your home. Its luxurious fabric and sturdy construction make it ideal for reading, lounging, or adding a touch of traditional sophistication to your décor. The rich color enhances any interior design aesthetic.",
     "sale": false,
     "reviews": 57,
-    "stars": "★★★★½"
+    "stars": "★★★★½",
+    "dateAdded": "2023-05-30"
   },
   {
     "id": 4,
@@ -53,11 +57,12 @@
     "title": "Camel Back",
     "price": 248,
     "color": "white",
-    "type": "Sofa",
+    "categoryName": "Sofa",
     "description": "The Camel Back sofa features a distinctive arched back, adding a touch of elegance to any living room. Its refined design is complemented by plush cushions for comfortable seating, making it perfect for both formal and casual settings. Its white upholstery enhances any space with brightness and sophistication.",
     "sale": true,
-    "reviews": 29,
-    "stars": "★★★★"
+    "reviews": 2999,
+    "stars": "★★★★",
+    "dateAdded": "2023-09-01"
   },
   {
     "id": 5,
@@ -65,11 +70,12 @@
     "title": "Stool",
     "price": 4750,
     "color": "white",
-    "type": "Chair",
+    "categoryName": "Chair",
     "description": "This simple and versatile white stool provides extra seating when needed or acts as a casual spot for lounging. With its minimalist design, it fits seamlessly into modern or traditional spaces. Whether in a kitchen, bedroom, or bathroom, this stool offers functionality and style in a compact design.",
     "sale": false,
     "reviews": 19,
-    "stars": "★★★½"
+    "stars": "★★★½",
+    "dateAdded": "2023-04-11"
   },
   {
     "id": 6,
@@ -77,11 +83,12 @@
     "title": "Windsor Chair",
     "price": 513,
     "color": "blue",
-    "type": "Chair",
+    "categoryName": "Chair",
     "description": "A classic blue Windsor Chair designed with sleek wooden spindles and a contoured seat, perfect for adding traditional charm to any space. This timeless piece fits into dining rooms, kitchens, or entryways, offering both beauty and function. It delivers durability and comfort, making it a perfect addition to your home.",
     "sale": false,
     "reviews": 85,
-    "stars": "★★★★★"
+    "stars": "★★★★★",
+    "dateAdded": "2023-07-15"
   },
   {
     "id": 7,
@@ -89,11 +96,12 @@
     "title": "C-Table",
     "price": 429,
     "color": "red",
-    "type": "Table",
+    "categoryName": "Table",
     "description": "The modern red C-Table is ideal for small spaces and adds both style and mobility to any room. Designed for versatility, it can easily slide under sofas or chairs, making it great for a quick workspace or snack area. Its minimalist look blends effortlessly with contemporary home designs.",
     "sale": true,
     "reviews": 53,
-    "stars": "★★★★"
+    "stars": "★★★★",
+    "dateAdded": "2023-08-01"
   },
   {
     "id": 8,
@@ -101,11 +109,12 @@
     "title": "Coffee Table",
     "price": 385,
     "color": "white",
-    "type": "Table",
+    "categoryName": "Table",
     "description": "This minimalist white Coffee Table offers a clean, sleek surface for your living room essentials. Its neutral color and simple design make it versatile enough to match various décor styles. Sturdy and durable, it’s perfect for showcasing your books, décor, or beverages while maintaining a chic, modern aesthetic.",
     "sale": false,
     "reviews": 48,
-    "stars": "★★★★"
+    "stars": "★★★★",
+    "dateAdded": "2023-06-29"
   },
   {
     "id": 9,
@@ -113,35 +122,38 @@
     "title": "Desk Chair",
     "price": 764,
     "color": "yellow",
-    "type": "Chair",
+    "categoryName": "Chair",
     "description": "This comfortable yellow Desk Chair is designed for long hours of work or study. Featuring adjustable seating and sturdy back support, it ensures comfort and productivity. Its bright yellow color adds a splash of fun to any workspace, blending functionality with a bold design statement for a modern office.",
     "sale": true,
     "reviews": 75,
-    "stars": "★★★★½"
+    "stars": "★★★★½",
+    "dateAdded": "2023-07-25"
   },
   {
     "id": 10,
     "img": "11.jpg",
     "title": "Garden Chair",
-    "price": 46,
+    "price": 466,
     "color": "white",
-    "type": "Chair",
+    "categoryName": "Chair",
     "description": "The white Garden Chair is a perfect outdoor seating solution for any garden or patio. Its durable, weather-resistant material ensures long-lasting use in all weather conditions. Lightweight and easy to move, this chair offers both style and convenience for outdoor lounging, parties, or relaxation in any outdoor space.",
     "sale": false,
     "reviews": 23,
-    "stars": "★★★½"
+    "stars": "★★★½",
+    "dateAdded": "2023-05-12"
   },
   {
     "id": 11,
     "img": "12.jpg",
     "title": "Novelty",
-    "price": 151,
+    "price": 1511,
     "color": "red",
-    "type": "Lamp",
+    "categoryName": "Lamp",
     "description": "A unique red Novelty lamp that adds a touch of fun and whimsy to any room. Ideal for those looking for a creative lighting option, this lamp delivers a quirky design while providing functional lighting. Its vibrant red color and unusual shape make it an exciting addition to any home.",
     "sale": true,
     "reviews": 60,
-    "stars": "★★★★½"
+    "stars": "★★★★½",
+    "dateAdded": "2023-08-16"
   },
   {
     "id": 12,
@@ -149,11 +161,12 @@
     "title": "Lava",
     "price": 760,
     "color": "blue",
-    "type": "Lamp",
+    "categoryName": "Lamp",
     "description": "This stylish blue Lava lamp creates a mesmerizing flow of liquid, offering a calming and soothing effect. Perfect for a bedroom or living room, the gentle light enhances the ambiance while the dynamic lava movement provides a unique decorative feature. A timeless lamp for those who appreciate retro designs.",
     "sale": false,
     "reviews": 90,
-    "stars": "★★★★★"
+    "stars": "★★★★★",
+    "dateAdded": "2023-07-30"
   },
   {
     "id": 13,
@@ -161,11 +174,12 @@
     "title": "Deck Chair",
     "price": 752,
     "color": "white",
-    "type": "Chair",
+    "categoryName": "Chair",
     "description": "The white Deck Chair offers a comfortable and relaxing seating option for your outdoor spaces. Its foldable design makes it easy to store when not in use, while its sturdy construction ensures lasting durability. Perfect for lounging on the porch, balcony, or garden, this chair is designed for relaxation.",
     "sale": true,
     "reviews": 61,
-    "stars": "★★★★"
+    "stars": "★★★★",
+    "dateAdded": "2023-06-11"
   },
   {
     "id": 14,
@@ -173,10 +187,11 @@
     "title": "Accent Table",
     "price": 754,
     "color": "white",
-    "type": "Table",
+    "categoryName": "Table",
     "description": "The chic white Accent Table brings elegance and functionality to any space. Ideal for showcasing décor, holding drinks, or serving as a side table, its neutral color allows it to complement a variety of interior designs. Its sturdy design makes it a practical yet stylish addition to your living room.",
     "sale": false,
     "reviews": 99,
-    "stars": "★★★★★"
+    "stars": "★★★★★",
+    "dateAdded": "2023-09-10"
   }
 ]

@@ -1,21 +1,12 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-
 // components
 import MobileMenu from '@/components/Header/MobileMenu.vue'
 import NavLinks from '@/components/Header/NavLinks.vue'
 import Logo from '@/components/Header/Logo.vue'
 import SearchBar from '@/components/Header/SearchBar.vue'
-import Profile from '@/components/Header/Profile.vue'
-import CartButton from '@/components/Header/BasketButton.vue'
+import BasketButton from '@/components/Header/BasketButton.vue'
 import UserModal from '@/components/Header/UserModal.vue'
-import Basket from '@/components/Header/Basket.vue' // Assuming Cart component is imported
-
-// Reactive cart state
-const cart = ref(false)
-
-// Toggle cart state
-const cartState = () => (cart.value = !cart.value)
+import Basket from '@/components/Header/Basket.vue'
 </script>
 
 <template>
@@ -31,25 +22,27 @@ const cartState = () => (cart.value = !cart.value)
       <div class="navbar-group right-side is-flex is-align-items-center">
         <SearchBar />
         <!--        <Profile />-->
-        <CartButton @open="cartState" />
+        <BasketButton />
       </div>
     </nav>
     <UserModal />
-    <Basket :is-open="cart" @closeCart="cartState" />
+    <Basket />
   </header>
 </template>
 
 <style scoped lang="scss">
 .header {
   background-color: #ffffff;
-  @include space(padding-block, $half-spacing, $one-spacing);
+  //@include
+  // (padding-block, $half-spacing, $one-spacing);
 }
 
 .nav-links {
+  gap: 1rem;
+
   @include responsive(tablet) {
     display: none;
   }
-  gap: 1rem;
 }
 
 .navbar-group {

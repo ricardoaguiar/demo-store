@@ -1,9 +1,10 @@
 // composables/utils.ts
 import { ref } from 'vue'
 
+const isCartOpen = ref(false)
+
 export function useDropdown() {
   const dropdownActive = ref(false)
-
   function toggleDropdown() {
     dropdownActive.value = !dropdownActive.value
   }
@@ -24,4 +25,15 @@ export function useAsset(
 
   // Generate the full URL to the asset
   return new URL(`../assets/img/${fullPath}`, import.meta.url).href
+}
+
+export function useCart() {
+  function toggleCart() {
+    isCartOpen.value = !isCartOpen.value
+  }
+
+  return {
+    isCartOpen,
+    toggleCart,
+  }
 }

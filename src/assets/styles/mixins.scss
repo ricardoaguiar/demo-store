@@ -30,15 +30,15 @@ $double-spacing: $base-spacing * 2;                    // 2rem (32px)
       @content;
     }
   } @else if $breakpoint == tablet {
-    @media screen and (min-width: 769px) and (max-width: 1024px) {
+    @media screen and (min-width: 769px) and (max-width: 1023px) {
       @content;
     }
   } @else if $breakpoint == desktop {
-    @media screen and (min-width: 1025px) and (max-width: 1440px) {
+    @media screen and (min-width: 1024px) and (max-width: 1439px) {
       @content;
     }
   } @else if $breakpoint == widescreen {
-    @media screen and (min-width: 1441px) and (max-width: 1920px) {
+    @media screen and (min-width: 1440px) and (max-width: 1920px) {
       @content;
     }
   } @else if $breakpoint == fullhd {
@@ -79,23 +79,61 @@ $double-spacing: $base-spacing * 2;                    // 2rem (32px)
   gap: $gap;
 }
 
-@mixin font-size($size-mobile, $size-tablet: null, $size-desktop: null, $size-widescreen: null, $size-fullhd: null) {
+//@mixin font-size($size-mobile, $size-tablet: null, $size-desktop: null, $size-widescreen: null, $size-fullhd: null) {
+//  font-size: $size-mobile;
+//
+//  @if $size-tablet != null {
+//    @media screen and (min-width: 769px) {
+//      font-size: $size-tablet;
+//    }
+//  }
+//
+//  @if $size-desktop != null {
+//    @media screen and (min-width: 1025px) {
+//      font-size: $size-desktop;
+//    }
+//  }
+//
+//  @if $size-widescreen != null {
+//    @media screen and (min-width: 1216px) {
+//      font-size: $size-widescreen;
+//    }
+//  }
+//
+//  @if $size-fullhd != null {
+//    @media screen and (min-width: 1408px) {
+//      font-size: $size-fullhd;
+//    }
+//  }
+//}
+
+@mixin font-size(
+  $size-mobile,
+  $size-tablet: null,
+  $size-desktop: null,
+  $size-widescreen: null,
+  $size-fullhd: null
+) {
   font-size: $size-mobile;
 
+  @media screen and (min-width: 320px) and (max-width: 768px) {
+    font-size: calc(#{$size-mobile} + 2vw); // Fluid scaling for mobile
+  }
+
   @if $size-tablet != null {
-    @media screen and (min-width: 769px) {
+    @media screen and (min-width: 769px) and (max-width: 1024px) {
       font-size: $size-tablet;
     }
   }
 
   @if $size-desktop != null {
-    @media screen and (min-width: 1025px) {
+    @media screen and (min-width: 1025px) and (max-width: 1215px) {
       font-size: $size-desktop;
     }
   }
 
   @if $size-widescreen != null {
-    @media screen and (min-width: 1216px) {
+    @media screen and (min-width: 1216px) and (max-width: 1407px) {
       font-size: $size-widescreen;
     }
   }
@@ -106,6 +144,7 @@ $double-spacing: $base-spacing * 2;                    // 2rem (32px)
     }
   }
 }
+
 
 /* Mixin to prevent zoom on iOS with max() and declarative animation, using rem */
 @mixin prevent-ios-zoom($font-size-rem) {

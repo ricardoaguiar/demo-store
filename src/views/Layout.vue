@@ -25,6 +25,5 @@ const route = useRoute()
   @include space(padding-inline, $one-spacing, $one-spacing);
 
   width: 100vw;
-  outline: 1px dashed red;
 }
 </style>

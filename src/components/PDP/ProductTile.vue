@@ -8,23 +8,28 @@
       buttonClass="view-item-button"
       :isRelatedProduct="true"
       @click="navigateToProduct"
-      :item="item"
+      :product="product"
+      :style="{ cursor: !isRelatedProduct ? 'auto' : '' }"
     >
-      <img class="img-fluid" :src="useAsset(item?.img)" :alt="item?.title" />
+      <img
+        class="img-fluid"
+        :src="useAsset(product?.img)"
+        :alt="product?.title"
+      />
     </ButtonComponent>
 
     <div class="product-info">
       <template v-if="!isRelatedProduct">
-        <h1 class="title">{{ item?.title }}</h1>
+        <h1 class="title">{{ product?.title }}</h1>
         <h6 class="is-size-6" style="width: 190px">
-          <span class="pr-3">{{ item.stars }}</span>
-          {{ item.reviews }} reviews
+          <span class="pr-3">{{ product.stars }}</span>
+          {{ product.reviews }} reviews
         </h6>
-        <p>{{ item.description }}</p>
+        <p>{{ product.description }}</p>
       </template>
 
-      <h1 class="title" v-if="isRelatedProduct">{{ item?.title }}</h1>
-      <h3 class="price">${{ item?.price }}</h3>
+      <h1 class="title" v-if="isRelatedProduct">{{ product?.title }}</h1>
+      <h3 class="price">${{ product?.price }}</h3>
 
       <div class="flex counter-container has-text-centered">
         <div>
@@ -46,9 +51,10 @@
         </div>
         <ButtonComponent
           actionType="addToCart"
-          :item="item"
+          :product="product"
           buttonClass="button add-to-cart-button"
           @cart="handleAddToCart"
+          @click="toggleCart"
           buttonText="add to cart"
         />
       </div>
@@ -58,18 +64,18 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Product } from '@/types'
+import type { Product } from '@/types'
 import { useMainStore } from '@/store'
-import { useAsset } from '@/composables'
-import { useRouter } from 'vue-router'
+import { useAsset, useCart } from '@/composables'
 import ButtonComponent from '@/components/UI/ButtonComponent.vue'
-import router from '@/router'
+import { useRouter } from 'vue-router'
 
 const store = useMainStore()
-const route = useRouter()
+const { toggleCart } = useCart()
+const router = useRouter()
 
-const { item, isRelatedProduct } = defineProps({
-  item: Object,
+const { product, isRelatedProduct } = defineProps({
+  product: Object,
   isRelatedProduct: Boolean,
 })
 
@@ -81,15 +87,15 @@ function updateQuantity(newQuantity: number): void {
 }
 
 // Handle Add to Cart
-function handleAddToCart(item: Product) {
+function handleAddToCart(product: Product) {
   for (let i = 0; i < quantity.value; i++) {
-    store.inCart(item)
+    store.inCart(product)
     store.updateLocalStorage()
   }
 }
 
 function navigateToProduct() {
-  router.push(`/details/${item?.id}`).then(() => {
+  router.push(`/details/${product?.id}`).then(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   })
 }
@@ -101,6 +107,7 @@ function navigateToProduct() {
   @include space(padding-inline, $half-spacing, $base-spacing);
   flex: 100%;
 }
+
 .counter-container {
   gap: 1rem;
   align-items: center;
@@ -115,6 +122,7 @@ function navigateToProduct() {
     line-height: 2;
   }
 }
+
 .quantity {
   font-weight: bolder;
   padding: 0.25rem 0.5rem;

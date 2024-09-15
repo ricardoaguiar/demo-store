@@ -12,11 +12,11 @@
       <!--      <div class="column">-->
       <RelatedProducts />
       <!-- Render paginated products -->
-      <MoreButton
-        v-if="products.length !== 0"
-        @increment-cards="grid.showCards += 6"
-        class="mt-4"
-      />
+      <!--      <MoreButton-->
+      <!--        v-if="products.length !== 0"-->
+      <!--        @increment-cards="grid.showCards += 6"-->
+      <!--        class="mt-4"-->
+      <!--      />-->
     </div>
     <!--    </div>-->
 

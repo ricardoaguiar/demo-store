@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { useMainStore } from '@/store'
+import { useCart } from '@/composables'
 
 // components
 import Item from '@/components/Cart/Item.vue'
@@ -11,18 +12,10 @@ import ButtonComponent from '@/components/UI/ButtonComponent.vue'
 // variables
 const store = useMainStore()
 const router = useRouter()
-const emit = defineEmits(['closeCart'])
-
-//  props
-const cart = defineProps({
-  isOpen: {
-    type: Boolean,
-    default: false,
-  },
-})
+const { isCartOpen, toggleCart } = useCart()
 
 // functions
-function handleCheckout() {
+function handleCheckout(): void {
   const purchasedItems = store.cartItems.map((item) => ({
     ...item,
     quantity: item.quantity,
@@ -31,62 +24,58 @@ function handleCheckout() {
   store.cartItems = []
   store.updateLocalStorage()
   router.push({ name: 'ThankYou' })
+  toggleCart()
 }
 
-function goShopping() {
+function goShopping(): void {
   router.push({ path: '/products' })
-  emit('closeCart')
+  toggleCart()
 }
 </script>
 
 <template>
-  <div>
-    <div :class="['cart', cart.isOpen ? 'on' : '']">
-      <!--      <div class="remove-btn-container column p-0">-->
-      <div class="cart-title">
-        <ButtonComponent buttonClass="close-basket" @click="$emit('closeCart')"
-          >&#10006;</ButtonComponent
-        >
-        <h2 class="has-text-centered is-size-3">Cart</h2>
-      </div>
-      <!--      </div>-->
-      <div class="cart-menu">
-        <Notification v-if="!store.itemsNumber">
-          Your cart is empty, try to add some items.
-        </Notification>
-        <div
-          class="cart-container is-mobile"
-          v-for="item in store.cartItems"
-          :key="item.id"
-        >
-          <div class="cart-item column is-full">
-            <Item :item="item" />
-          </div>
-        </div>
-        <div v-if="store.itemsNumber">
-          <hr />
-          <Total />
-        </div>
-        <ButtonComponent
-          v-if="store.cartItems.length > 0"
-          buttonText="finish checkout"
-          :class="'checkout-button'"
-          @click="handleCheckout"
-        />
-
-        <ButtonComponent
-          v-if="store.cartItems.length === 0"
-          buttonText="Go Shopping"
-          buttonClass="empty-basket__go-shopping"
-          @click="goShopping"
-        />
-      </div>
+  <div :class="['cart', isCartOpen ? 'on' : '']">
+    <div class="cart-title">
+      <ButtonComponent buttonClass="close-basket" @click="toggleCart"
+        >&#10006;</ButtonComponent
+      >
+      <h2 class="has-text-centered is-size-3">Cart</h2>
     </div>
-    <div
-      :class="['modal-background', cart.isOpen ? '' : 'is-hidden']"
-      @click="$emit('closeCart')"
-    ></div>
+    <div class="cart-items">
+      <Notification v-if="!store.itemsNumber">
+        Your cart is empty, try to add some items.
+      </Notification>
+      <div
+        class="cart-container is-mobile"
+        v-for="item in store.cartItems"
+        :key="item.id"
+      >
+        <div class="cart-item column is-full">
+          <Item :item="item" />
+        </div>
+      </div>
+
+      <Total v-if="store.itemsNumber" />
+
+      <ButtonComponent
+        v-if="store.cartItems.length > 0"
+        buttonText="finish checkout"
+        buttonClass="checkout-button"
+        @click="handleCheckout"
+      />
+
+      <ButtonComponent
+        v-if="store.cartItems.length === 0"
+        buttonText="Go Shopping"
+        buttonClass="empty-basket__go-shopping"
+        @click="goShopping"
+      />
+    </div>
   </div>
+  <div
+    :class="['modal-background', isCartOpen ? '' : 'is-hidden']"
+    @click="toggleCart"
+  ></div>
 </template>
 
 <style scoped lang="scss">
@@ -115,30 +104,37 @@ function goShopping() {
 }
 
 .empty-basket__go-shopping {
-  &:deep(button) {
-    display: block;
-    width: 100%;
-    background: black;
-    color: white;
-  }
+  display: block;
+  width: 100%;
+  background: black;
+  color: white;
+  border-radius: 2px;
+  @include space(padding, $one-spacing, $one-spacing);
 }
 
 .checkout-button {
   padding: 1rem 1.5rem;
   width: 100%;
-  font-size: 1rem;
   background: rgb(125, 207, 133);
+  font-weight: bold;
+  text-transform: uppercase;
+
+  @include font-size(16px, 18px);
 }
 
 .cart-container {
   position: relative;
   width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  @include space(padding, $quarter-spacing, $one-spacing);
+  @include space(margin-bottom, $half-spacing, $one-spacing);
 }
 
 .cart-item {
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 0.5rem;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 0.5rem;
   position: relative;
 }
 
@@ -153,6 +149,7 @@ function goShopping() {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.4);
   transition: opacity 0.5s;
+  cursor: pointer;
 }
 
 .is-hidden {
@@ -168,7 +165,7 @@ function goShopping() {
   height: 100%;
   background: #ffffff;
   overflow-y: auto;
-  z-index: 1051;
+  z-index: 1500;
   transform: translateX(100%);
   transition: transform 0.4s;
 }
@@ -181,13 +178,9 @@ function goShopping() {
   }
 }
 
-.cart-menu {
+.cart-items {
   color: black;
   padding: 1rem;
-}
-
-hr {
-  border-color: black;
 }
 
 .columns {

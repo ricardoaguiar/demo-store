@@ -42,4 +42,8 @@ const toggleModal = () => {
     height: 25px;
   }
 }
+
+.modal-background {
+  cursor: pointer;
+}
 </style>

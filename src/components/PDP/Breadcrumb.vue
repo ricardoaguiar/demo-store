@@ -9,7 +9,7 @@
           <RouterLink to="/products">Products</RouterLink>
         </li>
         <li>
-          <RouterLink to="/products">{{ details.type }}</RouterLink>
+          <RouterLink to="/products">{{ details.categoryName }}</RouterLink>
         </li>
         <li class="is-active">
           <a aria-current="page">{{ details.title }}</a>

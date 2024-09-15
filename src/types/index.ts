@@ -5,7 +5,12 @@ export interface Product {
   title?: string
   price: number
   color?: string
-  type?: string
+  categoryName?: string
+  description?: string
+  sale?: boolean
+  reviews?: number
+  stars?: string
+  dateAdded?: number
   quantity: number
 }
 

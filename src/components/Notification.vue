@@ -1,7 +1,11 @@
 <template>
-  <div
-    class="notification is-flex is-align-items-center is-justify-content-center has-text-centered is-italic"
-  >
+  <div class="notification is-italic">
     <slot />
   </div>
 </template>
+<style scoped>
+.notification {
+  border-radius: 2px;
+}
+</style>
+/

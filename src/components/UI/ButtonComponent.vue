@@ -31,7 +31,7 @@ const props = defineProps({
     type: String,
     default: 'addToCart',
   },
-  item: Object,
+  product: Object,
   quantity: Number,
   buttonText: String,
   buttonClass: String,
@@ -72,8 +72,8 @@ function handleClick() {
       handleDecrement()
       break
     case 'addToCart':
-      if (props.item) {
-        emit('cart', props.item)
+      if (props.product) {
+        emit('cart', props.product)
       }
       break
   }

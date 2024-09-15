@@ -39,11 +39,14 @@ export const useMainStore = defineStore('main', {
 
   getters: {
     itemsNumber: (state) =>
-      state.cartItems.reduce((total, item) => total + (item.quantity || 0), 0),
+      state.cartItems.reduce(
+        (total, product) => total + (product.quantity || 0),
+        0
+      ),
 
     totalPrice: (state) => {
       return state.cartItems.reduce(
-        (acc, item) => acc + (item.price || 0) * (item.quantity || 1),
+        (acc, product) => acc + (product.price || 0) * (product.quantity || 1),
         0
       )
     },
@@ -52,20 +55,24 @@ export const useMainStore = defineStore('main', {
       let filtered = [...state.products]
       if (state.selectedCategory) {
         filtered = filtered.filter(
-          (product) => product.category === state.selectedCategory
+          (product) => product.categoryNames === state.selectedCategory
         )
+        console.log(state.selectedCategory)
       }
       if (state.selectedColor) {
         filtered = filtered.filter(
-          (product) => product.color === state.selectedColor
+          (product) => product.categoryColors === state.selectedColor
         )
       }
       if (state.selectedSorting === 'price') {
         filtered = filtered.sort((a, b) => a.price - b.price)
       } else if (state.selectedSorting === 'newest') {
-        filtered = filtered.sort((a, b) => b.dateAdded - a.dateAdded)
+        filtered = filtered.sort(
+          (a, b) => new Date(b.dateAdded) - new Date(a.dateAdded)
+        )
       } else if (state.selectedSorting === 'trending') {
       }
+
       return filtered
     },
   },
@@ -121,20 +128,23 @@ export const useMainStore = defineStore('main', {
       this.selectedSorting = value
     },
 
-    inCart(item: Product): void {
+    inCart(product: Product): void {
       const existingItem = this.cartItems.find(
-        (cartItem): boolean => cartItem.id === item.id
+        (cartItem): boolean => cartItem.id === product.id
       )
       if (existingItem) {
         existingItem.quantity = (existingItem.quantity || 0) + 1 // Increment quantity if item already exists
       } else {
-        this.cartItems.push({ ...item, quantity: 1 }) // Add new item with quantity 1
+        this.cartItems.push({ ...product, quantity: 1 }) // Add new item with quantity 1
       }
+
       this.updateLocalStorage()
     },
 
-    outCart(itemId: number): void {
-      this.cartItems = this.cartItems.filter((item) => item.id !== itemId) // Remove item if only 1 left
+    outCart(productId: number): void {
+      this.cartItems = this.cartItems.filter(
+        (product) => product.id !== productId
+      ) // Remove item if only 1 left
       this.updateLocalStorage()
     },
 
@@ -150,15 +160,15 @@ export const useMainStore = defineStore('main', {
       return orderId
     },
 
-    checkout() {
-      if (this.cartItems.length > 0) {
-        console.log('Processing checkout for items:', this.cartItems)
-        this.cartItems = [] // Clear cart after checkout
-        this.updateLocalStorage()
-      } else {
-        console.log('Cart is empty, no checkout to process.')
-      }
-    },
+    // checkout() {
+    //   if (this.cartItems.length > 0) {
+    //     console.log('Processing checkout for items:', this.cartItems)
+    //     this.cartItems = [] // Clear cart after checkout
+    //     this.updateLocalStorage()
+    //   } else {
+    //     console.log('Cart is empty, no checkout to process.')
+    //   }
+    // },
 
     updateLocalStorage() {
       localStorage.setItem('cartItems', JSON.stringify(this.cartItems))

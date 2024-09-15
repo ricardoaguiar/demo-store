@@ -7,8 +7,8 @@ const store = useMainStore()
 
 <template>
   <div class="related-products">
-    <template v-for="item in store.products" :key="item.id">
-      <ProductTile :item="item" :isRelatedProduct="true" />
+    <template v-for="product in store.filteredProducts" :key="product.id">
+      <ProductTile :product="product" :isRelatedProduct="true" />
     </template>
   </div>
 </template>
@@ -16,24 +16,17 @@ const store = useMainStore()
 <style scoped lang="scss">
 .related-products {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: $one-spacing;
 
-  @include responsive(desktop) {
-    grid-template-columns: repeat(3, 1fr);
+  @include responsive(widescreen) {
+    grid-template-columns: repeat(4, 1fr);
   }
 
   @include responsive(mobile) {
     grid-template-columns: 1fr 1fr;
     gap: $half-spacing;
   }
-}
-
-.products-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-gap: 1rem;
-  outline: 1px solid red;
 }
 
 /* Card Style */
