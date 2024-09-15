@@ -1,27 +1,32 @@
 <script setup lang="ts">
 import { useMainStore } from '@/store'
-import ProductTile from '@/components/Details/ProductTile.vue'
+import ProductTile from '@/components/PDP/ProductTile.vue'
 
 const store = useMainStore()
 </script>
 
 <template>
-  <div class="columns is-multiline">
-    <div
-      v-for="item in store.products"
-      :key="item.id"
-      class="column is-12-mobile is-6-tablet is-4-desktop"
-    >
-      <ProductTile :item="item" :isRelatedProduct="true" />
-    </div>
+  <div class="related-products">
+    <template v-for="product in store.filteredProducts" :key="product.id">
+      <ProductTile :product="product" :isRelatedProduct="true" />
+    </template>
   </div>
 </template>
 
 <style scoped lang="scss">
-.products-grid {
+.related-products {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $one-spacing;
+
+  @include responsive(widescreen) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @include responsive(mobile) {
+    grid-template-columns: 1fr 1fr;
+    gap: $half-spacing;
+  }
 }
 
 /* Card Style */
@@ -31,7 +36,7 @@ const store = useMainStore()
   overflow: hidden;
   border-radius: 0.25rem;
 
-  @include space(margin, 0.5, 14px);
+  //@include space(margin, 0.5, 14px);
 
   .image img {
     z-index: 1;

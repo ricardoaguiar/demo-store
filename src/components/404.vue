@@ -1,5 +1,6 @@
 <template>
-  <div class="not-found-container">
+  <Header />
+  <div class="not-found-container container py-5">
     <h1 class="not-found-title">Oops! 404 - Page Not Found</h1>
     <p class="not-found-message">
       It looks like the page you're looking for doesn't exist or has been moved.
@@ -13,11 +14,13 @@
       <button class="back-button">Back to Product List</button>
     </RouterLink>
   </div>
+  <Footer />
 </template>
 
 <script setup lang="ts">
-// No special logic required for this component
 import { useAsset } from '@/composables'
+import Header from '@/components/Header.vue'
+import Footer from '@/components/Footer.vue'
 </script>
 
 <style scoped>
@@ -29,11 +32,11 @@ import { useAsset } from '@/composables'
   height: 100vh;
   text-align: center;
   padding: 20px;
+  color: #000000;
 }
 
 .not-found-title {
   font-size: 3rem;
-  color: #ff6b6b;
   margin-bottom: 1rem;
 }
 
@@ -44,7 +47,7 @@ import { useAsset } from '@/composables'
 }
 
 .not-found-image {
-  width: 100%;
+  width: 80%;
   margin-bottom: 2rem;
 }
 
@@ -53,17 +56,19 @@ import { useAsset } from '@/composables'
 }
 
 .back-button {
-  background-color: #2c3e50;
-  color: #fff;
-  padding: 12px 24px;
-  font-size: 1rem;
+  background-color: #000000;
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-transform: capitalize;
   border: none;
-  border-radius: 4px;
+  border-radius: 2px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .back-button:hover {
-  background-color: #34495e;
+  background-color: #3c3c3c;
 }
 </style>

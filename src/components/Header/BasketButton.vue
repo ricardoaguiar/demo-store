@@ -1,18 +1,27 @@
 <script setup lang="ts">
 import { useMainStore } from '@/store'
-import { useAsset } from '@/composables'
+import { useAsset, useCart } from '@/composables'
 
 const store = useMainStore()
-
-defineEmits(['open'])
+const { toggleCart } = useCart()
 </script>
 
 <template>
-  <div class="bag" @click="$emit('open')">
-    <img :src="useAsset('cart', 'svg')" alt="move-by-trolley" title="cart-trolley" class="image" width="25"
-      height="25" />
-    <span class="badge is-badge-danger is-badge-top-right" v-if="store.itemsNumber">{{ store.itemsNumber }}</span>
-  </div>
+  <button class="bag" @click="toggleCart">
+    <img
+      :src="useAsset('cart', 'svg')"
+      alt="move-by-trolley"
+      title="cart-trolley"
+      class="image"
+      width="25"
+      height="25"
+    />
+    <span
+      class="badge is-badge-danger is-badge-top-right"
+      v-if="store.itemsNumber"
+      >{{ store.itemsNumber }}</span
+    >
+  </button>
 </template>
 
 <style scoped lang="scss">

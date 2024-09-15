@@ -8,19 +8,22 @@ const route = useRoute()
 </script>
 
 <template>
-  <div>
-    <!-- Persistent Header -->
+  <div class="wrapper">
     <Header />
 
-    <!-- Main content where different views will be injected -->
     <main>
       <router-view />
     </main>
 
-    <!-- Optional Newsletter section based on route -->
     <Newsletter v-if="route.path !== '/contact'" />
-
-    <!-- Persistent Footer -->
     <Footer />
   </div>
 </template>
+
+<style lang="scss" scoped>
+.wrapper {
+  @include space(padding-inline, $one-spacing, $one-spacing);
+
+  width: 100vw;
+}
+</style>

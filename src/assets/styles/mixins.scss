@@ -1,34 +1,51 @@
-@use 'sass:math'; // Import Sass math functions
+@use 'sass:math';
+
+$root-size: 16px;
+$base-spacing: 1rem;
+$enable-caret: true;
+$caret-width: 5px;
+
+
+// Define base spacing and use math.div for division
+$base-spacing: 1rem; // 16px base spacing
+
+// Spacing scale with math.div
+$quarter-spacing: math.div($base-spacing, 4);          // 0.25rem (4px)
+$half-spacing: math.div($base-spacing, 2);             // 0.5rem (8px)
+$three-quarter-spacing: $base-spacing * 0.75;          // 0.75rem (12px)
+$one-spacing: $base-spacing;                           // 1rem (16px)
+$one-and-half-spacing: $base-spacing * 1.5;            // 1.5rem (24px)
+$double-spacing: $base-spacing * 2;                    // 2rem (32px)
+
+
 
 // Mixin for handling various breakpoints including retina and HD screens
 @mixin responsive($breakpoint) {
-  @if $breakpoint == mobile {
-    // Mobile phones (both Android & iOS)
-    @media screen and (max-width: 768px) {
+  @if $breakpoint == mobile-small {
+    @media screen and (max-width: 479px) {
+      @content;
+    }
+  } @else if $breakpoint == mobile {
+    @media screen and  (max-width: 768px) {
       @content;
     }
   } @else if $breakpoint == tablet {
-    // Tablets (iOS iPads and Android tablets)
-    @media screen and (min-width: 769px) and (max-width: 1024px) {
+    @media screen and (min-width: 769px) and (max-width: 1023px) {
       @content;
     }
   } @else if $breakpoint == desktop {
-    // Desktops and laptops
-    @media screen and (min-width: 1025px) and (max-width: 1440px) {
+    @media screen and (min-width: 1024px) and (max-width: 1439px) {
       @content;
     }
   } @else if $breakpoint == widescreen {
-    // Large desktops (HD desktops)
-    @media screen and (min-width: 1441px) and (max-width: 1920px) {
+    @media screen and (min-width: 1440px) and (max-width: 1920px) {
       @content;
     }
   } @else if $breakpoint == fullhd {
-    // Full HD screens and larger
     @media screen and (min-width: 1921px) {
       @content;
     }
   } @else if $breakpoint == retina {
-    // Retina display (Apple devices with high DPI)
     @media screen and (-webkit-min-device-pixel-ratio: 2),
     screen and (min--moz-device-pixel-ratio: 2),
     screen and (-o-min-device-pixel-ratio: 2/1),
@@ -38,7 +55,6 @@
       @content;
     }
   } @else if $breakpoint == hdpi {
-    // High-DPI screens for Android and non-Apple devices
     @media screen and (-webkit-min-device-pixel-ratio: 1.5),
     screen and (min-resolution: 144dpi),
     screen and (min-resolution: 1.5dppx) {
@@ -46,6 +62,7 @@
     }
   }
 }
+
 
 @mixin flex($direction: row, $justify: flex-start, $align: stretch, $gap: 0) {
   display: flex;
@@ -62,23 +79,61 @@
   gap: $gap;
 }
 
-@mixin font-size($size-mobile, $size-tablet: null, $size-desktop: null, $size-widescreen: null, $size-fullhd: null) {
+//@mixin font-size($size-mobile, $size-tablet: null, $size-desktop: null, $size-widescreen: null, $size-fullhd: null) {
+//  font-size: $size-mobile;
+//
+//  @if $size-tablet != null {
+//    @media screen and (min-width: 769px) {
+//      font-size: $size-tablet;
+//    }
+//  }
+//
+//  @if $size-desktop != null {
+//    @media screen and (min-width: 1025px) {
+//      font-size: $size-desktop;
+//    }
+//  }
+//
+//  @if $size-widescreen != null {
+//    @media screen and (min-width: 1216px) {
+//      font-size: $size-widescreen;
+//    }
+//  }
+//
+//  @if $size-fullhd != null {
+//    @media screen and (min-width: 1408px) {
+//      font-size: $size-fullhd;
+//    }
+//  }
+//}
+
+@mixin font-size(
+  $size-mobile,
+  $size-tablet: null,
+  $size-desktop: null,
+  $size-widescreen: null,
+  $size-fullhd: null
+) {
   font-size: $size-mobile;
 
+  @media screen and (min-width: 320px) and (max-width: 768px) {
+    font-size: calc(#{$size-mobile} + 2vw); // Fluid scaling for mobile
+  }
+
   @if $size-tablet != null {
-    @media screen and (min-width: 769px) {
+    @media screen and (min-width: 769px) and (max-width: 1024px) {
       font-size: $size-tablet;
     }
   }
 
   @if $size-desktop != null {
-    @media screen and (min-width: 1025px) {
+    @media screen and (min-width: 1025px) and (max-width: 1215px) {
       font-size: $size-desktop;
     }
   }
 
   @if $size-widescreen != null {
-    @media screen and (min-width: 1216px) {
+    @media screen and (min-width: 1216px) and (max-width: 1407px) {
       font-size: $size-widescreen;
     }
   }
@@ -89,6 +144,7 @@
     }
   }
 }
+
 
 /* Mixin to prevent zoom on iOS with max() and declarative animation, using rem */
 @mixin prevent-ios-zoom($font-size-rem) {
@@ -122,10 +178,11 @@
   }
 }
 
-// Function to convert px to rem
+// px-to-rem function
 @function px-to-rem($px, $root-size: 16px) {
-  @return calc($px / $root-size) * 1rem;
+  @return calc($px / $root-size) * 1rem; // Division without calc
 }
+
 
 // Mixin for setting font-size, line-height, and letter-spacing using rem units
 // Optional parameters: line-height and letter-spacing
@@ -141,24 +198,117 @@
 }
 
 
-// Space mixin for padding and margin based on project font size
-@mixin space($property, $size, $root-size: 16px) {
-  @if $property == padding or $property == margin {
-    #{$property}: px-to-rem($size * $root-size, $root-size);
+@mixin space($property, $sizes, $root-size: 16px) {
+  // If $sizes is a single number, convert it to rem
+  @if type-of($sizes) == number {
+    #{$property}: px-to-rem($sizes, $root-size); // Direct conversion using px-to-rem
   }
+    // If $sizes is a list (with 1 to 4 values)
+  @else if type-of($sizes) == list {
+    @if length($sizes) == 1 {
+      #{$property}: px-to-rem(nth($sizes, 1), $root-size);
+    }
+    @else if length($sizes) == 2 {
+      #{$property}: px-to-rem(nth($sizes, 1), $root-size) px-to-rem(nth($sizes, 2), $root-size);
+    }
+    @else if length($sizes) == 3 {
+      #{$property}: px-to-rem(nth($sizes, 1), $root-size) px-to-rem(nth($sizes, 2), $root-size) px-to-rem(nth($sizes, 3), $root-size);
+    }
+    @else if length($sizes) == 4 {
+      #{$property}: px-to-rem(nth($sizes, 1), $root-size) px-to-rem(nth($sizes, 2), $root-size) px-to-rem(nth($sizes, 3), $root-size) px-to-rem(nth($sizes, 4), $root-size);
+    }
+  }
+    // Handle specific directional properties
   @else if $property == padding-top or $property == margin-top {
-    #{$property}: px-to-rem($size * $root-size, $root-size);
+    #{$property}: px-to-rem($sizes, $root-size);
   }
   @else if $property == padding-right or $property == margin-right {
-    #{$property}: px-to-rem($size * $root-size, $root-size);
+    #{$property}: px-to-rem($sizes, $root-size);
   }
   @else if $property == padding-bottom or $property == margin-bottom {
-    #{$property}: px-to-rem($size * $root-size, $root-size);
+    #{$property}: px-to-rem($sizes, $root-size);
   }
   @else if $property == padding-left or $property == margin-left {
-    #{$property}: px-to-rem($size * $root-size, $root-size);
+    #{$property}: px-to-rem($sizes, $root-size);
+  }
+    // Handle logical properties like padding-inline and padding-block
+  @else if $property == padding-inline or $property == margin-inline {
+    #{$property}: px-to-rem($sizes, $root-size);
+  }
+  @else if $property == padding-block or $property == margin-block {
+    #{$property}: px-to-rem($sizes, $root-size);
   }
   @else {
-    @error "Invalid property. Use padding or margin.";
+    @error "Invalid property. Use padding, margin, or one of their variants.";
+  }
+}
+
+@mixin full-width {
+  width: 100%;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  max-width: 100vw;
+}
+
+@mixin caret-down {
+  border-left: $caret-width solid transparent;
+  border-right: $caret-width solid transparent;
+  border-top: $caret-width solid black;
+}
+
+@mixin caret-up {
+  border-left: $caret-width solid transparent;
+  border-right: $caret-width solid transparent;
+  border-bottom: $caret-width solid black;
+}
+
+@mixin caret-right {
+  border-top: $caret-width solid transparent;
+  border-bottom: $caret-width solid transparent;
+  border-left: $caret-width solid black;
+}
+
+@mixin caret-left {
+  border-top: $caret-width solid transparent;
+  border-bottom: $caret-width solid transparent;
+  border-right: $caret-width solid black;
+}
+
+@mixin caret($direction: down) {
+  @if $enable-caret {
+    &::after {
+      display: inline-block;
+      margin-left: $caret-width * .85;
+      vertical-align: $caret-width * .85;
+      content: "";
+      @if $direction == down {
+        @include caret-down;
+      } @else if $direction == up {
+        @include caret-up;
+      } @else if $direction == right {
+        @include caret-right;
+      }
+    }
+
+    @if $direction == left {
+      &::after {
+        display: none;
+      }
+
+      &::before {
+        display: inline-block;
+        margin-right: $caret-width * .85;
+        vertical-align: $caret-width * .85;
+        content: "";
+        @include caret-left;
+      }
+    }
+
+    &:empty::after {
+      margin-left: 0;
+    }
   }
 }

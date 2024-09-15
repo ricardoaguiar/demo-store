@@ -33,7 +33,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useAsset } from '@/composables/useAsset'
+import { useAsset } from '@/composables'
 
 const activeIndex = ref(0)
 const slides = [
