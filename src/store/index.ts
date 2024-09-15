@@ -124,6 +124,7 @@ export const useMainStore = defineStore('main', {
 
     setColorFilter(color: string | null) {
       this.selectedColor = color
+      console.log(126, this.selectedColor, color)
     },
 
     setSortingFilter(value: string | null) {
