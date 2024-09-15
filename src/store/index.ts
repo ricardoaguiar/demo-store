@@ -58,11 +58,14 @@ export const useMainStore = defineStore('main', {
           (product) => product.categoryName === state.selectedCategory
         )
       }
+
       if (state.selectedColor) {
         filtered = filtered.filter(
-          (product) => product.color === state.selectedColor
+          (product) =>
+            product.color.toLowerCase() === state.selectedColor.toLowerCase()
         )
       }
+
       if (state.selectedSorting === 'price') {
         filtered = filtered.sort((a, b) => a.price - b.price)
       } else if (state.selectedSorting === 'newest') {
@@ -121,6 +124,7 @@ export const useMainStore = defineStore('main', {
 
     setColorFilter(color: string | null) {
       this.selectedColor = color
+      console.log(126, this.selectedColor, color)
     },
 
     setSortingFilter(value: string | null) {

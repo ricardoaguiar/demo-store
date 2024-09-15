@@ -11,6 +11,7 @@
         { "name": "Yellow", "value": "#FFC015" },
         { "name": "Blue", "value": "#829FAA" },
         { "name": "White", "value": "#BFB8AE" },
+        { "name": "Red", "value": "#FF0040" },
         { "name": "Silver", "value": "#817A77" }
       ]
     },

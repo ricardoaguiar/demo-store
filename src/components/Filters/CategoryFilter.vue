@@ -18,12 +18,9 @@ function filterByCategory(category: string): void {
   dropdownActive.value = false
 }
 
-function filterByColor(color: string): void {
-  selectedColor.value =
-    store.categories.colors.find((col) => col.name === color.toLowerCase())
-      ?.name || 'Select'
-  store.setColorFilter(color)
-  console.log({ color }, store.setColorFilter(color))
+function filterByColor(colorName: string): void {
+  selectedColor.value = colorName
+  store.setColorFilter(colorName)
   dropdownActive.value = false
 }
 </script>
