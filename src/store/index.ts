@@ -55,15 +55,17 @@ export const useMainStore = defineStore('main', {
       let filtered = [...state.products]
       if (state.selectedCategory) {
         filtered = filtered.filter(
-          (product) => product.categoryNames === state.selectedCategory
+          (product) => product.categoryName === state.selectedCategory
         )
-        console.log(state.selectedCategory)
       }
+
       if (state.selectedColor) {
         filtered = filtered.filter(
-          (product) => product.categoryColors === state.selectedColor
+          (product) =>
+            product.color.toLowerCase() === state.selectedColor.toLowerCase()
         )
       }
+
       if (state.selectedSorting === 'price') {
         filtered = filtered.sort((a, b) => a.price - b.price)
       } else if (state.selectedSorting === 'newest') {
@@ -122,6 +124,7 @@ export const useMainStore = defineStore('main', {
 
     setColorFilter(color: string | null) {
       this.selectedColor = color
+      console.log(126, this.selectedColor, color)
     },
 
     setSortingFilter(value: string | null) {
@@ -159,16 +162,6 @@ export const useMainStore = defineStore('main', {
 
       return orderId
     },
-
-    // checkout() {
-    //   if (this.cartItems.length > 0) {
-    //     console.log('Processing checkout for items:', this.cartItems)
-    //     this.cartItems = [] // Clear cart after checkout
-    //     this.updateLocalStorage()
-    //   } else {
-    //     console.log('Cart is empty, no checkout to process.')
-    //   }
-    // },
 
     updateLocalStorage() {
       localStorage.setItem('cartItems', JSON.stringify(this.cartItems))
