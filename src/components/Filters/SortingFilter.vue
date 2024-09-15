@@ -11,6 +11,7 @@ onMounted(async () => await store.fetchFilters())
 
 function selectSortOption(value: string) {
   store.resetFilters()
+
   store.setSortingFilter(value)
   sortLabel.value =
     store.sortingOptions.find((opt) => opt.value === value)?.name || 'DEFAULT'
