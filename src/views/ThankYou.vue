@@ -1,14 +1,20 @@
 <script setup lang="ts">
 import { onMounted, ref, computed } from 'vue'
-import { useAsset } from '@/composables'
-import { Product } from '@/types'
-import ButtonComponent from '@/components/UI/ButtonComponent.vue'
 import { useRouter } from 'vue-router'
 
+// composables
+import { useAsset } from '@/composables'
+
+// types
+import { Product } from '@/types'
+
+// components
+import ButtonComponent from '@/components/UI/ButtonComponent.vue'
+
+// variables
+const router = useRouter()
 const orderId = ref('')
 const purchasedItems = ref<Product[]>([])
-
-const router = useRouter()
 
 onMounted(() => {
   try {
@@ -33,20 +39,20 @@ const orderTotal = computed((): number => {
   }, 0)
 })
 
-function deleteOrder() {
+function deleteOrder(): void {
   localStorage.removeItem('orderId')
   localStorage.removeItem('purchasedItems')
   orderId.value = ''
   purchasedItems.value = []
 }
 
-function goShopping() {
+function goShopping(): string {
   router.push({ path: '/products' })
 }
 </script>
 
 <template>
-  <div class="thank-you-page py-5 mx-4">
+  <div class="thank-you-page container py-5">
     <template v-if="orderId">
       <h1 class="title pb-3">Thank you for your purchase!</h1>
       <p class="subtitle">Here are the items you purchased:</p>
@@ -103,9 +109,9 @@ function goShopping() {
   </div>
 </template>
 
-<style scoped>
-.continue-shopping {
-  margin-top: 1rem;
+<style scoped lang="scss">
+.nothing-here {
+  margin-bottom: 1.5rem;
 }
 
 .nothing-here-img {
@@ -150,5 +156,18 @@ function goShopping() {
 .container {
   max-width: 800px;
   margin: 0 auto;
+}
+
+.delete-order,
+.empty-basket__go-shopping {
+  background-color: #000000;
+  color: white;
+  font-weight: bold;
+  border-radius: 2px;
+  padding: 0.5rem 1rem;
+}
+
+.delete-order {
+  background-color: #aa0808;
 }
 </style>
