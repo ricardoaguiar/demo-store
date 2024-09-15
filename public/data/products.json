@@ -62,7 +62,7 @@
     "sale": true,
     "reviews": 2999,
     "stars": "★★★★",
-    "dateAdded": "2023-09-01"
+    "dateAdded": "2022-09-01"
   },
   {
     "id": 5,
@@ -75,7 +75,7 @@
     "sale": false,
     "reviews": 19,
     "stars": "★★★½",
-    "dateAdded": "2023-04-11"
+    "dateAdded": "2021-04-11"
   },
   {
     "id": 6,
@@ -101,16 +101,16 @@
     "sale": true,
     "reviews": 53,
     "stars": "★★★★",
-    "dateAdded": "2023-08-01"
+    "dateAdded": "2024-08-01"
   },
   {
     "id": 8,
     "img": "9.jpg",
-    "title": "Coffee Table",
+    "title": "Silver Lamp",
     "price": 385,
-    "color": "white",
-    "categoryName": "Table",
-    "description": "This minimalist white Coffee Table offers a clean, sleek surface for your living room essentials. Its neutral color and simple design make it versatile enough to match various décor styles. Sturdy and durable, it’s perfect for showcasing your books, décor, or beverages while maintaining a chic, modern aesthetic.",
+    "color": "silver",
+    "categoryName": "Lamp",
+    "description": "This minimalist Silver Lamp offers a clean, sleek surface for your living room essentials. Its neutral color and simple design make it versatile enough to match various décor styles. Sturdy and durable, it’s perfect for showcasing your books, décor, or beverages while maintaining a chic, modern aesthetic.",
     "sale": false,
     "reviews": 48,
     "stars": "★★★★",
@@ -127,7 +127,7 @@
     "sale": true,
     "reviews": 75,
     "stars": "★★★★½",
-    "dateAdded": "2023-07-25"
+    "dateAdded": "2019-07-25"
   },
   {
     "id": 10,
@@ -153,7 +153,7 @@
     "sale": true,
     "reviews": 60,
     "stars": "★★★★½",
-    "dateAdded": "2023-08-16"
+    "dateAdded": "2023-12-16"
   },
   {
     "id": 12,
@@ -173,7 +173,7 @@
     "img": "14.jpg",
     "title": "Deck Chair",
     "price": 752,
-    "color": "white",
+    "color": "silver",
     "categoryName": "Chair",
     "description": "The white Deck Chair offers a comfortable and relaxing seating option for your outdoor spaces. Its foldable design makes it easy to store when not in use, while its sturdy construction ensures lasting durability. Perfect for lounging on the porch, balcony, or garden, this chair is designed for relaxation.",
     "sale": true,

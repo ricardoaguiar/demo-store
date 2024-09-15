@@ -11,17 +11,19 @@ const selectedColor = ref('')
 onMounted(async () => await store.fetchFilters())
 
 function filterByCategory(category: string): void {
-  store.setCategoryFilter(category)
   selectedCategory.value =
-    store.categories.types.find((cat) => cat.value === category)?.name ||
+    store.categories.types.find((cat) => cat.name === category)?.value ||
     'Select'
+  store.setCategoryFilter(category)
   dropdownActive.value = false
 }
 
 function filterByColor(color: string): void {
-  store.setColorFilter(color)
   selectedColor.value =
-    store.categories.colors.find((col) => col.value === color)?.name || 'Select'
+    store.categories.colors.find((col) => col.name === color.toLowerCase())
+      ?.name || 'Select'
+  store.setColorFilter(color)
+  console.log({ color }, store.setColorFilter(color))
   dropdownActive.value = false
 }
 </script>
@@ -31,7 +33,9 @@ function filterByColor(color: string): void {
     <button class="button dropdown-button is-light" @click="toggleDropdown">
       <span>
         CATEGORIES
-        <span style="color: #f2be00">{{ selectedCategory || 'Select' }}</span>
+        <span class="category-name" style="color: #f2be00">{{
+          selectedCategory || 'Select'
+        }}</span>
       </span>
       <span
         :class="{ 'caret-up': dropdownActive, 'caret-down': !dropdownActive }"
@@ -49,7 +53,7 @@ function filterByColor(color: string): void {
         :key="category.value"
       >
         <a @click="filterByCategory(category.name)">
-          {{ category.name }}
+          {{ category.name + 's' }}
         </a>
       </div>
       <div class="color-container">
@@ -62,7 +66,7 @@ function filterByColor(color: string): void {
           <a
             class="circle"
             :style="{ backgroundColor: color.value }"
-            @click="filterByColor(color.value)"
+            @click="filterByColor(color.name)"
           />
         </template>
       </div>
@@ -94,6 +98,14 @@ function filterByColor(color: string): void {
   padding: 1rem;
 }
 
+.category-name {
+  text-transform: capitalize;
+}
+
+.category-name::after {
+  content: 's';
+}
+
 .search-title {
   @include flex($direction: column, $gap: $one-spacing);
 }
@@ -113,7 +125,6 @@ function filterByColor(color: string): void {
 
 .color-container {
   @include flex($direction: row, $gap: $half-spacing, $align: center);
-  //@include space(padding-top, $half-spacing, $one-spacing);
 
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 

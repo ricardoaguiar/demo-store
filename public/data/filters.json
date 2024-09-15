@@ -3,9 +3,9 @@
     "categories": {
       "types": [
         { "name": "Table", "value": "table" },
-        { "name": "Lamps", "value": "lamp" },
-        { "name": "Chairs", "value": "chair" },
-        { "name": "Sofas", "value": "sofa" }
+        { "name": "Lamp", "value": "lamp" },
+        { "name": "Chair", "value": "chair" },
+        { "name": "Sofa", "value": "sofa" }
       ],
       "colors": [
         { "name": "Yellow", "value": "#FFC015" },
