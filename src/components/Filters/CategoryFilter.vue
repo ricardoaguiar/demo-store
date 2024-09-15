@@ -11,6 +11,7 @@ const selectedColor = ref('')
 onMounted(async () => await store.fetchFilters())
 
 function filterByCategory(category: string): void {
+  store.resetFilters()
   selectedCategory.value =
     store.categories.types.find((cat) => cat.name === category)?.value ||
     'Select'
@@ -19,6 +20,7 @@ function filterByCategory(category: string): void {
 }
 
 function filterByColor(colorName: string): void {
+  store.resetFilters()
   selectedColor.value = colorName
   store.setColorFilter(colorName)
   dropdownActive.value = false
@@ -49,8 +51,8 @@ function filterByColor(colorName: string): void {
         v-for="category in store.categories.types"
         :key="category.value"
       >
-        <a @click="filterByCategory(category.name)">
-          {{ category.name + 's' }}
+        <a class="category-name" @click="filterByCategory(category.name)">
+          {{ category.name }}
         </a>
       </div>
       <div class="color-container">

@@ -124,11 +124,16 @@ export const useMainStore = defineStore('main', {
 
     setColorFilter(color: string | null) {
       this.selectedColor = color
-      console.log(126, this.selectedColor, color)
     },
 
     setSortingFilter(value: string | null) {
       this.selectedSorting = value
+    },
+
+    resetFilters() {
+      this.selectedCategory = null
+      this.selectedColor = null
+      this.selectedSorting = null
     },
 
     inCart(product: Product): void {
