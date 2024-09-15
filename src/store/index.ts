@@ -131,6 +131,12 @@ export const useMainStore = defineStore('main', {
       this.selectedSorting = value
     },
 
+    resetFilters() {
+      this.selectedCategory = null
+      this.selectedColor = null
+      this.selectedSorting = null
+    },
+
     inCart(product: Product): void {
       const existingItem = this.cartItems.find(
         (cartItem): boolean => cartItem.id === product.id
