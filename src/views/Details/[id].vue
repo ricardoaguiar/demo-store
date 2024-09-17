@@ -85,7 +85,7 @@ const sliceItems = computed(() => {
 }
 
 .relate-productc-title {
-  @include font-size(16px, 18px, 20px, 26px, 30px);
+  @include responsive-font-size(16px);
 
   font-weight: bold;
 }

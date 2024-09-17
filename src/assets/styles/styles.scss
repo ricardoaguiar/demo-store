@@ -107,6 +107,40 @@ li, ol {
   filter: blur(1rem);
 }
 
+.sorting-filter,
+.category-filter {
+  width: 100%;
+}
+
+.sorting-item,
+.category-name {
+  @include space(padding, $quarter-spacing, $half-spacing);
+  @include responsive-font-size(12px);
+
+  text-transform: capitalize;
+  flex: 1;
+}
+
+.sorting-item,
+.category-item {
+  background-color: #f8f8f8;
+  color: #000000;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  @include flex();
+
+  &:hover {
+    background-color: #dae0e5;
+    cursor: pointer;
+  }
+}
+
+.sorting-filter-select,
+.category-filter-select {
+  color: #f2be00;
+  text-transform: uppercase;
+}
 
 
 

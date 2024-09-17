@@ -95,6 +95,7 @@ function handleAddToCart(product: Product) {
 }
 
 function navigateToProduct() {
+  store.resetFilters()
   router.push(`/details/${product?.id}`).then(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   })
