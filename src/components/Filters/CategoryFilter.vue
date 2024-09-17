@@ -13,7 +13,7 @@ onMounted(async () => await store.fetchFilters())
 function filterByCategory(category: string): void {
   store.resetFilters()
   selectedCategory.value =
-    store.categories.types.find((cat) => cat.name === category)?.value ||
+    store.categories.types?.find((cat) => cat.name === category)?.value ||
     'Select'
   store.setCategoryFilter(category)
   dropdownActive.value = false
@@ -32,7 +32,7 @@ function filterByColor(colorName: string): void {
     <button class="button dropdown-button is-light" @click="toggleDropdown">
       <span>
         CATEGORIES
-        <span class="category-name" style="color: #f2be00">{{
+        <span class="category-filter-select">{{
           selectedCategory || 'Select'
         }}</span>
       </span>
@@ -47,7 +47,7 @@ function filterByColor(colorName: string): void {
       :class="{ 'color-options-active': dropdownActive }"
     >
       <div
-        class="dropdown-item"
+        class="category-item"
         v-for="category in store.categories.types"
         :key="category.value"
       >
@@ -74,10 +74,6 @@ function filterByColor(colorName: string): void {
 </template>
 
 <style scoped lang="scss">
-.category-filter {
-  width: 100%;
-}
-
 .dropdown-button {
   width: 100%;
   justify-content: space-between;
@@ -91,41 +87,23 @@ function filterByColor(colorName: string): void {
   border: 1px solid grey;
 }
 
-.categories {
-  border-radius: 0.25rem;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 1rem;
-}
-
 .category-name {
+  @include space(padding, $quarter-spacing, $half-spacing);
+  @include responsive-font-size(12px);
+
   text-transform: capitalize;
+  flex: 1;
 }
 
 .category-name::after {
   content: 's';
 }
 
-.search-title {
-  @include flex($direction: column, $gap: $one-spacing);
-}
-
-.icon {
-  display: inline-block;
-  vertical-align: middle;
-}
-
-.is-small {
-  font-size: 12px; /* Adjust font-size if needed */
-}
-
-.search-title h6 {
-  cursor: pointer;
-}
-
 .color-container {
   @include flex($direction: row, $gap: $half-spacing, $align: center);
-
+  @include space(padding, $half-spacing, $one-spacing);
   border-top: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: #f8f8f8;
 
   .colors-title {
     color: #000000;
@@ -157,30 +135,5 @@ function filterByColor(colorName: string): void {
   &:hover {
     outline: 1px solid rgba(0, 0, 0, 0.75);
   }
-}
-
-.filters {
-  justify-content: flex-start;
-}
-
-.color-container {
-  background-color: #f8f8f8;
-
-  @include space(padding, $half-spacing, $one-spacing);
-}
-
-.dropdown-item {
-  padding: 10px;
-  background-color: #f8f8f8;
-  color: #000000;
-  text-align: left;
-  display: block;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.dropdown-item:hover {
-  background-color: #dae0e5;
-  cursor: pointer;
 }
 </style>

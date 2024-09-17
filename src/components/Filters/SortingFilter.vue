@@ -22,7 +22,8 @@ function selectSortOption(value: string) {
   <div class="sorting-filter">
     <button class="button dropdown-button is-light" @click="toggleDropdown">
       <span>
-        SORT BY <span style="color: #f2be00">{{ sortLabel }}</span>
+        SORT BY
+        <span class="sorting-filter-select">{{ sortLabel }}</span>
       </span>
       <span
         :class="{ 'caret-up': dropdownActive, 'caret-down': !dropdownActive }"
@@ -37,7 +38,7 @@ function selectSortOption(value: string) {
       <div class="sorting-item" v-for="option in store.sortingOptions">
         <a
           :key="option.value"
-          class="dropdown-item"
+          class="dropdown-link"
           @click="selectSortOption(option.value)"
         >
           {{ option.name }}
@@ -88,10 +89,5 @@ function selectSortOption(value: string) {
 
 .dropdown-item:hover {
   background-color: #dae0e5;
-}
-
-.sorting-filter {
-  //background-color: rgba(0, 0, 0, 0.1);
-  width: 100%;
 }
 </style>

@@ -119,7 +119,7 @@ function goShopping(): void {
   font-weight: bold;
   text-transform: uppercase;
 
-  @include font-size(16px, 18px);
+  @include responsive-font-size(16px);
 }
 
 .cart-container {
