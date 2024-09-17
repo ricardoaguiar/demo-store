@@ -107,42 +107,53 @@ $double-spacing: $base-spacing * 2;                    // 2rem (32px)
 //  }
 //}
 
-@mixin font-size(
-  $size-mobile,
-  $size-tablet: null,
-  $size-desktop: null,
-  $size-widescreen: null,
-  $size-fullhd: null
-) {
-  font-size: $size-mobile;
+//@mixin font-size(
+//  $size-mobile,
+//  $size-tablet: null,
+//  $size-desktop: null,
+//  $size-widescreen: null,
+//  $size-fullhd: null
+//) {
+//  font-size: $size-mobile;
+//
+//  @media screen and (min-width: 320px) and (max-width: 768px) {
+//    font-size: calc(#{$size-mobile} + 2vw); // Fluid scaling for mobile
+//  }
+//
+//  @if $size-tablet != null {
+//    @media screen and (min-width: 769px) and (max-width: 1024px) {
+//      font-size: $size-tablet;
+//    }
+//  }
+//
+//  @if $size-desktop != null {
+//    @media screen and (min-width: 1025px) and (max-width: 1215px) {
+//      font-size: $size-desktop;
+//    }
+//  }
+//
+//  @if $size-widescreen != null {
+//    @media screen and (min-width: 1216px) and (max-width: 1407px) {
+//      font-size: $size-widescreen;
+//    }
+//  }
+//
+//  @if $size-fullhd != null {
+//    @media screen and (min-width: 1408px) {
+//      font-size: $size-fullhd;
+//    }
+//  }
+//}
 
-  @media screen and (min-width: 320px) and (max-width: 768px) {
-    font-size: calc(#{$size-mobile} + 2vw); // Fluid scaling for mobile
-  }
+@mixin responsive-font-size($base-size, $min-vw: 320px, $max-vw: 1440px, $min-font: null, $max-font: null) {
+  // Calculate the minimum font size if not provided
+  $min-font: if($min-font == null, $base-size * 0.875, $min-font);
 
-  @if $size-tablet != null {
-    @media screen and (min-width: 769px) and (max-width: 1024px) {
-      font-size: $size-tablet;
-    }
-  }
+  // Calculate the maximum font size if not provided
+  $max-font: if($max-font == null, $base-size * 1.25, $max-font);
 
-  @if $size-desktop != null {
-    @media screen and (min-width: 1025px) and (max-width: 1215px) {
-      font-size: $size-desktop;
-    }
-  }
-
-  @if $size-widescreen != null {
-    @media screen and (min-width: 1216px) and (max-width: 1407px) {
-      font-size: $size-widescreen;
-    }
-  }
-
-  @if $size-fullhd != null {
-    @media screen and (min-width: 1408px) {
-      font-size: $size-fullhd;
-    }
-  }
+  // Use clamp() to calculate font size that scales between $min-font and $max-font based on the viewport width
+  font-size: clamp(#{$min-font}, calc(#{$base-size} + ((#{$max-font} - #{$min-font}) * ((100vw - #{$min-vw}) / (#{$max-vw} - #{$min-vw})))), #{$max-font});
 }
 
 

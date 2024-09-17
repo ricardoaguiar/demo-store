@@ -12,8 +12,12 @@ export const useMainStore = defineStore('main', {
     selectedCategory: string | null
     selectedColor: string | null
     selectedSorting: string | null
-    categories: Array<{ name: string; value: string }>
+    categories: {
+      types?: Array<{ name: string; value: string }>
+      colors?: Array<{ name: string; value: string }>
+    }
     sortingOptions: Array<{ name: string; value: string }>
+    isFilterSet: boolean
   } => ({
     productInfo: null,
     // Initialize the cartItems with a quantity field
@@ -35,6 +39,7 @@ export const useMainStore = defineStore('main', {
       colors: [],
     },
     sortingOptions: [],
+    isFilterSet: false,
   }),
 
   getters: {
@@ -57,22 +62,30 @@ export const useMainStore = defineStore('main', {
         filtered = filtered.filter(
           (product) => product.categoryName === state.selectedCategory
         )
+        this.isFilterSet = true
       }
 
       if (state.selectedColor) {
         filtered = filtered.filter(
           (product) =>
-            product.color.toLowerCase() === state.selectedColor.toLowerCase()
+            product.color?.toLowerCase() === state.selectedColor?.toLowerCase()
         )
+
+        this.isFilterSet = true
       }
 
       if (state.selectedSorting === 'price') {
+        this.isFilterSet = true
         filtered = filtered.sort((a, b) => a.price - b.price)
       } else if (state.selectedSorting === 'newest') {
-        filtered = filtered.sort(
-          (a, b) => new Date(b.dateAdded) - new Date(a.dateAdded)
-        )
+        this.isFilterSet = true
+        filtered = filtered.sort((a, b) => {
+          const dateA = a.dateAdded ? new Date(a.dateAdded).getTime() : 0
+          const dateB = b.dateAdded ? new Date(b.dateAdded).getTime() : 0
+          return dateB - dateA
+        })
       } else if (state.selectedSorting === 'trending') {
+        this.isFilterSet = true
       }
 
       return filtered
@@ -135,6 +148,7 @@ export const useMainStore = defineStore('main', {
       this.selectedCategory = null
       this.selectedColor = null
       this.selectedSorting = null
+      this.isFilterSet = false
     },
 
     inCart(product: Product): void {

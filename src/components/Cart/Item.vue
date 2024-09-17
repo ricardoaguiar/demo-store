@@ -63,15 +63,14 @@ function updateQuantity(newQuantity) {
 }
 
 .product-title {
-  @include font-size(16px, 22px, 24px, 26px, 26px);
-
+  @include responsive-font-size(16px);
   & {
     font-weight: bold;
   }
 }
 
 .product-price {
-  @include font-size(18px);
+  @include responsive-font-size(18px);
 }
 
 .title-container {
@@ -108,7 +107,7 @@ function updateQuantity(newQuantity) {
   max-width: fit-content;
   line-height: normal;
 
-  @include font-size(16px);
+  @include responsive-font-size(16px);
   @include responsive(mobile) {
     flex-direction: row;
   }

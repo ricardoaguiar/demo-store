@@ -1,31 +1,23 @@
 <!-- Sidebar.vue -->
 <script setup lang="ts">
+import { useMainStore } from '@/store'
 import CategoryFilter from '@/components/Filters/CategoryFilter.vue'
 import SortingFilter from '@/components/Filters/SortingFilter.vue'
 
-function handleCategoryFilter(category: string) {
-  console.log('Selected Category:', category)
-  // Handle category filter
-}
-
-function handleColorFilter(color: string) {
-  console.log('Selected Color:', color)
-  // Handle color filter
-}
-
-function handleSortItems(value: string) {
-  console.log('Selected Sort:', value)
-  // Handle sorting logic
-}
+const store = useMainStore()
 </script>
 
 <template>
   <aside class="sidebar-navigation">
-    <SortingFilter @sortItem="handleSortItems" />
-    <CategoryFilter
-      @filterCategory="handleCategoryFilter"
-      @filterColor="handleColorFilter"
-    />
+    <SortingFilter />
+    <CategoryFilter />
+    <button
+      class="button reset-button is-light"
+      v-if="store.isFilterSet"
+      @click="store.resetFilters()"
+    >
+      RESET FILTERS
+    </button>
   </aside>
 </template>
 
@@ -38,5 +30,13 @@ function handleSortItems(value: string) {
 
 .slider {
   width: 100%;
+}
+
+.reset-button {
+  width: 100%;
+  color: black;
+  background: white;
+  border-radius: 0;
+  border: 1px solid grey;
 }
 </style>
