@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import { useMainStore } from '@/store'
-import { useAsset, useCart } from '@/composables'
+import { useAsset } from '@/composables'
 
 const store = useMainStore()
-const { toggleCart } = useCart()
 </script>
 
 <template>
-  <button class="bag" @click="toggleCart">
+  <button class="bag" @click="store.toggleCart()">
     <img
       :src="useAsset('cart', 'svg')"
       alt="move-by-trolley"

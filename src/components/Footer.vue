@@ -79,7 +79,7 @@ onMounted(async () => {
     </div>
   </footer>
 </template>
-<style scoped>
+<style scoped lang="scss">
 .links-list {
   list-style: none;
   padding-left: 0;
@@ -88,7 +88,7 @@ onMounted(async () => {
 .social-links {
   display: flex;
   justify-content: flex-start;
-  gap: 1rem;
+  gap: $spacing-base;
 }
 
 .icon.is-small {

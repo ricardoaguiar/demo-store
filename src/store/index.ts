@@ -1,24 +1,8 @@
 import { defineStore } from 'pinia'
-import { Product } from '@/types'
+import { Product, State } from '@/types'
 
 export const useMainStore = defineStore('main', {
-  state: (): {
-    cartItems: Product[]
-    products: Product[]
-    productInfo: Product | null
-    loading: boolean
-    error: string | null
-    purchasedItems: Product[]
-    selectedCategory: string | null
-    selectedColor: string | null
-    selectedSorting: string | null
-    categories: {
-      types?: Array<{ name: string; value: string }>
-      colors?: Array<{ name: string; value: string }>
-    }
-    sortingOptions: Array<{ name: string; value: string }>
-    isFilterSet: boolean
-  } => ({
+  state: (): State => ({
     productInfo: null,
     // Initialize the cartItems with a quantity field
     cartItems: (
@@ -40,6 +24,8 @@ export const useMainStore = defineStore('main', {
     },
     sortingOptions: [],
     isFilterSet: false,
+    isCartOpen: false,
+    navLinks: [],
   }),
 
   getters: {
@@ -131,13 +117,30 @@ export const useMainStore = defineStore('main', {
       }
     },
 
+    async fetchNavigation(): Promise<void> {
+      this.loading = true
+      this.error = null
+      try {
+        const response = await fetch('/data/navigation.json')
+        if (!response.ok) {
+          throw new Error('Failed to fetch navigation')
+        }
+        const data = await response.json()
+        this.navLinks = data.nav.links
+      } catch (err: any) {
+        this.error = err.message || 'Error fetching navigation'
+        throw err
+      } finally {
+        this.loading = false
+      }
+    },
+
     setCategoryFilter(category: string | null) {
       this.selectedCategory = category
     },
 
     setColorFilter(color: string | null) {
       this.selectedColor = color
-      console.log(126, this.selectedColor, color)
     },
 
     setSortingFilter(value: string | null) {
@@ -181,6 +184,10 @@ export const useMainStore = defineStore('main', {
       this.updateLocalStorage()
 
       return orderId
+    },
+
+    toggleCart() {
+      this.isCartOpen = !this.isCartOpen
     },
 
     updateLocalStorage() {

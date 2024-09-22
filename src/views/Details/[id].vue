@@ -26,7 +26,7 @@ import Card from '@/components/Products/RelatedProducts.vue'
 import Breadcrumb from '@/components/PDP/Breadcrumb.vue'
 import ProductTile from '@/components/PDP/ProductTile.vue'
 import ProductDescription from '@/components/PDP/PDPText.vue'
-import { Product } from '@/types'
+import type { Product } from '@/types'
 
 // Store and routing
 const store = useMainStore()
@@ -85,7 +85,7 @@ const sliceItems = computed(() => {
 }
 
 .relate-productc-title {
-  @include responsive-font-size(16px);
+  font-size: $font-size-base;
 
   font-weight: bold;
 }

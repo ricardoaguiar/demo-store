@@ -128,13 +128,13 @@ function goShopping(): string {
 .action-buttons {
   display: flex;
   flex-direction: row;
-  gap: 1rem;
+  gap: $spacing-base;
 }
 
 .product-list {
   display: flex;
   flex-flow: row wrap;
-  gap: 1rem;
+  gap: $spacing-base;
   margin-bottom: 2rem;
 }
 .product-list-item {

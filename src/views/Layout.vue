@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
-import Header from '@/components/Header.vue' // Assuming you have a header component
+import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
-import Newsletter from '@/components/Newsletter.vue' // Assuming you have a footer component
+import Newsletter from '@/components/Newsletter.vue'
 
 const route = useRoute()
 </script>
@@ -22,8 +22,6 @@ const route = useRoute()
 
 <style lang="scss" scoped>
 .wrapper {
-  @include space(padding-inline, $one-spacing, $one-spacing);
-
-  width: 100vw;
+  padding-inline: $spacing-base;
 }
 </style>

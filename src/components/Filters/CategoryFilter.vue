@@ -51,9 +51,9 @@ function filterByColor(colorName: string): void {
         v-for="category in store.categories.types"
         :key="category.value"
       >
-        <a class="category-name" @click="filterByCategory(category.name)">
+        <button @click="filterByCategory(category.name)">
           {{ category.name }}
-        </a>
+        </button>
       </div>
       <div class="color-container">
         <h3 class="colors-title">Colors:</h3>
@@ -62,7 +62,7 @@ function filterByColor(colorName: string): void {
           v-for="color in store.categories.colors"
           :key="color.name"
         >
-          <a
+          <button
             class="circle"
             :style="{ backgroundColor: color.value }"
             @click="filterByColor(color.name)"
@@ -81,16 +81,15 @@ function filterByColor(colorName: string): void {
 }
 
 .button.is-light {
-  color: black;
-  background: white;
+  color: $color-black;
+  background: $color-white;
   border-radius: 0;
   border: 1px solid grey;
 }
 
 .category-name {
-  @include space(padding, $quarter-spacing, $half-spacing);
-  @include responsive-font-size(12px);
-
+  padding: $spacing-2;
+  font-size: $font-size-xs;
   text-transform: capitalize;
   flex: 1;
 }
@@ -100,13 +99,13 @@ function filterByColor(colorName: string): void {
 }
 
 .color-container {
-  @include flex($direction: row, $gap: $half-spacing, $align: center);
-  @include space(padding, $half-spacing, $one-spacing);
+  @include flex($direction: row, $gap: $spacing-2, $alignItems: center);
+  padding: $spacing-2;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
-  background-color: #f8f8f8;
+  background-color: $background-color;
 
   .colors-title {
-    color: #000000;
+    color: $color-black;
     font-weight: bold;
   }
 }

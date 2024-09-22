@@ -39,7 +39,7 @@ useHead({
   grid-template-columns: 1fr;
   gap: 16px;
 
-  @include responsive(desktop) {
+  @include responsive(desktop, min) {
     grid-template-columns: 1fr 3fr;
   }
 

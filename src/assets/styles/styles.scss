@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Exo+2');
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  line-height: $spacing-6;
+  font-weight: $normal;
 
   color-scheme: light;
   font-synthesis: none;
@@ -16,15 +16,14 @@
 }
 
 a, a:hover, a:visited {
-  font-weight: 500;
-  color: #000000;
+  font-weight: $medium;
+  color: $color-black;
   text-decoration: inherit;
 }
 
 body {
   margin: 0 auto;
   min-height: 100vh;
-  background: #ffffff;
 }
 
 main {
@@ -32,12 +31,12 @@ main {
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: $spacing-12;
   line-height: 1.1;
 }
 
 :is(h1, h2, h3, h4, h5, h6) {
-  font-weight: bold;
+  font-weight: $bold;
   text-transform: capitalize;
 }
 
@@ -47,40 +46,25 @@ li, ol {
 
 
 .button {
-  border-radius: 8px;
+  border-radius: $spacing-2;
+  padding: 0 $spacing-base;
+  font-size: $font-size-base;
+  background-color: $color-white;
+  font-weight: $medium;
   border: 1px solid rgba(211, 211, 211, 0.5);
-  padding: 0 1rem;
-  font-size: 1em;
-  font-weight: 500;
   font-family: inherit;
-  background-color: #ffffff;
   cursor: pointer;
   transition: border-color 0.25s;
 }
 
 .button:hover {
-  border-color: #646cff;
+  border-color: $hover-color;
 }
 
 .button:focus,
 .button:focus-visible {
   outline: none;
 }
-
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: $half-spacing
-}
-
-.flex {
-    display: flex;
-    gap: $half-spacing;
-    justify-content: center;
-    align-items: center;
-}
-
 
 .caret-down {
   @include caret(down);
@@ -101,10 +85,11 @@ li, ol {
 .page-leave-active {
   transition: all 0.5s;
 }
+
 .page-enter-from,
 .page-leave-to {
   opacity: 0;
-  filter: blur(1rem);
+  filter: blur($spacing-base);
 }
 
 .sorting-filter,
@@ -113,35 +98,45 @@ li, ol {
 }
 
 .sorting-item,
-.category-name {
-  @include space(padding, $quarter-spacing, $half-spacing);
-  @include responsive-font-size(12px);
-
-  text-transform: capitalize;
-  flex: 1;
-}
-
-.sorting-item,
 .category-item {
-  background-color: #f8f8f8;
-  color: #000000;
-  text-align: left;
-  cursor: pointer;
+  color: $primary-color;
+  background-color: $background-color;
+  font-size: $font-size-base;
   transition: background-color 0.3s ease;
-  @include flex();
+  cursor: pointer;
+
+  button {
+    padding: $spacing-3;
+    text-align: left;
+    width: 100%;
+  }
 
   &:hover {
-    background-color: #dae0e5;
-    cursor: pointer;
+    background-color: $hover-color;
   }
 }
 
 .sorting-filter-select,
 .category-filter-select {
-  color: #f2be00;
+  margin-right: $spacing-3;
+  color: $secondary-color;
   text-transform: uppercase;
 }
 
+/* Modal Overlay */
+.modal-background {
+  display: block;
+  z-index: 1050;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  transition: opacity 0.5s;
+  cursor: pointer;
+}
 
-
-
+.is-hidden {
+  display: none;
+}

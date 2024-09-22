@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { useMainStore } from '@/store'
-import { useCart } from '@/composables'
 
 // components
 import Item from '@/components/Cart/Item.vue'
@@ -12,7 +11,6 @@ import ButtonComponent from '@/components/UI/ButtonComponent.vue'
 // variables
 const store = useMainStore()
 const router = useRouter()
-const { isCartOpen, toggleCart } = useCart()
 
 // functions
 function handleCheckout(): void {
@@ -24,19 +22,19 @@ function handleCheckout(): void {
   store.cartItems = []
   store.updateLocalStorage()
   router.push({ name: 'ThankYou' })
-  toggleCart()
+  store.toggleCart()
 }
 
 function goShopping(): void {
   router.push({ path: '/products' })
-  toggleCart()
+  store.toggleCart()
 }
 </script>
 
 <template>
-  <div :class="['cart', isCartOpen ? 'on' : '']">
+  <div :class="['cart', store.isCartOpen ? 'on' : '']">
     <div class="cart-title">
-      <ButtonComponent buttonClass="close-basket" @click="toggleCart"
+      <ButtonComponent buttonClass="close-basket" @click="store.toggleCart()"
         >&#10006;</ButtonComponent
       >
       <h2 class="has-text-centered is-size-3">Cart</h2>
@@ -73,8 +71,8 @@ function goShopping(): void {
     </div>
   </div>
   <div
-    :class="['modal-background', isCartOpen ? '' : 'is-hidden']"
-    @click="toggleCart"
+    :class="['modal-background', store.isCartOpen ? '' : 'is-hidden']"
+    @click="store.toggleCart()"
   ></div>
 </template>
 
@@ -109,7 +107,7 @@ function goShopping(): void {
   background: black;
   color: white;
   border-radius: 2px;
-  @include space(padding, $one-spacing, $one-spacing);
+  padding: $spacing-base;
 }
 
 .checkout-button {
@@ -119,7 +117,7 @@ function goShopping(): void {
   font-weight: bold;
   text-transform: uppercase;
 
-  @include responsive-font-size(16px);
+  font-size: $font-size-base;
 }
 
 .cart-container {
@@ -127,33 +125,15 @@ function goShopping(): void {
   width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 2px;
-  @include space(padding, $quarter-spacing, $one-spacing);
-  @include space(margin-bottom, $half-spacing, $one-spacing);
+  padding: $spacing-2;
+  margin-bottom: $spacing-2;
 }
 
 .cart-item {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  column-gap: 0.5rem;
+  column-gap: $spacing-2;
   position: relative;
-}
-
-/* Modal Overlay */
-.modal-background {
-  display: block;
-  z-index: 1050;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-  transition: opacity 0.5s;
-  cursor: pointer;
-}
-
-.is-hidden {
-  display: none;
 }
 
 /* Cart Body */
@@ -173,7 +153,7 @@ function goShopping(): void {
 .cart.on {
   transform: translateX(0);
 
-  @include responsive(mobile) {
+  @include responsive(mobile-small, max) {
     width: 100%;
   }
 }

@@ -1,8 +1,6 @@
 // composables/utils.ts
 import { ref } from 'vue'
 
-const isCartOpen = ref(false)
-
 export function useDropdown() {
   const dropdownActive = ref(false)
   function toggleDropdown() {
@@ -27,13 +25,15 @@ export function useAsset(
   return new URL(`../assets/img/${fullPath}`, import.meta.url).href
 }
 
-export function useCart() {
-  function toggleCart() {
-    isCartOpen.value = !isCartOpen.value
+export function useMobileMenuToggle() {
+  const isMobileMenuOpen = ref(false)
+
+  function toggleMobileMenu() {
+    isMobileMenuOpen.value = !isMobileMenuOpen.value
   }
 
   return {
-    isCartOpen,
-    toggleCart,
+    isMobileMenuOpen,
+    toggleMobileMenu,
   }
 }

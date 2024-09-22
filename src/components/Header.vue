@@ -3,9 +3,7 @@
 import MobileMenu from '@/components/Header/MobileMenu.vue'
 import NavLinks from '@/components/Header/NavLinks.vue'
 import Logo from '@/components/Header/Logo.vue'
-import SearchBar from '@/components/Header/SearchBar.vue'
 import BasketButton from '@/components/Header/BasketButton.vue'
-import UserModal from '@/components/Header/UserModal.vue'
 import Basket from '@/components/Header/Basket.vue'
 </script>
 
@@ -14,43 +12,33 @@ import Basket from '@/components/Header/Basket.vue'
     <nav
       class="navbar is-flex is-align-items-center is-justify-content-space-between"
     >
-      <MobileMenu />
       <div class="navbar-group left-side is-flex is-align-items-center">
+        <MobileMenu class="mobile-menu" />
         <Logo class="logo" />
-        <NavLinks class="nav-links" />
+        <NavLinks />
       </div>
       <div class="navbar-group right-side is-flex is-align-items-center">
-        <SearchBar />
-        <!--        <Profile />-->
         <BasketButton />
       </div>
     </nav>
-    <UserModal />
     <Basket />
   </header>
 </template>
 
 <style scoped lang="scss">
 .header {
-  background-color: #ffffff;
-  //@include
-  // (padding-block, $half-spacing, $one-spacing);
-}
-
-.nav-links {
-  gap: 1rem;
-
-  @include responsive(tablet) {
-    display: none;
-  }
+  margin: 0 auto;
 }
 
 .navbar-group {
-  gap: 1rem;
-  justify-content: space-between;
+  column-gap: $spacing-base;
 }
 
-.right-side {
-  @include space(margin-right, $one-spacing, $one-spacing);
+.navbar-group {
+  &:deep(.mobile-menu-button) {
+    @include responsive(tablet-min, min) {
+      display: none;
+    }
+  }
 }
 </style>

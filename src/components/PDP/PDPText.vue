@@ -42,8 +42,7 @@ const selectedInfo = (index: number): number => (text.active = index)
 
 <style scoped lang="scss">
 .product-description {
-  @include space(margin-top, $double-spacing, $base-spacing);
-  @include space(margin-bottom, $half-spacing, $base-spacing);
+  margin-block: $spacing-8;
 }
 .column h6 {
   height: 25px;

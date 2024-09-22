@@ -15,9 +15,23 @@ export interface Product {
 }
 
 export interface State {
-  productInfo: Product
+  productInfo: Product | null
   cartItems: Product[]
-  items: Product[]
+  products: Product[]
+  loading: boolean
+  error: string | null
+  purchasedItems: Product[]
+  selectedCategory: string | null
+  selectedColor: string | null
+  selectedSorting: string | null
+  categories: {
+    types?: Array<{ name: string; value: string }>
+    colors?: Array<{ name: string; value: string }>
+  }
+  sortingOptions: Array<{ name: string; value: string }>
+  isFilterSet: boolean
+  isCartOpen: boolean
+  navLinks: NavLink | null
 }
 
 // footer
