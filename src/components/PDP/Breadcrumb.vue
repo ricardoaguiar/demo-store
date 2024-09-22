@@ -30,11 +30,13 @@ defineProps<{
 <style scoped lang="scss">
 .breadcrumb {
   background: inherit;
+  margin-bottom: $spacing-2;
+  padding-left: $spacing-1;
 
   a {
     text-decoration: none;
-    color: #2c3539 !important;
-    font-size: 18px;
+    color: $primary-color;
+    font-size: $font-size-lg;
 
     &:hover {
       text-decoration: underline;
@@ -42,7 +44,7 @@ defineProps<{
   }
 
   .is-active a {
-    color: #f2be00 !important;
+    color: $secondary-color;
     pointer-events: none;
   }
 }

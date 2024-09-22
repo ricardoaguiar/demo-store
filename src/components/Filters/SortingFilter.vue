@@ -36,13 +36,9 @@ function selectSortOption(value: string) {
       role="menu"
     >
       <div class="sorting-item" v-for="option in store.sortingOptions">
-        <a
-          :key="option.value"
-          class="dropdown-link"
-          @click="selectSortOption(option.value)"
-        >
+        <button :key="option.value" @click="selectSortOption(option.value)">
           {{ option.name }}
-        </a>
+        </button>
       </div>
     </div>
   </div>
@@ -75,19 +71,5 @@ function selectSortOption(value: string) {
 .sorting-options-active {
   max-height: 500px;
   opacity: 1;
-}
-
-.dropdown-item {
-  padding: 10px;
-  background-color: #f8f8f8;
-  color: #000000;
-  text-align: left;
-  display: block;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.dropdown-item:hover {
-  background-color: #dae0e5;
 }
 </style>

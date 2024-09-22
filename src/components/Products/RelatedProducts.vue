@@ -17,15 +17,11 @@ const store = useMainStore()
 .related-products {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: $one-spacing;
+  gap: $spacing-base;
 
-  @include responsive(widescreen) {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  @include responsive(mobile) {
+  @include responsive(tablet, max) {
     grid-template-columns: 1fr 1fr;
-    gap: $half-spacing;
+    gap: $spacing-2;
   }
 }
 

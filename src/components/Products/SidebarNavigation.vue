@@ -25,7 +25,7 @@ const store = useMainStore()
 .sidebar-navigation {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: $spacing-base;
 }
 
 .slider {

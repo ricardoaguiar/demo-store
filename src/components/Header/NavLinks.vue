@@ -1,34 +1,69 @@
+<script setup lang="ts">
+import { useMainStore } from '@/store'
+import { onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+import { useMobileMenuToggle } from '@/composables'
+import ButtonComponent from '@/components/UI/ButtonComponent.vue'
+
+const store = useMainStore()
+const router = useRouter()
+const { toggleMobileMenu } = useMobileMenuToggle()
+
+onMounted(async () => await store.fetchNavigation())
+
+function navigateTo(path: string): void {
+  const currentPath = router.currentRoute.value.path
+  if (currentPath === path) {
+    toggleMobileMenu()
+  } else {
+    router.push({ path })
+    toggleMobileMenu()
+  }
+}
+</script>
+
 <template>
-  <div class="navbar-item is-hidden-mobile">
-    <RouterLink
-      class="navbar-item"
-      :to="link.Link"
-      v-for="(link, idx) in navLinks"
-      :key="idx"
-    >
-      {{ link.name }}
-    </RouterLink>
+  <div class="nav-container">
+    <template v-for="(link, i) in store.navLinks" :key="i">
+      <ButtonComponent
+        @click="navigateTo(link.url)"
+        buttonClass="nav-link-button"
+      >
+        {{ link.name }}
+      </ButtonComponent>
+    </template>
   </div>
 </template>
 
-<script setup lang="ts">
-const navLinks = [
-  {
-    name: 'Home',
-    Link: '/',
-  },
-  {
-    name: 'Products',
-    Link: '/products',
-  },
-  {
-    name: 'Contact',
-    Link: '/contact',
-  },
-]
-</script>
-<style lang="scss">
-.navbar-item {
+<style scoped lang="scss">
+.nav-container {
+  @include flex($justifyContent: space-between, $gap: $spacing-base);
+  @include responsive(mobile, max) {
+    font-size: $font-size-xl;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+
+    &:deep(.nav-link-button) {
+      padding: $spacing-base $spacing-5;
+      justify-content: flex-start;
+      width: 100%;
+      text-align: left;
+
+      &:hover {
+        background-color: $hover-color;
+      }
+    }
+  }
+}
+
+.nav-container:not(.mobile-menu .nav-container) {
+  @include responsive(mobile, max) {
+    display: none;
+  }
+}
+
+.nav-link {
   background-color: white;
 }
 </style>

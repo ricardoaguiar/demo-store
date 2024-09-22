@@ -1,3 +1,39 @@
+<script setup lang="ts">
+import { useMainStore } from '@/store'
+import { useAsset } from '@/composables'
+import ButtonComponent from '@/components/UI/ButtonComponent.vue'
+import { ref } from 'vue'
+
+const props = defineProps<{
+  item: Object
+}>()
+
+const store = useMainStore()
+const quantity = ref(props.item.quantity)
+
+function updateQuantity(newQuantity: number): void {
+  quantity.value = newQuantity
+  props.item.quantity = newQuantity
+  store.updateLocalStorage()
+}
+
+function handleClick(actionType: string) {
+  switch (actionType) {
+    case 'increment':
+      if (quantity.value < 9) {
+        updateQuantity(quantity.value + 1)
+      }
+      break
+
+    case 'decrement':
+      if (quantity.value > 1) {
+        updateQuantity(quantity.value - 1)
+      }
+      break
+  }
+}
+</script>
+
 <template>
   <div class="column p-0">
     <img
@@ -13,11 +49,11 @@
     <p>Quantity: {{ item.quantity }}</p>
     <p>Subtotal: ${{ item.price * item.quantity }}</p>
 
-    <div class="flex counter-container has-text-centered">
+    <div class="counter-container has-text-centered">
       <ButtonComponent
         actionType="decrement"
         :quantity="quantity"
-        @quantity="updateQuantity"
+        @click="handleClick('decrement')"
         buttonClass="button update-quantity"
         buttonText="−"
       />
@@ -25,7 +61,7 @@
       <ButtonComponent
         actionType="increment"
         :quantity="quantity"
-        @quantity="updateQuantity"
+        @click="handleClick('increment')"
         buttonClass="button update-quantity"
         buttonText="+"
       />
@@ -37,44 +73,30 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { useMainStore } from '@/store'
-import { useAsset } from '@/composables'
-import ButtonComponent from '@/components/UI/ButtonComponent.vue'
-import { ref } from 'vue'
-
-const props = defineProps<{
-  item: Object
-}>()
-
-const store = useMainStore()
-const quantity = ref(props.item.quantity)
-
-function updateQuantity(newQuantity) {
-  quantity.value = newQuantity
-  props.item.quantity = newQuantity
-  store.updateLocalStorage()
-}
-</script>
-
 <style scoped lang="scss">
 .cart-img {
   width: 100%;
 }
 
 .product-title {
-  @include responsive-font-size(16px);
+  font-size: $font-size-base;
   & {
-    font-weight: bold;
+    font-weight: $bold;
   }
 }
 
 .product-price {
-  @include responsive-font-size(18px);
+  font-size: $font-size-lg;
 }
 
 .title-container {
-  align-self: center;
+  @include flex(
+    $direction: column,
+    $justifyContent: flex-start,
+    $alignItems: flex-start,
+    $alignSelf: center,
+    $gap: $spacing-1
+  );
 }
 
 .remove-btn {
@@ -94,32 +116,21 @@ function updateQuantity(newQuantity) {
 }
 
 .remove-btn:hover {
-  background-color: black;
-  border-radius: 20px;
-  color: white;
+  background-color: $color-black;
+  color: $color-white;
+  border-radius: $spacing-5;
 }
 
 .counter-container {
-  align-items: center;
-  justify-content: center;
+  @include flex($alignItems: center, $alignSelf: flex-start);
+
+  font-size: $font-size-base;
   font-weight: bold;
   border: 1px solid rgba(0, 0, 0, 0.05);
   max-width: fit-content;
   line-height: normal;
-
-  @include responsive-font-size(16px);
-  @include responsive(mobile) {
-    flex-direction: row;
-  }
-
-  .update-quantity {
-    border-radius: 0;
-    border: none;
-    outline: none;
-  }
-
-  & * {
-    @include flex($direction: row, $gap: $one-spacing);
+  .button {
+    padding-bottom: 0.2rem;
   }
 }
 </style>

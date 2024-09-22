@@ -1,3 +1,60 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useMainStore } from '@/store'
+import { useAsset } from '@/composables'
+import type { Product } from '@/types'
+import ButtonComponent from '@/components/UI/ButtonComponent.vue'
+
+const quantity = ref(1)
+
+const store = useMainStore()
+const router = useRouter()
+
+defineProps<{
+  product: Product
+  isRelatedProduct?: boolean
+}>()
+
+function updateQuantity(newQuantity: number): void {
+  quantity.value = newQuantity
+}
+
+function handleClick(actionType: string, product?: Product): void {
+  switch (actionType) {
+    case 'increment':
+      if (quantity.value < 9) {
+        updateQuantity(quantity.value + 1)
+      }
+      break
+
+    case 'decrement':
+      if (quantity.value > 1) {
+        updateQuantity(quantity.value - 1)
+      }
+      break
+
+    case 'addToCart':
+      if (product) {
+        for (let i = 0; i < quantity.value; i++) {
+          store.inCart(product)
+          store.updateLocalStorage()
+        }
+        store.toggleCart()
+      }
+      break
+
+    case 'navigateToProduct':
+      if (product) {
+        router.push(`/details/${product?.id}`).then(() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' })
+        })
+      }
+      break
+  }
+}
+</script>
+
 <template>
   <div
     :class="[
@@ -7,7 +64,7 @@
     <ButtonComponent
       buttonClass="view-item-button"
       :isRelatedProduct="true"
-      @click="navigateToProduct"
+      @click="handleClick('navigateToProduct', product)"
       :product="product"
       :style="{ cursor: !isRelatedProduct ? 'auto' : '' }"
     >
@@ -21,22 +78,22 @@
     <div class="product-info">
       <template v-if="!isRelatedProduct">
         <h1 class="title">{{ product?.title }}</h1>
-        <h6 class="is-size-6" style="width: 190px">
-          <span class="pr-3">{{ product.stars }}</span>
-          {{ product.reviews }} reviews
+        <h6 class="is-size-6 title-reviews">
+          <span class="pr-3">{{ product?.stars }}</span>
+          {{ product?.reviews }} reviews
         </h6>
-        <p>{{ product.description }}</p>
+        <p>{{ product?.description }}</p>
       </template>
 
       <h1 class="title" v-if="isRelatedProduct">{{ product?.title }}</h1>
       <h3 class="price">${{ product?.price }}</h3>
 
       <div class="flex counter-container has-text-centered">
-        <div>
+        <div class="counter-container-buttons">
           <ButtonComponent
             actionType="decrement"
             :quantity="quantity"
-            @quantity="updateQuantity"
+            @click="handleClick('decrement')"
             buttonClass="button update-quantity"
             buttonText="−"
           />
@@ -44,17 +101,15 @@
           <ButtonComponent
             actionType="increment"
             :quantity="quantity"
-            @quantity="updateQuantity"
+            @click="handleClick('increment')"
             buttonClass="button update-quantity"
             buttonText="+"
           />
         </div>
         <ButtonComponent
           actionType="addToCart"
-          :product="product"
           buttonClass="button add-to-cart-button"
-          @cart="handleAddToCart"
-          @click="toggleCart"
+          @click="handleClick('addToCart', product)"
           buttonText="add to cart"
         />
       </div>
@@ -62,77 +117,52 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref } from 'vue'
-import type { Product } from '@/types'
-import { useMainStore } from '@/store'
-import { useAsset, useCart } from '@/composables'
-import ButtonComponent from '@/components/UI/ButtonComponent.vue'
-import { useRouter } from 'vue-router'
-
-const store = useMainStore()
-const { toggleCart } = useCart()
-const router = useRouter()
-
-const { product, isRelatedProduct } = defineProps({
-  product: Object,
-  isRelatedProduct: Boolean,
-})
-
-const quantity = ref(1)
-
-// Handle the quantity update event
-function updateQuantity(newQuantity: number): void {
-  quantity.value = newQuantity // Update the quantity state
-}
-
-// Handle Add to Cart
-function handleAddToCart(product: Product) {
-  for (let i = 0; i < quantity.value; i++) {
-    store.inCart(product)
-    store.updateLocalStorage()
-  }
-}
-
-function navigateToProduct() {
-  store.resetFilters()
-  router.push(`/details/${product?.id}`).then(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  })
-}
-</script>
-
 <style scoped lang="scss">
+.title-reviews {
+  width: fit-content;
+}
+
 .view-item-button {
   background: #ffffff;
-  @include space(padding-inline, $half-spacing, $base-spacing);
   flex: 100%;
+  padding-inline: $spacing-base;
 }
 
 .counter-container {
-  gap: 1rem;
-  align-items: center;
-  justify-content: center;
-  @include flex($direction: row);
+  @include flex(
+    $direction: row,
+    $justifyContent: center,
+    $alignItems: center,
+    $gap: $spacing-base
+  );
 
   @include responsive(mobile) {
     flex-direction: row;
   }
+}
 
-  &:deep(button) {
-    line-height: 2;
-  }
+.counter-container-buttons {
+  @include flex(
+    $direction: row,
+    $justifyContent: center,
+    $alignItems: center,
+    $gap: $spacing-1
+  );
+}
+
+.update-quantity {
+  border: 1px solid $color-black;
+  outline: none;
+  line-height: $line-height-base;
+  padding-bottom: 0.2rem;
+  border-radius: 2px;
 }
 
 .quantity {
   font-weight: bolder;
-  padding: 0.25rem 0.5rem;
-}
-
-.update-quantity {
-  border-radius: 0;
-  border: none;
-  outline: none;
+  border-radius: 2px;
+  padding: 0.2rem 0.5rem;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .title {
@@ -156,11 +186,10 @@ function navigateToProduct() {
 
   @include flex(
     $direction: column,
-    $gap: $half-spacing,
-    $align: flex-start,
-    $justify: center
+    $gap: $spacing-2,
+    $alignItems: flex-start,
+    $justifyContent: center
   );
-  @include space(margin-right, $one-and-half-spacing, $base-spacing);
 
   @include responsive(mobile) {
     gap: 0.75rem;
@@ -174,7 +203,6 @@ function navigateToProduct() {
   margin: auto;
 
   @include flex($direction: row, $gap: 2rem);
-  @include space(margin-block, $one-spacing, $base-spacing);
   @include responsive(mobile) {
     @include flex($direction: column);
 
@@ -182,11 +210,11 @@ function navigateToProduct() {
   }
 
   .product-info {
-    @include responsive(mobile) {
-      @include space(padding, $double-spacing, $base-spacing);
+    @include responsive(mobile, max) {
+      padding: $spacing-base;
     }
-    @include responsive(tablet) {
-      @include space(padding, $one-and-half-spacing, $base-spacing);
+    @include responsive(tablet-min, min) {
+      padding: $spacing-8;
     }
   }
 }
@@ -194,8 +222,7 @@ function navigateToProduct() {
 .product-detail__related-product {
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 3px;
-  @include flex($direction: column, $align: center);
-  @include space(margin-block, 0, 0);
+  @include flex($direction: column, $alignItems: center);
 
   .product-info {
     align-items: center;
@@ -203,15 +230,12 @@ function navigateToProduct() {
   }
   .counter-container {
     flex-direction: column;
-    gap: $quarter-spacing;
+    gap: $spacing-2;
   }
 }
 
 .img-fluid {
   width: 100%;
-  //box-shadow:
-  //  0 4px 8px rgba(0, 0, 0, 0.2),
-  //  0 6px 20px rgba(0, 0, 0, 0.19);
 }
 
 .control {
@@ -240,15 +264,15 @@ function navigateToProduct() {
   font-size: 15px;
   cursor: pointer;
   border: none;
-  //box-shadow:
-  //  0 26px 38px rgba(0, 0, 0, 0.2),
-  //  0 6px 20px rgba(0, 0, 0, 0.19);
   border-radius: 2px;
+  line-height: $line-height-xl;
+  text-transform: uppercase;
 
   &:hover,
   &:focus {
     background-color: inherit;
     color: black;
+    outline: 1px solid $color-black;
   }
 }
 </style>

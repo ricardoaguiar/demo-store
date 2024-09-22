@@ -6,7 +6,7 @@
         {{ `(${store.itemsNumber} items)` }}
       </p>
     </div>
-    <div class="column has-text-centered pr-3">
+    <div class="has-text-centered pr-3">
       <h4 class="title is-4">${{ store.totalPrice }}</h4>
     </div>
   </div>
@@ -18,8 +18,10 @@ import { useMainStore } from '@/store'
 const store = useMainStore()
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .total {
+  @include flex($direction: row, $justifyContent: center, $alignItems: center);
+
   width: 100%;
   margin-inline: auto;
   background-color: rgba(0, 0, 0, 0.1);

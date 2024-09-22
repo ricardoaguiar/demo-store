@@ -15,12 +15,12 @@
           <div class="newsletter-form">
             <form @submit.prevent="submit">
               <input
-                class="input nl-email"
+                class="input"
                 type="email"
                 placeholder="Your E-mail"
                 required
               />
-              <button class="button is-dark input-button">Submit</button>
+              <button class="submit-button is-dark input-button">Submit</button>
             </form>
           </div>
         </div>
@@ -37,8 +37,12 @@ function submit(): void {
 
 <style scoped lang="scss">
 .newsletter-area {
-  background-color: #dbf0fa;
-  padding: 75px;
+  background-color: $light-blue;
+  padding: $spacing-16;
+
+  @include responsive(mobile, max) {
+    padding: $spacing-12 $spacing-base;
+  }
 }
 
 .newsletter-text {
@@ -56,34 +60,42 @@ function submit(): void {
 .newsletter-form {
   form {
     display: flex;
-    gap: 1rem;
+    gap: $spacing-base;
 
-    .nl-email {
-      flex-grow: 1;
-      background-color: inherit !important;
-      color: #2c3539;
-      font-size: 20px;
-      font-style: italic;
-      border: none;
+    @include responsive(mobile, max) {
+      flex-direction: column;
+      .input-button {
+        padding-block: $spacing-2;
+      }
+    }
+
+    input {
+      @include prevent-ios-zoom($font-size-base);
+
       outline: none;
-      border-bottom: 2px solid #2c3539;
-      padding: 0 15px;
+      background: $color-white;
+
+      &:focus,
+      &:active {
+        outline: none;
+      }
     }
 
     .input-button {
       transition-duration: 500ms;
-      background-color: #2c3539;
-      color: #fff;
-      font-size: 18px;
-      box-shadow:
-        0 8px 6px 0 rgba(0, 0, 0, 0.1),
-        0 16px 70px 0 rgba(0, 0, 0, 0.69);
+      background-color: $color-black;
+      color: $color-white;
+      font-size: $font-size-lg;
+      border-radius: $spacing-1;
+      padding-inline: $spacing-8;
+
       border: none;
 
       &:hover,
       &:focus {
         background-color: inherit;
         color: black;
+        border: 1px solid $color-black;
       }
     }
   }
