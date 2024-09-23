@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { useAsset, useMobileMenuToggle } from '@/composables'
+import { useAsset } from '@/composables'
+import { useMainStore } from '@/store'
 import ButtonComponent from '@/components/UI/ButtonComponent.vue'
 import NavLinks from '@/components/Header/NavLinks.vue'
 
 const mobileMenu = ref(null)
 const menuHeight = ref(0)
-const { isMobileMenuOpen, toggleMobileMenu } = useMobileMenuToggle()
+const store = useMainStore()
 
 onMounted(() => {
   menuHeight.value = mobileMenu.value.offsetHeight
@@ -14,7 +15,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <ButtonComponent class="mobile-menu-button" @click="toggleMobileMenu">
+  <ButtonComponent class="mobile-menu-button" @click="store.toggleMobileMenu">
     <img
       :src="useAsset('menu', 'svg')"
       width="20"
@@ -25,10 +26,10 @@ onMounted(() => {
     />
   </ButtonComponent>
 
-  <div role="menu" :class="['mobile-menu', { on: isMobileMenuOpen }]">
+  <div role="menu" :class="['mobile-menu', { on: store.isMobileMenuOpen }]">
     <div ref="mobileMenu" class="mobile-menu-title">
       <h1>Menu</h1>
-      <ButtonComponent buttonClass="close-menu" @click="toggleMobileMenu"
+      <ButtonComponent buttonClass="close-menu" @click="store.toggleMobileMenu"
         >&#10006;
       </ButtonComponent>
     </div>
@@ -38,8 +39,8 @@ onMounted(() => {
     />
   </div>
   <div
-    :class="['modal-background', isMobileMenuOpen ? '' : 'is-hidden']"
-    @click="toggleMobileMenu"
+    :class="['modal-background', store.isMobileMenuOpen ? '' : 'is-hidden']"
+    @click="store.toggleMobileMenu"
   ></div>
 </template>
 

@@ -5,6 +5,10 @@ import NavLinks from '@/components/Header/NavLinks.vue'
 import Logo from '@/components/Header/Logo.vue'
 import BasketButton from '@/components/Header/BasketButton.vue'
 import Basket from '@/components/Header/Basket.vue'
+
+defineProps<{
+  isHeaderNavigation?: boolean
+}>()
 </script>
 
 <template>
@@ -13,9 +17,9 @@ import Basket from '@/components/Header/Basket.vue'
       class="navbar is-flex is-align-items-center is-justify-content-space-between"
     >
       <div class="navbar-group left-side is-flex is-align-items-center">
-        <MobileMenu class="mobile-menu" />
+        <MobileMenu />
         <Logo class="logo" />
-        <NavLinks />
+        <NavLinks :isHeaderNavigation="true" />
       </div>
       <div class="navbar-group right-side is-flex is-align-items-center">
         <BasketButton />

@@ -47,64 +47,70 @@
   </section>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 form {
   padding: 50px 0;
 }
 
 .field {
-  margin-bottom: 2rem;
-  position: relative;
+  //margin-bottom: 2rem;
+  //position: relative;
 }
 
 .label {
-  font-weight: 100;
-  font-size: 1.5rem;
-  color: grey;
-  position: absolute;
-  transition: 0.5s ease-in-out;
-  top: 10px;
-  left: 10px;
-  z-index: 0;
-  pointer-events: none;
+  //font-weight: 100;
+  //font-size: 1.5rem;
+  //color: grey;
+  //position: absolute;
+  //transition: 0.5s ease-in-out;
+  //top: 10px;
+  //left: 10px;
+  //z-index: 0;
+  //pointer-events: none;
 }
 
 .input,
 .textarea {
-  font-size: 1.4rem;
-  font-weight: 100;
-  background-color: transparent;
-  border: 1px solid #555;
-  transition: all 0.5s;
-  border-radius: 0;
+  //font-size: 1.4rem;
+  //font-weight: 100;
+  //background-color: transparent;
+  //border: 1px solid #555;
+  //transition: all 0.5s;
+  //border-radius: 0;
 }
 
 .input:focus,
 .input:valid,
 .textarea:focus,
 .textarea:valid {
-  border-color: #71acd6;
+  //border-color: #71acd6;
 }
 
 .input:focus ~ .label,
 .input:valid ~ .label,
 .textarea:focus ~ .label,
 .textarea:valid ~ .label {
-  color: #71acd6;
-  font-size: 1rem;
-  top: -10px;
-  left: 0;
+  //color: #71acd6;
+  //font-size: 1rem;
+  //top: -10px;
+  //left: 0;
 }
 
 .button {
-  transition-duration: 200ms;
-  width: 120px;
-  height: 50px;
-  font-size: 15px;
-  padding: 0 30px;
-  cursor: pointer;
-  box-shadow:
-    0 26px 38px 0 rgba(0, 0, 0, 0.2),
-    0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transition-duration: 500ms;
+  background-color: $color-black;
+  color: $color-white;
+  font-size: $font-size-lg;
+  border-radius: $spacing-1;
+  padding-inline: $spacing-8;
+  padding-block: $spacing-2;
+  border: none;
+
+  &:hover,
+  &:focus {
+    background-color: inherit;
+    color: black;
+    border: 1px solid $color-black;
+  }
 }
 </style>
