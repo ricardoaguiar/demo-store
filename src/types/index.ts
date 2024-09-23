@@ -32,6 +32,7 @@ export interface State {
   isFilterSet: boolean
   isCartOpen: boolean
   navLinks: NavLink | null
+  isMobileMenu: boolean
 }
 
 // footer

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useMainStore } from '@/store'
-import { onMounted } from 'vue'
+import { onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useMobileMenuToggle } from '@/composables'
 import ButtonComponent from '@/components/UI/ButtonComponent.vue'
@@ -14,7 +14,7 @@ onMounted(async () => await store.fetchNavigation())
 function navigateTo(path: string): void {
   const currentPath = router.currentRoute.value.path
   if (currentPath === path) {
-    toggleMobileMenu()
+    store.closeMobileMenu()
   } else {
     router.push({ path })
     toggleMobileMenu()

@@ -26,6 +26,7 @@ export const useMainStore = defineStore('main', {
     isFilterSet: false,
     isCartOpen: false,
     navLinks: [],
+    isMobileMenu: false,
   }),
 
   getters: {
@@ -192,6 +193,13 @@ export const useMainStore = defineStore('main', {
 
     updateLocalStorage() {
       localStorage.setItem('cartItems', JSON.stringify(this.cartItems))
+    },
+
+    toggleMobileMenu() {
+      this.isMobileMenuOpen = !this.isMobileMenuOpen
+    },
+    closeMobileMenu() {
+      this.isMobileMenuOpen = false
     },
   },
 })
