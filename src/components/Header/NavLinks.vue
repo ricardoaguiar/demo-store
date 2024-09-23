@@ -2,22 +2,29 @@
 import { useMainStore } from '@/store'
 import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { useMobileMenuToggle } from '@/composables'
 import ButtonComponent from '@/components/UI/ButtonComponent.vue'
 
 const store = useMainStore()
 const router = useRouter()
-const { toggleMobileMenu } = useMobileMenuToggle()
 
 onMounted(async () => await store.fetchNavigation())
 
+const props = defineProps<{
+  isHeaderNavigation?: boolean
+}>()
+
 function navigateTo(path: string): void {
-  const currentPath = router.currentRoute.value.path
-  if (currentPath === path) {
-    toggleMobileMenu()
+  const isSamePath = router.currentRoute.value.fullPath === path
+  const shouldToggleMenu = !props.isHeaderNavigation
+
+  if (isSamePath && shouldToggleMenu) {
+    store.toggleMobileMenu()
   } else {
-    router.push({ path })
-    toggleMobileMenu()
+    router.push(path).then(() => {
+      if (shouldToggleMenu) {
+        store.toggleMobileMenu()
+      }
+    })
   }
 }
 </script>

@@ -153,16 +153,18 @@ function handleClick(actionType: string, product?: Product): void {
 .update-quantity {
   border: 1px solid $color-black;
   outline: none;
-  line-height: $line-height-base;
   padding-bottom: 0.2rem;
   border-radius: 2px;
+  height: 33px;
 }
 
 .quantity {
   font-weight: bolder;
   border-radius: 2px;
-  padding: 0.2rem 0.5rem;
-  background-color: rgba(0, 0, 0, 0.1);
+  padding: $spacing-1 $spacing-2;
+  width: 3.2ch;
+  background-color: rgba(0, 0, 0, 0.05);
+  border: 0.75px solid rgba(0, 0, 0, 0.07);
 }
 
 .title {
@@ -259,7 +261,7 @@ function handleClick(actionType: string, product?: Product): void {
 
 .add-to-cart-button {
   transition-duration: 500ms;
-  background-color: #2c3539;
+  background-color: $color-black;
   color: #fff;
   font-size: 15px;
   cursor: pointer;

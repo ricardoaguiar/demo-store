@@ -72,8 +72,10 @@ function submit(): void {
     input {
       @include prevent-ios-zoom($font-size-base);
 
-      outline: none;
-      background: $color-white;
+      & {
+        outline: none;
+        background: $color-white;
+      }
 
       &:focus,
       &:active {
@@ -88,7 +90,6 @@ function submit(): void {
       font-size: $font-size-lg;
       border-radius: $spacing-1;
       padding-inline: $spacing-8;
-
       border: none;
 
       &:hover,
