@@ -22,6 +22,8 @@ const route = useRoute()
 
 <style lang="scss" scoped>
 .wrapper {
-  padding-inline: $spacing-base;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 </style>

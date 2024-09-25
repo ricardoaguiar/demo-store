@@ -1,99 +1,99 @@
 <template>
-  <section>
-    <div class="container py-5">
-      <div class="columns is-vcentered">
-        <div class="column is-half">
-          <img
-            class="image"
-            src="@/assets/img/speaker.jpg"
-            alt="speaker"
-            title="speaker"
-          />
+  <section class="contact-form">
+    <div class="contact-us-img"></div>
+    <div class="contact-us-form is-half">
+      <h1 class="title">Hello there</h1>
+      <h2 class="subtitle" style="color: grey">Get in touch.</h2>
+      <form>
+        <div class="field">
+          <div class="control">
+            <label class="label" for="name">Name </label>
+            <input
+              id="name"
+              type="text"
+              class="input"
+              required
+              placeholder="name"
+            />
+          </div>
         </div>
-        <div class="column is-half">
-          <h1 class="title">Hello there</h1>
-          <h2 class="subtitle" style="color: grey">
-            Got a thought to discuss?
-          </h2>
-          <form>
-            <div class="field">
-              <div class="control">
-                <input id="name" type="text" class="input" required />
-                <label class="label" for="name">Name</label>
-              </div>
-            </div>
-            <div class="field">
-              <div class="control">
-                <input id="email" type="email" class="input" required />
-                <label class="label" for="email">E-mail</label>
-              </div>
-            </div>
-            <div class="field">
-              <div class="control">
-                <textarea
-                  id="message"
-                  class="textarea"
-                  rows="3"
-                  required
-                ></textarea>
-                <label class="label" for="message">Message</label>
-              </div>
-            </div>
-            <button class="button is-light" type="submit">Submit</button>
-          </form>
+        <div class="field">
+          <div class="control">
+            <label class="label" for="email">E-mail </label>
+            <input
+              id="email"
+              type="email"
+              class="input"
+              placeholder="email"
+              required
+            />
+          </div>
         </div>
-      </div>
+        <div class="field">
+          <div class="control">
+            <label class="label" for="message">Message </label>
+            <textarea
+              id="message"
+              class="textarea"
+              placeholder="message"
+              rows="3"
+              required
+            ></textarea>
+          </div>
+        </div>
+        <button class="button is-light" type="submit">Submit</button>
+      </form>
     </div>
   </section>
 </template>
 
 <style scoped lang="scss">
-form {
-  padding: 50px 0;
+.contact-form {
+  min-height: 100%;
+  width: 80vw;
+  margin: $spacing-16;
+  display: flex;
+  gap: $spacing-16 $spacing-8;
+
+  @include responsive(mobile, max) {
+    flex-direction: column;
+    width: 100vw;
+    margin: $spacing-2 0;
+    row-gap: $spacing-2;
+  }
 }
 
-.field {
-  //margin-bottom: 2rem;
-  //position: relative;
+.contact-us-img {
+  background-image: url('@/assets/img/speaker.jpg');
+  background-size: cover;
+  background-position: center;
+  width: 40%;
+  height: 40vh;
+
+  @include responsive(mobile, max) {
+    height: 25vh;
+    width: 100vw;
+  }
+}
+
+.contact-us-form {
+  flex: 1;
+
+  .subtitle {
+    margin-bottom: $spacing-2;
+  }
+
+  @include responsive(mobile, max) {
+    display: flex;
+    flex-direction: column;
+    row-gap: $spacing-2;
+    padding: $spacing-base;
+  }
 }
 
 .label {
-  //font-weight: 100;
-  //font-size: 1.5rem;
-  //color: grey;
-  //position: absolute;
-  //transition: 0.5s ease-in-out;
-  //top: 10px;
-  //left: 10px;
-  //z-index: 0;
-  //pointer-events: none;
-}
-
-.input,
-.textarea {
-  //font-size: 1.4rem;
-  //font-weight: 100;
-  //background-color: transparent;
-  //border: 1px solid #555;
-  //transition: all 0.5s;
-  //border-radius: 0;
-}
-
-.input:focus,
-.input:valid,
-.textarea:focus,
-.textarea:valid {
-  //border-color: #71acd6;
-}
-
-.input:focus ~ .label,
-.input:valid ~ .label,
-.textarea:focus ~ .label,
-.textarea:valid ~ .label {
-  //color: #71acd6;
-  //font-size: 1rem;
-  //top: -10px;
-  //left: 0;
+  font-size: $font-size-sm;
+  color: $color-black;
 }
 
 .button {
@@ -105,12 +105,17 @@ form {
   padding-inline: $spacing-8;
   padding-block: $spacing-2;
   border: none;
+  width: 40%;
 
   &:hover,
   &:focus {
     background-color: inherit;
     color: black;
     border: 1px solid $color-black;
+  }
+
+  @include responsive(mobile-small, max) {
+    width: 100%;
   }
 }
 </style>

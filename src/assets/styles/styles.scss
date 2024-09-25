@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Exo+2');
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: $spacing-6;
@@ -21,13 +22,14 @@ a, a:hover, a:visited {
   text-decoration: inherit;
 }
 
-body {
-  margin: 0 auto;
-  min-height: 100vh;
+html, body {
+  margin: 0;
+  min-height: 100%;
 }
 
 main {
   margin: 0 auto;
+  flex: 1;
 }
 
 h1 {
@@ -38,6 +40,22 @@ h1 {
 :is(h1, h2, h3, h4, h5, h6) {
   font-weight: $bold;
   text-transform: capitalize;
+}
+
+.input, .textarea, input, select, textarea {
+  font-size: max($font-size-base, $font-root-size);
+
+
+  & {
+    outline: none;
+    background: $color-white;
+  }
+
+  &:focus,
+  &:active {
+    outline: none;
+    box-shadow: none;
+  }
 }
 
 li, ol {
