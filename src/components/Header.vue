@@ -34,6 +34,10 @@ defineProps<{
   margin: 0 auto;
   padding-inline: $spacing-8;
   width: 100%;
+
+  @include responsive(mobile, max) {
+    padding-inline: $spacing-3;
+  }
 }
 
 .navbar-group {

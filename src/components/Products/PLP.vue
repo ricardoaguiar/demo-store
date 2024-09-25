@@ -30,7 +30,7 @@ const products = computed(() => store.products)
 .product-page {
   margin-inline: 1rem;
 
-  @include responsive(mobile) {
+  @include responsive(mobile, max) {
     margin-inline: 0.25rem;
   }
 }
