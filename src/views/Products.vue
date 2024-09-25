@@ -37,10 +37,18 @@ useHead({
     'breadCrumbs breadCrumbs'
     'filterBar productList';
   grid-template-columns: 1fr;
-  gap: 16px;
+  gap: $spacing-base;
 
   @include responsive(desktop, min) {
     grid-template-columns: 1fr 3fr;
+  }
+
+  @include responsive(mobile, max) {
+    padding-inline: $spacing-3;
+  }
+
+  @include responsive(tablet-min, min) {
+    padding-inline: $spacing-5;
   }
 
   // Ensure full width for breadcrumbs
