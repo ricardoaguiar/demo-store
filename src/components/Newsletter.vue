@@ -3,15 +3,15 @@
     <div class="container">
       <div class="columns is-justify-content-space-between">
         <!-- Newsletter Text -->
-        <div class="column is-full-mobile is-two-thirds-desktop">
+        <div class="column is-full-mobile">
           <div class="newsletter-text">
             <h2 class="title is-3">Join our Newsletter</h2>
-            <p>Nulla ac convallis lorem, eget euismod nisl. bibendum nec.</p>
+            <p>Get the latest trends in design furniture.</p>
           </div>
         </div>
 
         <!-- Newsletter Form -->
-        <div class="column is-full-mobile is-one-third-desktop">
+        <div class="column is-full-mobile">
           <div class="newsletter-form">
             <form @submit.prevent="submit">
               <input
@@ -66,20 +66,6 @@ function submit(): void {
       flex-direction: column;
       .input-button {
         padding-block: $spacing-2;
-      }
-    }
-
-    input {
-      @include prevent-ios-zoom($font-size-base);
-
-      & {
-        outline: none;
-        background: $color-white;
-      }
-
-      &:focus,
-      &:active {
-        outline: none;
       }
     }
 

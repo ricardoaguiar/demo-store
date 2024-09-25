@@ -1,39 +1,39 @@
 // Base Sizes
 $browser-font-size: 16px; // Default browser font size (usually 16px)
-$root-size: 1rem;    // Root font size (typically equals browser font size, 16px)
+$font-root-size: 1rem;
 
 // Font Sizes (using rem for scalability)
-$font-size-xs: 0.75rem;   // 12px
-$font-size-sm: 0.875rem;  // 14px
-$font-size-base: 1rem;    // 16px (default)
-$font-size-lg: 1.125rem;  // 18px
-$font-size-xl: 1.25rem;   // 20px
-$font-size-2xl: 1.5rem;   // 24px
+$font-size-xs: 0.75rem; // 12px
+$font-size-sm: 0.875rem; // 14px
+$font-size-base: 1rem; // 16px (default)
+$font-size-lg: 1.125rem; // 18px
+$font-size-xl: 1.25rem; // 20px
+$font-size-2xl: 1.5rem; // 24px
 $font-size-3xl: 1.875rem; // 30px
-$font-size-4xl: 2.25rem;  // 36px
-$font-size-5xl: 3rem;     // 48px
-$font-size-6xl: 3.75rem;  // 60px
+$font-size-4xl: 2.25rem; // 36px
+$font-size-5xl: 3rem; // 48px
+$font-size-6xl: 3.75rem; // 60px
 
 // Spacing Scale
-$spacing-1: 0.25rem;   // 4px
-$spacing-2: 0.5rem;    // 8px
-$spacing-3: 0.75rem;   // 12px
-$spacing-base: 1rem;      // 16px (base spacing)
-$spacing-5: 1.25rem;   // 20px
-$spacing-6: 1.5rem;    // 24px
-$spacing-8: 2rem;      // 32px
-$spacing-10: 2.5rem;   // 40px
-$spacing-12: 3rem;     // 48px
-$spacing-16: 4rem;     // 64px
-$spacing-20: 5rem;     // 80px
-$spacing-24: 6rem;     // 96px
+$spacing-1: 0.25rem; // 4px
+$spacing-2: 0.5rem; // 8px
+$spacing-3: 0.75rem; // 12px
+$spacing-base: 1rem; // 16px (base spacing)
+$spacing-5: 1.25rem; // 20px
+$spacing-6: 1.5rem; // 24px
+$spacing-8: 2rem; // 32px
+$spacing-10: 2.5rem; // 40px
+$spacing-12: 3rem; // 48px
+$spacing-16: 4rem; // 64px
+$spacing-20: 5rem; // 80px
+$spacing-24: 6rem; // 96px
 
 // Line Heights
-$line-height-xs: 1;        // Tight
-$line-height-sm: 1.25;     // Normal
-$line-height-base: 1.5;    // Default line-height (150%)
-$line-height-lg: 1.75;     // Loose
-$line-height-xl: 2;        // Extra loose
+$line-height-xs: 1; // Tight
+$line-height-sm: 1.25; // Normal
+$line-height-base: 1.5; // Default line-height (150%)
+$line-height-lg: 1.75; // Loose
+$line-height-xl: 2; // Extra loose
 
 // Font Weights
 $normal: 400;

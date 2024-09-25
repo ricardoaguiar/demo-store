@@ -32,6 +32,8 @@ defineProps<{
 <style scoped lang="scss">
 .header {
   margin: 0 auto;
+  padding-inline: $spacing-8;
+  width: 100%;
 }
 
 .navbar-group {

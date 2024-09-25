@@ -19,13 +19,12 @@ onMounted(async () => {
 
 <template>
   <footer class="footer has-background-light" v-if="footerData">
-    <!-- Navigation and Links Section -->
-    <div class="columns">
+    <div class="footer-top">
       <div
         v-if="footerData"
         v-for="(section, index) in footerData.footer"
         :key="index"
-        class="column"
+        class="footer-section"
       >
         <h3 class="title is-5">{{ section.title }}</h3>
         <ul class="links-list">
@@ -36,9 +35,8 @@ onMounted(async () => {
       </div>
     </div>
 
-    <!-- Social Media and Contact Section -->
-    <div class="columns is-vcentered">
-      <div class="column is-half">
+    <div class="footer-bottom">
+      <div class="footer-bottom-left">
         <h3 class="title is-5">Get Social</h3>
         <div class="social-links">
           <a
@@ -47,16 +45,14 @@ onMounted(async () => {
             :href="social.url"
             target="_blank"
             rel="noopener noreferrer"
-            class="icon is-small"
+            class="social-link"
           >
-            <!-- Render the social media icons using v-html to use the provided SVGs -->
-            <span v-html="social.icon"></span>
+            <span v-html="social.icon" class="social-icon"></span>
           </a>
         </div>
       </div>
 
-      <!-- Contact Information Section -->
-      <div class="column is-half has-text-right">
+      <div class="footer-bottom-right">
         <p>{{ footerData.contactInfo.address }}</p>
         <p>
           Email:
@@ -73,16 +69,124 @@ onMounted(async () => {
       </div>
     </div>
 
-    <!-- Copyright Section -->
-    <div class="has-text-centered">
+    <div class="copyright has-text-centered">
       <p>{{ footerData.copyright }}</p>
     </div>
   </footer>
 </template>
+
 <style scoped lang="scss">
+.footer {
+  padding: $spacing-base;
+}
+
+.footer-top {
+  @include flex(
+    $direction: row,
+    $justifyContent: space-between,
+    $gap: $spacing-base
+  );
+  margin: $spacing-8 $spacing-16;
+  padding-bottom: $spacing-8;
+  width: 80%;
+
+  @include responsive(mobile-small, max) {
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+  }
+
+  @include responsive(mobile, max) {
+    margin: $spacing-8 $spacing-2;
+    width: 90%;
+  }
+}
+
+.footer-section {
+  line-height: $line-height-xl;
+
+  @include responsive(mobile-small, max) {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-bottom: 1px solid $color-grey;
+
+    .title {
+      margin-bottom: $spacing-1;
+    }
+
+    &:first-child {
+      margin-top: $spacing-5;
+    }
+
+    &:last-child {
+      margin-bottom: $spacing-5;
+      border-bottom: none;
+    }
+  }
+}
+
 .links-list {
-  list-style: none;
-  padding-left: 0;
+  display: flex;
+  flex-flow: row wrap;
+  padding: 0;
+  margin: 0;
+  justify-content: space-between;
+
+  @include responsive(mobile-small, max) {
+    justify-content: space-between;
+    margin-bottom: $spacing-base;
+
+    li {
+      flex-basis: 50%;
+      width: 50%;
+    }
+  }
+
+  @include responsive(mobile-small, min) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.footer-bottom {
+  @include flex(
+    $direction: row,
+    $justifyContent: space-between,
+    $gap: $spacing-base
+  );
+  width: 100%;
+  padding-inline: $spacing-8;
+  margin-bottom: $spacing-base;
+
+  @include responsive(mobile-small, max) {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-inline: 0;
+  }
+
+  @include responsive(mobile, max) {
+    padding-inline: $spacing-2;
+  }
+}
+
+.footer-bottom-left {
+  .title {
+    margin-bottom: $spacing-3;
+  }
+}
+
+.footer-bottom-right {
+  p,
+  a {
+    font-weight: normal;
+    text-align: right;
+
+    @include responsive(mobile-small, max) {
+      text-align: left;
+    }
+  }
 }
 
 .social-links {
@@ -91,22 +195,15 @@ onMounted(async () => {
   gap: $spacing-base;
 }
 
-.icon.is-small {
-  height: auto;
+.social-icon {
+  &:deep(svg) {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: $primary-color;
+  }
 }
 
-@media (max-width: 600px) {
-  .columns {
-    flex-direction: column;
-  }
-
-  .column.is-half {
-    text-align: center;
-    margin-bottom: 1rem;
-  }
-
-  .social-links {
-    justify-content: center;
-  }
+.copyright {
+  padding: $spacing-base;
 }
 </style>

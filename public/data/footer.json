@@ -3,28 +3,28 @@
     {
       "title": "Navigate",
       "links": [
-        { "text": "About Us", "url": "/about-us" },
-        { "text": "Blog", "url": "/blog" },
-        { "text": "Contact Us", "url": "/contact-us" },
-        { "text": "Sitemap", "url": "/sitemap" }
+        { "text": "About Us", "url": "/" },
+        { "text": "Blog", "url": "/" },
+        { "text": "Contact Us", "url": "/contact" },
+        { "text": "Sitemap", "url": "/" }
       ]
     },
     {
       "title": "Collection",
       "links": [
-        { "text": "New arrivals", "url": "/new-arrivals" },
-        { "text": "Featured", "url": "/featured" },
-        { "text": "Catalog", "url": "/catalog" },
-        { "text": "Brands", "url": "/brands" }
+        { "text": "New arrivals", "url": "/products" },
+        { "text": "Featured", "url": "/products" },
+        { "text": "Catalog", "url": "/products" },
+        { "text": "Brands", "url": "/products" }
       ]
     },
     {
       "title": "Categories",
       "links": [
-        { "text": "Tables", "url": "/tables" },
-        { "text": "Lamps", "url": "/lamps" },
-        { "text": "Chairs", "url": "/chairs" },
-        { "text": "Sofas", "url": "/sofas" }
+        { "text": "Tables", "url": "/products" },
+        { "text": "Lamps", "url": "/products" },
+        { "text": "Chairs", "url": "/products" },
+        { "text": "Sofas", "url": "/products" }
       ]
     }
   ],
