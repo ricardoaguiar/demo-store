@@ -89,6 +89,10 @@ onMounted(() => {
   padding-left: 0;
 }
 
+h1 {
+  font-size: 2rem;
+}
+
 .mobile-menu-title {
   padding: $spacing-3;
   font-size: $font-size-xs;
