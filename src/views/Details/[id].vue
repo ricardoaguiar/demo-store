@@ -1,21 +1,3 @@
-<template>
-  <div class="container py-5" v-if="item.details">
-    <Breadcrumb :details="item.details" />
-    <ProductTile :product="item.details" />
-    <ProductDescription />
-
-    <div class="related-item" v-if="sliceItems.length > 0">
-      <h6 class="relate-productc-title pb-4 my-6">Related Products</h6>
-      <Card :cards="sliceItems" />
-    </div>
-  </div>
-
-  <div v-else>
-    <p>Product not found.</p>
-    <router-link to="/">Back to Products</router-link>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { useRoute, useRouter } from 'vue-router'
 import { onMounted, reactive, computed } from 'vue'
@@ -26,6 +8,8 @@ import Card from '@/components/Products/RelatedProducts.vue'
 import Breadcrumb from '@/components/PDP/Breadcrumb.vue'
 import ProductTile from '@/components/PDP/ProductTile.vue'
 import ProductDescription from '@/components/PDP/PDPText.vue'
+
+// types
 import type { Product } from '@/types'
 
 // Store and routing
@@ -35,7 +19,7 @@ const router = useRouter()
 
 // State
 const item = reactive<{
-  details: Product | null
+  details: Product | null | undefined
   relatedItems: Product[]
 }>({
   details: null,
@@ -78,15 +62,37 @@ const sliceItems = computed(() => {
 })
 </script>
 
+<template>
+  <div class="product-details" v-if="item.details">
+    <Breadcrumb :details="item.details" />
+    <ProductTile :product="item.details" />
+    <ProductDescription />
+
+    <div class="related-item" v-if="sliceItems.length > 0">
+      <h6 class="relate-product-title">Related Products</h6>
+      <Card :cards="sliceItems" />
+    </div>
+  </div>
+
+  <div v-else>
+    <p>Product not found.</p>
+    <router-link to="/">Back to Products</router-link>
+  </div>
+</template>
 <style scoped lang="scss">
+.product-details {
+  margin-inline: $spacing-base;
+  margin-block: $spacing-5;
+}
+
 .related-item {
   height: auto;
   text-align: center;
 }
 
-.relate-productc-title {
-  font-size: $font-size-base;
-
-  font-weight: bold;
+.relate-product-title {
+  font-size: $font-size-3xl;
+  font-weight: $bold;
+  margin: $spacing-16 auto $spacing-5;
 }
 </style>

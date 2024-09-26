@@ -33,13 +33,30 @@ $breakpoints: (
   }
 }
 
-@mixin flex($direction: row, $justifyContent: flex-start, $alignItems: center, $alignSelf: center, $gap: 0) {
+@mixin flex(
+  $direction: null,
+  $justifyContent: null,
+  $alignItems: null,
+  $alignSelf: null,
+  $wrap: null,
+  $gap: null
+) {
   display: flex;
-  flex-direction: $direction;
-  justify-content: $justifyContent;
-  align-items: $alignItems;
-  align-self: $alignSelf;
-  gap: $gap;
+
+  $properties: (
+          flex-direction: $direction,
+          flex-wrap: $wrap,
+          justify-content: $justifyContent,
+          align-items: $alignItems,
+          align-self: $alignSelf,
+          gap: $gap
+  );
+
+  @each $property, $value in $properties {
+    @if $value != null {
+      #{$property}: $value;
+    }
+  }
 }
 
 @mixin grid($columns: repeat(auto-fill, minmax(100px, 1fr)), $rows: auto, $gap: 1rem) {

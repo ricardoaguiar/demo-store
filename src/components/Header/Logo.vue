@@ -1,13 +1,17 @@
+<script setup lang="ts">
+import { useAsset } from '@/composables'
+</script>
+
 <template>
-  <span class="logo">
+  <router-link to="/" class="logo">
     <img
-      src="/src/assets/img/fi-logo.svg"
+      :src="useAsset('fi-logo.svg')"
       width="40"
       height="40"
       alt="site-logo"
       title="site-logo"
     />
-  </span>
+  </router-link>
 </template>
 
 <style scoped lang="scss">

@@ -52,7 +52,7 @@ function goShopping(): string {
 </script>
 
 <template>
-  <div class="thank-you-page container py-5">
+  <div class="thank-you-page">
     <template v-if="orderId">
       <h1 class="title pb-3">Thank you for your purchase!</h1>
       <p class="subtitle">Here are the items you purchased:</p>
@@ -61,18 +61,21 @@ function goShopping(): string {
 
     <div v-if="purchasedItems.length > 0">
       <ul class="product-list">
-        <li v-for="item in purchasedItems" :key="item.id">
+        <li
+          class="product-list-item"
+          v-for="item in purchasedItems"
+          :key="item.id"
+        >
           <router-link :to="`/details/${item.id}`" class="product-link">
-            <span class="product-list-item">
+            <span class="product-list-tile">
               <img
                 :src="useAsset(item.img)"
                 :alt="item.name"
                 class="product-image"
               />
-              <strong>{{ item.title }}</strong
-              >Quantity: {{ item.quantity }} - Total: ${{
-                item.price * item.quantity
-              }}
+              <strong>{{ item.title }}</strong>
+              <span>Quantity: {{ item.quantity }}</span>
+              <span>Total: ${{ item.price * item.quantity }}</span>
             </span>
           </router-link>
         </li>
@@ -110,6 +113,16 @@ function goShopping(): string {
 </template>
 
 <style scoped lang="scss">
+.thank-you-page {
+  width: 80%;
+  margin: $spacing-8;
+
+  @include responsive(mobile, max) {
+    width: 90%;
+    //padding-inline: $spacing-base;
+  }
+}
+
 .nothing-here {
   margin-bottom: 1.5rem;
 }
@@ -125,6 +138,7 @@ function goShopping(): string {
 .order-total .subtitle {
   font-weight: bold;
 }
+
 .action-buttons {
   display: flex;
   flex-direction: row;
@@ -132,16 +146,29 @@ function goShopping(): string {
 }
 
 .product-list {
-  display: flex;
-  flex-flow: row wrap;
-  gap: $spacing-base;
-  margin-bottom: 2rem;
+  @include flex(
+    $direction: row,
+    $wrap: wrap,
+    $gap: $spacing-2,
+    $justifyContent: flex-start
+  );
+  margin-bottom: $spacing-8;
 }
+
 .product-list-item {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid #ddd;
-  padding: 0 1rem 1rem;
+  @include responsive(mobile, max) {
+    width: 30%;
+  }
+
+  @include responsive(mobile-small, max) {
+    width: 45%;
+  }
+}
+
+.product-list-tile {
+  @include flex($direction: column);
+  border: 1px solid $color-grey;
+  padding: 0 $spacing-base $spacing-base;
 }
 
 .product-link {
@@ -152,10 +179,10 @@ function goShopping(): string {
 .product-image {
   flex: 1 0 30%;
   max-width: 15rem;
-}
-.container {
-  max-width: 800px;
-  margin: 0 auto;
+
+  @include responsive(mobile-small, max) {
+    max-width: 10rem;
+  }
 }
 
 .delete-order,
