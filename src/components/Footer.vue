@@ -1,35 +1,24 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { onMounted } from 'vue'
+import { useMainStore } from '@/store'
 
-const footerData = ref(null)
+const store = useMainStore()
 
-onMounted(async () => {
-  try {
-    const response = await fetch('/data/footer.json')
-    if (response.ok) {
-      footerData.value = await response.json()
-    } else {
-      console.error('Failed to load footer data')
-    }
-  } catch (error) {
-    console.error('Error fetching footer data:', error)
-  }
-})
+onMounted(async () => await store.fetchFooter())
 </script>
 
 <template>
-  <footer class="footer has-background-light" v-if="footerData">
+  <footer class="footer has-background-light">
     <div class="footer-top">
       <div
-        v-if="footerData"
-        v-for="(section, index) in footerData.footer"
+        v-for="(section, index) in store.footerData?.sections"
         :key="index"
         class="footer-section"
       >
-        <h3 class="title is-5">{{ section.title }}</h3>
+        <h3 class="title is-5">{{ section?.title }}</h3>
         <ul class="links-list">
           <li v-for="(link, linkIndex) in section.links" :key="linkIndex">
-            <RouterLink :to="link.url">{{ link.text }}</RouterLink>
+            <RouterLink :to="link.url">{{ link?.text }}</RouterLink>
           </li>
         </ul>
       </div>
@@ -40,7 +29,7 @@ onMounted(async () => {
         <h3 class="title is-5">Get Social</h3>
         <div class="social-links">
           <a
-            v-for="(social, i) in footerData.social"
+            v-for="(social, i) in store.footerData?.social"
             :key="i"
             :href="social.url"
             target="_blank"
@@ -53,24 +42,24 @@ onMounted(async () => {
       </div>
 
       <div class="footer-bottom-right">
-        <p>{{ footerData.contactInfo.address }}</p>
+        <p>{{ store.footerData?.contactInfo?.address }}</p>
         <p>
           Email:
-          <a :href="'mailto:' + footerData.contactInfo.email">{{
-            footerData.contactInfo.email
+          <a :href="'mailto:' + store.footerData?.contactInfo.email">{{
+            store.footerData?.contactInfo.email
           }}</a>
         </p>
         <p>
           Phone:
-          <a :href="'tel:' + footerData.contactInfo.phone">{{
-            footerData.contactInfo.phone
+          <a :href="'tel:' + store.footerData?.contactInfo.phone">{{
+            store.footerData?.contactInfo.phone
           }}</a>
         </p>
       </div>
     </div>
 
     <div class="copyright has-text-centered">
-      <p>{{ footerData.copyright }}</p>
+      <p>{{ store.footerData?.copyright }}</p>
     </div>
   </footer>
 </template>
@@ -128,25 +117,23 @@ onMounted(async () => {
 }
 
 .links-list {
-  display: flex;
-  flex-flow: row wrap;
+  @include flex(
+    $direction: column,
+    $justifyContent: space-between,
+    $alignItems: flex-start
+  );
   padding: 0;
   margin: 0;
-  justify-content: space-between;
 
   @include responsive(mobile-small, max) {
     justify-content: space-between;
+    flex-flow: row wrap;
     margin-bottom: $spacing-base;
 
     li {
       flex-basis: 50%;
       width: 50%;
     }
-  }
-
-  @include responsive(mobile-small, min) {
-    flex-direction: column;
-    align-items: flex-start;
   }
 }
 

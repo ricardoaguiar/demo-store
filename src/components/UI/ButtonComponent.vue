@@ -11,10 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { useRoute } from 'vue-router'
-import { computed } from 'vue'
-
-const props = defineProps({
+defineProps({
   buttonText: String,
   buttonClass: String,
   customStyle: Object,
@@ -22,10 +19,6 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['click'])
-
-const route = useRoute()
-
-const isCurrentPage = computed(() => route.path === props.routerLink)
 
 function handleClick(): void {
   emit('click')

@@ -1,6 +1,6 @@
 <template>
   <Header />
-  <div class="not-found-container container py-5">
+  <div class="not-found-container">
     <h1 class="not-found-title">Oops! 404 - Page Not Found</h1>
     <p class="not-found-message">
       It looks like the page you're looking for doesn't exist or has been moved.
@@ -10,45 +10,65 @@
       :src="useAsset('404.jpg')"
       alt="Page Not Found"
     />
-    <RouterLink to="/products" class="back-to-products">
-      <button class="back-button">Back to Product List</button>
-    </RouterLink>
+    <ButtonComponent class="back-button" @click="backToProducts"
+      >Back to Product List</ButtonComponent
+    >
   </div>
   <Footer />
 </template>
 
 <script setup lang="ts">
+import router from '@/router'
 import { useAsset } from '@/composables'
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
+import ButtonComponent from '@/components/UI/ButtonComponent.vue'
+
+function backToProducts(): void {
+  router.push({ path: '/products' })
+}
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .not-found-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
+  @include flex(
+    $direction: column,
+    $alignItems: center,
+    $justifyContent: center
+  );
   text-align: center;
-  padding: 20px;
-  color: #000000;
+  padding: $spacing-5;
+  color: $color-black;
+  margin-top: $spacing-10;
+
+  @include responsive(mobile, max) {
+    margin-top: $spacing-6;
+    padding: 0;
+  }
 }
 
 .not-found-title {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+  font-size: $font-size-3xl;
+  margin-bottom: $spacing-base;
+
+  @include responsive(mobile, max) {
+    font-size: $font-size-2xl;
+  }
 }
 
 .not-found-message {
-  font-size: 1.2rem;
-  color: #555;
-  margin-bottom: 2rem;
+  font-size: $font-size-xl;
+  color: $color-grey;
+  margin-bottom: $spacing-8;
 }
 
 .not-found-image {
   width: 80%;
-  margin-bottom: 2rem;
+  margin-bottom: $spacing-8;
+
+  @include responsive(mobile, max) {
+    width: 100vw;
+  }
 }
 
 .back-to-products {
@@ -56,19 +76,23 @@ import Footer from '@/components/Footer.vue'
 }
 
 .back-button {
-  background-color: #000000;
-  color: #ffffff;
-  padding: 0.5rem 1rem;
-  font-weight: bold;
-  font-size: 1.2rem;
+  background-color: $color-black;
+  color: $color-white;
+  padding: $spacing-2 $spacing-base;
+  font-weight: $bold;
+  font-size: $font-size-xl;
   text-transform: capitalize;
   border: none;
   border-radius: 2px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+
+  @include responsive(mobile, max) {
+    margin-bottom: $spacing-8;
+  }
 }
 
 .back-button:hover {
-  background-color: #3c3c3c;
+  background-color: $color-grey;
 }
 </style>

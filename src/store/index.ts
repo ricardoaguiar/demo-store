@@ -27,6 +27,7 @@ export const useMainStore = defineStore('main', {
     isCartOpen: false,
     navLinks: [],
     isMobileMenuOpen: false,
+    footerData: null,
   }),
 
   getters: {
@@ -130,6 +131,30 @@ export const useMainStore = defineStore('main', {
         this.navLinks = data.nav.links
       } catch (err: any) {
         this.error = err.message || 'Error fetching navigation'
+        throw err
+      } finally {
+        this.loading = false
+      }
+    },
+
+    async fetchFooter(): Promise<void> {
+      this.loading = true
+      this.error = null
+      try {
+        const response = await fetch('/data/footer.json')
+        if (!response.ok) {
+          throw new Error('Failed to fetch footer')
+        }
+        const { footer, contactInfo, social, copyright } = await response.json()
+
+        this.footerData = {
+          sections: footer,
+          contactInfo,
+          social,
+          copyright,
+        }
+      } catch (err: any) {
+        this.error = err.message || 'Error fetching footer'
         throw err
       } finally {
         this.loading = false

@@ -1,4 +1,9 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import {
+  createRouter,
+  createWebHistory,
+  RouteLocationNormalized,
+  NavigationGuardNext,
+} from 'vue-router'
 import { useMainStore } from '@/store'
 
 const routes = [
@@ -24,8 +29,12 @@ const routes = [
         component: () => import('@/views/Details/[id].vue'),
         props: true,
         meta: { title: 'Product PDP' },
-        beforeEnter: (to, from, next) => {
-          const productId = parseInt(to.params.id, 10)
+        beforeEnter: (
+          to: RouteLocationNormalized,
+          from: RouteLocationNormalized,
+          next: NavigationGuardNext
+        ) => {
+          const productId = parseInt(to.params.id as string, 10)
 
           if (isNaN(productId) || productId < 0) {
             // Redirect to 404 if the ID is not a valid number or out of range
@@ -45,7 +54,11 @@ const routes = [
         path: '/thank-you',
         name: 'ThankYou',
         component: () => import('@/views/ThankYou.vue'),
-        beforeEnter: (to, from, next) => {
+        beforeEnter: (
+          to: RouteLocationNormalized,
+          from: RouteLocationNormalized,
+          next: NavigationGuardNext
+        ) => {
           const store = useMainStore()
 
           // Safely retrieve purchasedItems from the store or localStorage

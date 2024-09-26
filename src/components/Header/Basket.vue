@@ -55,12 +55,19 @@ function goShopping(): void {
 
       <Total v-if="store.itemsNumber" />
 
-      <ButtonComponent
-        v-if="store.cartItems.length > 0"
-        buttonText="finish checkout"
-        buttonClass="checkout-button"
-        @click="handleCheckout"
-      />
+      <div class="basket-buttons" v-if="store.cartItems.length > 0">
+        <ButtonComponent
+          buttonText="Continue Shopping"
+          buttonClass="continue-shopping"
+          @click="goShopping"
+        />
+
+        <ButtonComponent
+          buttonText="finish checkout"
+          buttonClass="checkout-button"
+          @click="handleCheckout"
+        />
+      </div>
 
       <ButtonComponent
         v-if="store.cartItems.length === 0"
@@ -87,46 +94,46 @@ function goShopping(): void {
 
 .close-basket {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  width: 1.5rem;
-  height: 1.5rem;
+  top: $spacing-base;
+  right: $spacing-base;
+  width: $spacing-6;
+  height: $spacing-6;
+  color: $color-white;
   border-radius: 50%;
   text-align: center;
   cursor: pointer;
   transition: all 0.3s ease;
   overflow: hidden;
   white-space: nowrap;
-  color: #ffffff;
   background: transparent;
 }
 
+.continue-shopping,
 .empty-basket__go-shopping {
+  background: $color-black;
+  color: $color-white;
+  padding: $spacing-base;
   display: block;
   width: 100%;
-  background: black;
-  color: white;
   border-radius: 2px;
-  padding: $spacing-base;
 }
 
 .checkout-button {
-  padding: 1rem 1.5rem;
+  font-size: $font-size-base;
+  padding: $spacing-base $spacing-6;
   width: 100%;
   background: rgb(125, 207, 133);
   font-weight: bold;
   text-transform: uppercase;
-
-  font-size: $font-size-base;
 }
 
 .cart-container {
+  padding: $spacing-2;
+  margin-bottom: $spacing-2;
   position: relative;
   width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 2px;
-  padding: $spacing-2;
-  margin-bottom: $spacing-2;
 }
 
 .cart-item {
@@ -143,7 +150,7 @@ function goShopping(): void {
   right: 0;
   width: 25rem;
   height: 100%;
-  background: #ffffff;
+  background: $color-white;
   overflow-y: auto;
   z-index: 1500;
   transform: translateX(100%);
@@ -159,12 +166,16 @@ function goShopping(): void {
 }
 
 .cart-items {
-  color: black;
-  padding: 1rem;
+  color: $color-black;
+  padding: $spacing-base;
 }
 
 .columns {
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.basket-buttons {
+  @include flex($direction: column, $gap: $spacing-2);
 }
 </style>
