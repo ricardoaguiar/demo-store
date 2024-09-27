@@ -30,6 +30,7 @@ useHead({
   ],
 })
 </script>
+
 <style lang="scss" scoped>
 .products-page-view {
   display: grid;

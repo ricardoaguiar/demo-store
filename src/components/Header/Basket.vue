@@ -63,8 +63,8 @@ function goShopping(): void {
         />
 
         <ButtonComponent
-          buttonText="finish checkout"
-          buttonClass="checkout-button"
+          buttonText="Complete Checkout"
+          buttonClass="complete-checkout"
           @click="handleCheckout"
         />
       </div>
@@ -72,7 +72,7 @@ function goShopping(): void {
       <ButtonComponent
         v-if="store.cartItems.length === 0"
         buttonText="Go Shopping"
-        buttonClass="empty-basket__go-shopping"
+        buttonClass="go-shopping"
         @click="goShopping"
       />
     </div>
@@ -86,19 +86,19 @@ function goShopping(): void {
 <style scoped lang="scss">
 .cart-title {
   border-bottom: 1px solid rgba(211, 211, 211, 0.5);
-  background: #1f2229;
+  background: $color-black;
+  color: $color-white;
+  padding: $spacing-2 0;
   width: 100%;
-  color: white;
-  padding: 0.5rem 0;
 }
 
 .close-basket {
-  position: absolute;
   top: $spacing-base;
   right: $spacing-base;
   width: $spacing-6;
   height: $spacing-6;
   color: $color-white;
+  position: absolute;
   border-radius: 50%;
   text-align: center;
   cursor: pointer;
@@ -106,25 +106,24 @@ function goShopping(): void {
   overflow: hidden;
   white-space: nowrap;
   background: transparent;
+  border: none;
 }
 
 .continue-shopping,
-.empty-basket__go-shopping {
+.go-shopping {
   background: $color-black;
   color: $color-white;
   padding: $spacing-base;
   display: block;
   width: 100%;
-  border-radius: 2px;
 }
 
-.checkout-button {
+.complete-checkout {
   font-size: $font-size-base;
   padding: $spacing-base $spacing-6;
+  background: $secondary-color;
+  font-weight: $bold;
   width: 100%;
-  background: rgb(125, 207, 133);
-  font-weight: bold;
-  text-transform: uppercase;
 }
 
 .cart-container {
@@ -137,20 +136,20 @@ function goShopping(): void {
 }
 
 .cart-item {
+  column-gap: $spacing-2;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  column-gap: $spacing-2;
   position: relative;
 }
 
 /* Cart Body */
 .cart {
+  background: $color-white;
   position: fixed;
   top: 0;
   right: 0;
   width: 25rem;
   height: 100%;
-  background: $color-white;
   overflow-y: auto;
   z-index: 1500;
   transform: translateX(100%);
@@ -170,9 +169,8 @@ function goShopping(): void {
   padding: $spacing-base;
 }
 
-.columns {
-  margin-top: 10px;
-  margin-bottom: 10px;
+.total {
+  margin-block: $spacing-5 / 2;
 }
 
 .basket-buttons {

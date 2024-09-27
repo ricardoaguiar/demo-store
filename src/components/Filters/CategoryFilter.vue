@@ -38,7 +38,7 @@ function filterByColor(colorName: string): void {
       </span>
       <span
         :class="{ 'caret-up': dropdownActive, 'caret-down': !dropdownActive }"
-      ></span>
+      />
     </button>
 
     <div
@@ -51,7 +51,7 @@ function filterByColor(colorName: string): void {
         v-for="category in store.categories.types"
         :key="category.value"
       >
-        <button @click="filterByCategory(category.name)">
+        <button class="category-name" @click="filterByCategory(category.name)">
           {{ category.name }}
         </button>
       </div>
@@ -74,40 +74,12 @@ function filterByColor(colorName: string): void {
 </template>
 
 <style scoped lang="scss">
-.dropdown-button {
-  width: 100%;
-  justify-content: space-between;
-  flex: 1;
-}
-
-.button.is-light {
-  color: $color-black;
-  background: $color-white;
-  border-radius: 0;
-  border: 1px solid grey;
-}
-
 .category-name {
-  padding: $spacing-2;
-  font-size: $font-size-xs;
   text-transform: capitalize;
-  flex: 1;
 }
 
 .category-name::after {
   content: 's';
-}
-
-.color-container {
-  @include flex($direction: row, $gap: $spacing-2, $alignItems: center);
-  padding: $spacing-2;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  background-color: $background-color;
-
-  .colors-title {
-    color: $color-black;
-    font-weight: bold;
-  }
 }
 
 .color-options {
@@ -124,15 +96,27 @@ function filterByColor(colorName: string): void {
   opacity: 1;
 }
 
-.circle {
-  height: 15px;
-  width: 15px;
-  border-radius: 50%;
-  display: inline-block;
-  cursor: pointer;
+.color-container {
+  @include flex($direction: row, $gap: $spacing-2, $alignItems: center);
+  padding: $spacing-2;
+  background-color: $background-color;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
 
-  &:hover {
-    outline: 1px solid rgba(0, 0, 0, 0.75);
+  .colors-title {
+    color: $color-black;
+    font-weight: $bold;
+  }
+
+  .circle {
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+
+    &:hover {
+      outline: 1px solid rgba(0, 0, 0, 0.75);
+    }
   }
 }
 </style>

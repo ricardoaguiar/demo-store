@@ -22,9 +22,9 @@ import { useAsset } from '@/composables'
     transform: translateX(-50%);
   }
   & {
-    display: flex;
-    width: 2rem;
-    height: 2rem;
+    @include flex();
+    width: $spacing-8;
+    height: $spacing-8;
   }
 }
 </style>

@@ -18,8 +18,8 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         additionalData: `
-        @import "@/assets/styles/mixins.scss";
         @import "@/assets/styles/variables.scss";
+        @import "@/assets/styles/mixins.scss";
         `,
       },
     },
@@ -36,7 +36,6 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
       '@types': fileURLToPath(new URL('./types', import.meta.url)),
-      '@data': fileURLToPath(new URL('./data', import.meta.url)),
     },
   },
   build: {

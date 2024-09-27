@@ -25,25 +25,23 @@ const store = useMainStore()
 
 <style scoped lang="scss">
 .bag {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex($alignItems: center, $justifyContent: center);
   position: relative;
   cursor: pointer;
 
   .image {
-    min-width: 25px;
-    min-height: 25px;
+    min-width: $spacing-6;
+    min-height: $spacing-6;
   }
 
   .badge {
-    background-color: #000000;
-    color: white;
-    border-radius: 50%;
-    font-size: 10px;
+    background-color: $color-black;
+    color: $color-white;
+    font-weight: $bold;
+    font-size: $font-size-xl / 2;
+    padding: $spacing-1;
     line-height: 1;
-    font-weight: bold;
-    padding: 4px;
+    border-radius: 50%;
     position: absolute;
     top: -5px;
     right: -5px;

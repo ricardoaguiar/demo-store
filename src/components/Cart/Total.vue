@@ -25,5 +25,6 @@ const store = useMainStore()
   width: 100%;
   margin-inline: auto;
   background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
 }
 </style>

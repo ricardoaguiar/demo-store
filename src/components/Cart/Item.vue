@@ -1,11 +1,16 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import { useMainStore } from '@/store'
 import { useAsset } from '@/composables'
+
+// types
+import type { CartItems } from '@/types'
+
+// components
 import ButtonComponent from '@/components/UI/ButtonComponent.vue'
-import { ref } from 'vue'
 
 const props = defineProps<{
-  item: Object
+  item: CartItems
 }>()
 
 const store = useMainStore()
@@ -17,7 +22,7 @@ function updateQuantity(newQuantity: number): void {
   store.updateLocalStorage()
 }
 
-function handleClick(actionType: string) {
+function handleClick(actionType: string): void {
   switch (actionType) {
     case 'increment':
       if (quantity.value < 9) {
@@ -69,24 +74,13 @@ function handleClick(actionType: string) {
   </div>
 
   <div class="remove-btn-container column p-0">
-    <span class="remove-btn" @click="store.outCart(item.id!)">&#10006;</span>
+    <span class="remove-button" @click="store.outCart(item.id!)">&#10006;</span>
   </div>
 </template>
 
 <style scoped lang="scss">
 .cart-img {
   width: 100%;
-}
-
-.product-title {
-  font-size: $font-size-base;
-  & {
-    font-weight: $bold;
-  }
-}
-
-.product-price {
-  font-size: $font-size-lg;
 }
 
 .title-container {
@@ -99,13 +93,42 @@ function handleClick(actionType: string) {
   );
 }
 
-.remove-btn {
+.product-title {
+  font-size: $font-size-xl;
+  & {
+    font-weight: $bold;
+  }
+}
+
+.product-price {
+  font-size: $font-size-base;
+  letter-spacing: 0.02rem;
+}
+
+.counter-container {
+  @include flex($alignItems: center, $alignSelf: flex-start);
+  font-size: $font-size-base;
+  font-weight: $bold;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  max-width: fit-content;
+  line-height: normal;
+
+  .button {
+    padding-bottom: 0.2rem;
+  }
+}
+
+.update-quantity {
+  border: none;
+}
+
+.remove-button {
+  width: $spacing-6;
+  height: $spacing-6;
   display: inline-block;
   position: absolute;
   top: 0;
   right: 0;
-  width: 1.5rem;
-  height: 1.5rem;
   background-color: transparent;
   border-radius: 50%;
   text-align: center;
@@ -115,22 +138,9 @@ function handleClick(actionType: string) {
   white-space: nowrap;
 }
 
-.remove-btn:hover {
+.remove-button:hover {
   background-color: $color-black;
   color: $color-white;
   border-radius: $spacing-5;
-}
-
-.counter-container {
-  @include flex($alignItems: center, $alignSelf: flex-start);
-
-  font-size: $font-size-base;
-  font-weight: bold;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  max-width: fit-content;
-  line-height: normal;
-  .button {
-    padding-bottom: 0.2rem;
-  }
 }
 </style>
