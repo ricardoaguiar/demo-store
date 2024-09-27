@@ -170,7 +170,7 @@ function goShopping(): void {
 }
 
 .total {
-  margin-block: $spacing-5 / 2;
+  margin-block: calc($spacing-5 / 2);
 }
 
 .basket-buttons {
