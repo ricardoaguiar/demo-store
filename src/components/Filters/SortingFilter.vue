@@ -27,7 +27,7 @@ function selectSortOption(value: string) {
       </span>
       <span
         :class="{ 'caret-up': dropdownActive, 'caret-down': !dropdownActive }"
-      ></span>
+      />
     </button>
 
     <div
@@ -45,20 +45,6 @@ function selectSortOption(value: string) {
 </template>
 
 <style scoped lang="scss">
-.button.is-light {
-  color: black;
-  background: white;
-  border-radius: 0;
-  border: 1px solid grey;
-  flex: 1;
-}
-
-.dropdown-button {
-  width: 100%;
-  justify-content: space-between;
-  flex: 1;
-}
-
 .sorting-options {
   overflow: hidden;
   max-height: 0;

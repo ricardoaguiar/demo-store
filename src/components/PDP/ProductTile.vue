@@ -123,9 +123,10 @@ function handleClick(actionType: string, product?: Product): void {
 }
 
 .view-item-button {
-  background: #ffffff;
-  flex: 100%;
   padding-inline: $spacing-base;
+  background: $color-white;
+  flex: 100%;
+  border: none;
 }
 
 .counter-container {
@@ -154,13 +155,11 @@ function handleClick(actionType: string, product?: Product): void {
   border: 1px solid $color-black;
   outline: none;
   padding-bottom: 0.2rem;
-  border-radius: 2px;
   height: 33px;
 }
 
 .quantity {
   font-weight: bolder;
-  border-radius: 2px;
   padding: $spacing-1 $spacing-2;
   width: 3.2ch;
   background-color: rgba(0, 0, 0, 0.05);

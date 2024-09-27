@@ -3,6 +3,7 @@
 import { useMainStore } from '@/store'
 import CategoryFilter from '@/components/Filters/CategoryFilter.vue'
 import SortingFilter from '@/components/Filters/SortingFilter.vue'
+import ButtonComponent from '@/components/UI/ButtonComponent.vue'
 
 const store = useMainStore()
 </script>
@@ -11,32 +12,25 @@ const store = useMainStore()
   <aside class="sidebar-navigation">
     <SortingFilter />
     <CategoryFilter />
-    <button
+    <ButtonComponent
       class="button reset-button is-light"
       v-if="store.isFilterSet"
       @click="store.resetFilters()"
     >
       RESET FILTERS
-    </button>
+    </ButtonComponent>
   </aside>
 </template>
 
 <style scoped lang="scss">
 .sidebar-navigation {
-  display: flex;
-  flex-direction: column;
-  gap: $spacing-base;
-}
-
-.slider {
-  width: 100%;
+  @include flex($direction: column, $gap: $spacing-base);
 }
 
 .reset-button {
+  color: $color-black;
+  background: $color-white;
+  border: 1px solid $color-black;
   width: 100%;
-  color: black;
-  background: white;
-  border-radius: 0;
-  border: 1px solid grey;
 }
 </style>

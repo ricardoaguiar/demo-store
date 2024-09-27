@@ -186,7 +186,7 @@ function goShopping(): string {
 }
 
 .delete-order,
-.empty-basket__go-shopping {
+.go-shopping {
   background-color: #000000;
   color: white;
   font-weight: bold;

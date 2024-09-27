@@ -83,7 +83,6 @@ function backToProducts(): void {
   font-size: $font-size-xl;
   text-transform: capitalize;
   border: none;
-  border-radius: 2px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 

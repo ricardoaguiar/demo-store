@@ -53,12 +53,14 @@ function navigateTo(path: string): void {
 
     &:deep(.nav-link-button) {
       padding: $spacing-base $spacing-5;
+      border-bottom: 1px solid $color-grey;
       justify-content: flex-start;
       width: 100%;
       text-align: left;
 
       &:hover {
         background-color: $hover-color;
+        border-radius: 0;
       }
     }
   }
@@ -72,5 +74,9 @@ function navigateTo(path: string): void {
 
 .nav-link {
   background-color: white;
+}
+
+.nav-link-button {
+  border: none;
 }
 </style>

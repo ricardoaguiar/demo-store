@@ -68,8 +68,8 @@ export interface SocialLink {
 
 // top nav
 export interface NavLink {
-  text?: string | undefined
-  url?: string | undefined
+  name?: string | undefined
+  url: string
 }
 
 export interface NavIcons {

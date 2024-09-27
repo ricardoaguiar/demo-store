@@ -25,16 +25,4 @@ function handleClick(): void {
 }
 </script>
 
-<style scoped lang="scss">
-.button {
-  outline: none;
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-  cursor: pointer;
-}
-
-button:disabled {
-  cursor: not-allowed;
-}
-</style>
+<style scoped lang="scss"></style>
