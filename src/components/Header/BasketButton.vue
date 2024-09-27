@@ -38,7 +38,7 @@ const store = useMainStore()
     background-color: $color-black;
     color: $color-white;
     font-weight: $bold;
-    font-size: $font-size-xl / 2;
+    font-size: calc($font-size-xl / 2);
     padding: $spacing-1;
     line-height: 1;
     border-radius: 50%;
