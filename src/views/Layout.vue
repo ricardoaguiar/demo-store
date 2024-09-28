@@ -8,7 +8,7 @@ const route = useRoute()
 </script>
 
 <template>
-  <div class="wrapper">
+  <div class="wrapper" :key="route.fullPath">
     <Header />
 
     <main>

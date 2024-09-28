@@ -24,5 +24,3 @@ function handleClick(): void {
   emit('click')
 }
 </script>
-
-<style scoped lang="scss"></style>

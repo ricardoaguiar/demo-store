@@ -51,12 +51,12 @@ const goToSlide = (index: number): void => {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .carousel {
   position: relative;
   overflow: hidden;
   background: transparent;
-  padding-bottom: 0.5rem;
+  padding-bottom: $spacing-2;
 }
 
 .carousel-content {
@@ -80,17 +80,16 @@ const goToSlide = (index: number): void => {
 }
 
 .carousel-indicators {
-  display: flex;
-  justify-content: center;
-  margin-top: 0.5rem;
+  @include flex($justifyContent: center);
+  margin-top: $spacing-3;
 }
 
 .carousel-indicator {
-  background-color: white;
+  background-color: $color-white;
   height: 15px;
   width: 15px;
   border-radius: 50%;
-  border: 1px solid #817f7f;
+  border: 1px solid $color-mid-grey;
   margin: 0 5px;
   cursor: pointer;
 }

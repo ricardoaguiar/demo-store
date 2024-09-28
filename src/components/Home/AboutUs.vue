@@ -1,68 +1,54 @@
 <script setup lang="ts">
 import { useAsset } from '@/composables'
-import { ref, onMounted } from 'vue'
+import { onMounted } from 'vue'
+import { useMainStore } from '@/store'
 
-const aboutUsContent = ref(null)
+const store = useMainStore()
 
-onMounted(async () => {
-  try {
-    const response = await fetch('/data/content.json')
-    if (response.ok) {
-      aboutUsContent.value = await response.json()
-    } else {
-      console.error('Failed to load footer data')
-    }
-  } catch (error) {
-    console.error('Error fetching about data:', error)
-  }
-})
+onMounted(async () => await store.fetchAboutUs())
 </script>
 
 <template>
   <section class="about-us">
-    <div class="container">
-      <h1 class="title is-3 has-text-centered">About Us</h1>
+    <h1 class="title is-3 has-text-centered">About Us</h1>
+    <div v-if="store.aboutUs?.aboutUsData.length">
+      <div
+        v-for="(item, i) in store.aboutUs?.aboutUsData"
+        :key="i"
+        :class="[
+          'columns is-vcentered about-us-content',
+          { 'is-reverse': item?.reverse },
+        ]"
+      >
+        <!-- Image Section -->
+        <div class="column is-half image-container">
+          <img
+            :src="useAsset(item?.image)"
+            alt="home-img"
+            title="home-img"
+            class="about-us-img"
+            loading="lazy"
+          />
+        </div>
 
-      <!-- Ensure aboutUsContent is loaded before rendering -->
-      <div v-if="aboutUsContent">
-        <div
-          v-for="(item, index) in aboutUsContent.aboutUs"
-          :key="index"
-          :class="[
-            'columns is-vcentered about-us-content',
-            { 'is-reverse': item.reverse },
-          ]"
-        >
-          <!-- Image Section -->
-          <div class="column is-half image-container">
-            <img
-              :src="useAsset(item.image)"
-              alt="home-img"
-              title="home-img"
-              class="about-us-img"
-              loading="lazy"
-            />
-          </div>
-
-          <!-- Text Section -->
-          <div class="column is-half about-us-text">
-            <h2 class="subtitle is-4">{{ item.title }}</h2>
-            <p>{{ item.text }}</p>
-          </div>
+        <!-- Text Section -->
+        <div class="column is-half about-us-text">
+          <h2 class="subtitle is-4">{{ item.title }}</h2>
+          <p>{{ item.text }}</p>
         </div>
       </div>
-      <p v-else>Loading...</p>
     </div>
+    <p v-else>Loading...</p>
   </section>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .about-us {
-  padding: 2rem;
+  padding: $spacing-8;
 }
 
 .about-us-content {
-  margin-bottom: 2rem;
+  margin-bottom: $spacing-8;
 }
 
 .image-container img {
@@ -73,7 +59,7 @@ onMounted(async () => {
 
 .about-us-text {
   background-color: rgba(255, 255, 255, 0.9);
-  padding: 2rem;
+  padding: $spacing-8;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin-left: -5%;
   z-index: 1;
@@ -86,9 +72,10 @@ onMounted(async () => {
 .is-reverse .about-us-text {
   margin-left: 0;
   margin-right: -5%;
+  text-align: right;
 }
 
-@media screen and (max-width: 768px) {
+@include responsive(mobile, max) {
   .about-us-content {
     flex-direction: column !important;
   }
@@ -100,7 +87,7 @@ onMounted(async () => {
   }
 
   .about-us-text {
-    padding: 1rem;
+    padding: $spacing-base;
     box-shadow: none;
     background-color: transparent;
   }

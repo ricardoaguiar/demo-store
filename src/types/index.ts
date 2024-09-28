@@ -1,3 +1,4 @@
+// Product-related interfaces
 export interface Product {
   id: number
   img?: string
@@ -14,9 +15,118 @@ export interface Product {
   quantity: number
 }
 
+export interface CartItems {
+  img?: string
+  quantity: number
+  color?: string
+  description?: string
+  stars?: string
+  title?: string
+  categoryName?: string
+  dateAdded?: number
+  sale?: boolean
+  reviews?: number
+  price: number
+  name?: string
+  id: number
+}
+
+// Navigation-related interfaces
+export interface NavLink {
+  name?: string
+  url: string
+}
+
+export interface NavIcons {
+  search?: string
+  account?: string
+  cart?: string
+}
+
+export interface Nav {
+  mobileBurgerMenu?: string
+  links: NavLink[]
+  icons: NavIcons
+}
+
+// Navigation API Response
+export interface NavigationResponse {
+  nav: {
+    links: NavLink[]
+  }
+}
+
+// Footer-related interfaces
+export interface Footer {
+  sections: FooterSection[]
+  contactInfo: ContactInfo
+  social: SocialLink[]
+  copyright?: string
+}
+
+export interface FooterSection {
+  title?: string
+  links: FooterLink[]
+}
+
+export interface FooterLink {
+  text?: string
+  url: string
+}
+
+export interface ContactInfo {
+  address?: string
+  email?: string
+  phone?: string
+}
+
+export interface SocialLink {
+  platform?: string
+  icon?: string
+  url?: string
+}
+
+// Footer API Response
+export interface FooterResponse {
+  footer: FooterSection[]
+  contactInfo: ContactInfo
+  social: SocialLink[]
+  copyright: string
+}
+
+// About Us-related interfaces
+export interface AboutUsItem {
+  title?: string
+  text?: string
+  image?: string
+  reverse?: boolean
+}
+
+export interface AboutUs {
+  aboutUsData: AboutUsItem[]
+}
+
+export interface FilterOption {
+  name: string
+  value: string
+}
+
+export interface Filters {
+  filters: {
+    categories: {
+      types: FilterOption[]
+      colors: FilterOption[]
+    }
+    sorting: {
+      options: FilterOption[]
+    }
+  }
+}
+
+// State interface
 export interface State {
   productInfo: Product | null
-  cartItems: Product[]
+  cartItems: CartItems[]
   products: Product[]
   loading: boolean
   error: string | null
@@ -34,72 +144,5 @@ export interface State {
   navLinks: NavLink[]
   isMobileMenuOpen: boolean
   footerData?: Footer | null
-}
-
-// footer
-export interface Footer {
-  sections: FooterSection[]
-  contactInfo: ContactInfo
-  social: SocialLink[]
-  copyright?: string | undefined
-}
-
-export interface FooterSection {
-  title?: string | undefined
-  links: FooterLink[]
-}
-
-export interface FooterLink {
-  text?: string | undefined
-  url: string
-}
-
-export interface ContactInfo {
-  address?: string | undefined
-  email?: string | undefined
-  phone?: string | undefined
-}
-
-export interface SocialLink {
-  platform?: string | undefined
-  icon?: string | undefined
-  url?: string | undefined
-}
-
-// top nav
-export interface NavLink {
-  name?: string | undefined
-  url: string
-}
-
-export interface NavIcons {
-  search?: string | undefined
-  account?: string | undefined
-  cart?: string | undefined
-}
-
-export interface Nav {
-  mobileBurgerMenu?: string | undefined
-  links: NavLink[]
-  icons: NavIcons
-}
-
-export interface TopNavigation {
-  nav: Nav
-}
-
-export interface CartItems {
-  img?: string
-  quantity: number
-  color?: string
-  description?: string
-  stars?: string
-  title?: string
-  categoryName?: string
-  dateAdded?: number
-  sale?: boolean
-  reviews?: number
-  price: number
-  name?: string
-  id: number
+  aboutUs?: AboutUs | null
 }

@@ -25,15 +25,22 @@ export function useAsset(
   return new URL(`../assets/img/${fullPath}`, import.meta.url).href
 }
 
-export function useMobileMenuToggle() {
-  const isMobileMenuOpen = ref(false)
+export async function handleApiCall<T>(
+  asyncFn: () => Promise<T>,
+  setLoading: (loading: boolean) => void,
+  setError: (message: string | null) => void
+): Promise<T | null> {
+  setLoading(true)
+  setError(null)
 
-  function toggleMobileMenu() {
-    isMobileMenuOpen.value = !isMobileMenuOpen.value
-  }
-
-  return {
-    isMobileMenuOpen,
-    toggleMobileMenu,
+  try {
+    return await asyncFn()
+  } catch (err: any) {
+    const errorMessage = err?.message || 'An error occurred'
+    setError(errorMessage)
+    console.error(errorMessage)
+    return null
+  } finally {
+    setLoading(false)
   }
 }

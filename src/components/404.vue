@@ -36,10 +36,10 @@ function backToProducts(): void {
     $alignItems: center,
     $justifyContent: center
   );
-  text-align: center;
   padding: $spacing-5;
   color: $color-black;
   margin-top: $spacing-10;
+  text-align: center;
 
   @include responsive(mobile, max) {
     margin-top: $spacing-6;
@@ -63,8 +63,8 @@ function backToProducts(): void {
 }
 
 .not-found-image {
-  width: 80%;
   margin-bottom: $spacing-8;
+  width: 80%;
 
   @include responsive(mobile, max) {
     width: 100vw;
@@ -81,8 +81,8 @@ function backToProducts(): void {
   padding: $spacing-2 $spacing-base;
   font-weight: $bold;
   font-size: $font-size-xl;
+  border: 1px solid transparent;
   text-transform: capitalize;
-  border: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
 
@@ -92,6 +92,7 @@ function backToProducts(): void {
 }
 
 .back-button:hover {
-  background-color: $color-grey;
+  background-color: $color-white;
+  color: $color-black;
 }
 </style>

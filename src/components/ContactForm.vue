@@ -49,17 +49,17 @@
 
 <style scoped lang="scss">
 .contact-form {
+  margin: $spacing-16;
+  gap: $spacing-16 $spacing-8;
   min-height: 100%;
   width: 80vw;
-  margin: $spacing-16;
-  display: flex;
-  gap: $spacing-16 $spacing-8;
+  @include flex;
 
   @include responsive(mobile, max) {
-    flex-direction: column;
-    width: 100vw;
     margin: $spacing-2 0;
     row-gap: $spacing-2;
+    flex-direction: column;
+    width: 100vw;
   }
 }
 
@@ -68,7 +68,6 @@
   background-size: cover;
   background-position: center;
   width: 40%;
-  height: 40vh;
 
   @include responsive(mobile, max) {
     height: 25vh;
@@ -84,8 +83,6 @@
   }
 
   @include responsive(mobile, max) {
-    display: flex;
-    flex-direction: column;
     row-gap: $spacing-2;
     padding: $spacing-base;
   }
@@ -104,14 +101,16 @@
   border-radius: $spacing-1;
   padding-inline: $spacing-8;
   padding-block: $spacing-2;
-  border: none;
-  width: 40%;
+  border: 1px solid transparent;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  width: 45%;
 
   &:hover,
   &:focus {
-    background-color: inherit;
-    color: black;
+    color: $color-black;
     border: 1px solid $color-black;
+    background-color: inherit;
   }
 
   @include responsive(mobile-small, max) {
