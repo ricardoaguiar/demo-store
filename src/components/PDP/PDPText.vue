@@ -1,3 +1,20 @@
+<script setup lang="ts">
+import { onUnmounted, reactive } from 'vue'
+
+const text = reactive({
+  moreInfo: ['DESCRIPTION', 'WARRANTY', 'REVIEWS'],
+  active: 0,
+})
+
+onUnmounted(() => {
+  // clear the reactive object
+  text.moreInfo = []
+  text.active = 0
+})
+//More Info area tab selector
+const selectedInfo = (index: number): number => (text.active = index)
+</script>
+
 <template>
   <div class="product-description has-text-centered columns is-mobile is-0">
     <div
@@ -28,33 +45,21 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { reactive } from 'vue'
-
-const text = reactive({
-  moreInfo: ['DESCRIPTION', 'WARRANTY', 'REVIEWS'],
-  active: 0,
-})
-
-//More Info area tab selector
-const selectedInfo = (index: number): number => (text.active = index)
-</script>
-
 <style scoped lang="scss">
 .product-description {
   margin-block: $spacing-8;
 }
 .column h6 {
-  height: 25px;
-  padding-bottom: 25px;
-  border-bottom: 1px solid lightgrey;
+  height: $spacing-6;
+  padding-bottom: $spacing-6;
+  border-bottom: 1px solid $color-grey;
   color: grey;
   cursor: pointer;
 }
 
 .is-active h6 {
-  font-weight: bold;
-  border-bottom: 1px solid black !important;
-  color: black;
+  font-weight: $bold;
+  border-bottom: 1px solid $color-black;
+  color: $color-black;
 }
 </style>

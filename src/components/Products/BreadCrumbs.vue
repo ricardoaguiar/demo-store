@@ -32,10 +32,4 @@
     text-transform: capitalize;
   }
 }
-.product-title {
-  outline: 1px solid red;
-  @include responsive(mobile) {
-    font-size: 30px !important;
-  }
-}
 </style>

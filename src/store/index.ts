@@ -1,12 +1,20 @@
+import { handleApiCall } from '@/composables/utils'
 import { defineStore } from 'pinia'
-import { Product, State } from '@/types'
+import {
+  AboutUs,
+  CartItems,
+  Filters,
+  FooterResponse,
+  NavigationResponse,
+  Product,
+  State,
+} from '@/types'
 
 export const useMainStore = defineStore('main', {
   state: (): State => ({
     productInfo: null,
-    // Initialize the cartItems with a quantity field
     cartItems: (
-      JSON.parse(localStorage.getItem('cartItems') || '[]') as Product[]
+      JSON.parse(localStorage.getItem('cartItems') || '[]') as CartItems[]
     ).map((item: Product) => ({
       ...item,
       quantity: item.quantity || 1, // Ensure quantity is present if not already
@@ -28,6 +36,7 @@ export const useMainStore = defineStore('main', {
     navLinks: [],
     isMobileMenuOpen: false,
     footerData: null,
+    aboutUs: null,
   }),
 
   getters: {
@@ -81,83 +90,130 @@ export const useMainStore = defineStore('main', {
   },
 
   actions: {
+    async fetchAboutUs(): Promise<void> {
+      const asyncOperation = async () => {
+        const response = await fetch('/data/content.json')
+        if (!response.ok) {
+          throw new Error('Failed to fetch content')
+        }
+        return response.json()
+      }
+
+      const result = await handleApiCall<AboutUs>(
+        asyncOperation,
+        (loading) => {
+          this.loading = loading
+        },
+        (message) => {
+          this.error = message
+        }
+      )
+
+      if (result) {
+        this.aboutUs = result
+      }
+    },
+
     async fetchProducts(): Promise<void> {
-      this.loading = true
-      this.error = null
-      try {
+      const asyncOperation = async () => {
         const response = await fetch('/data/products.json')
         if (!response.ok) {
           throw new Error('Failed to fetch products')
         }
-        this.products = await response.json()
-      } catch (err: any) {
-        this.error = err.message || 'Error fetching products'
+        return response.json()
+      }
 
-        throw err
-      } finally {
-        this.loading = false
+      const result = await handleApiCall<Product[]>(
+        asyncOperation,
+        (loading) => {
+          this.loading = loading
+        },
+        (message) => {
+          this.error = message
+        }
+      )
+
+      if (result) {
+        this.products = result
       }
     },
 
     async fetchFilters(): Promise<void> {
-      this.loading = true
-      this.error = null
-      try {
+      const asyncOperation = async () => {
         const response = await fetch('/data/filters.json')
         if (!response.ok) {
           throw new Error('Failed to fetch filters')
         }
-        const data = await response.json()
-        this.categories.types = data.filters.categories.types
-        this.categories.colors = data.filters.categories.colors
-        this.sortingOptions = data.filters.sorting.options
-      } catch (err: any) {
-        this.error = err.message || 'Error fetching filters'
-        throw err
-      } finally {
-        this.loading = false
+        return response.json()
+      }
+
+      const result = await handleApiCall<Filters>(
+        asyncOperation,
+        (loading) => {
+          this.loading = loading
+        },
+        (message) => {
+          this.error = message
+        }
+      )
+
+      if (result) {
+        this.categories.types = result.filters.categories.types
+        this.categories.colors = result.filters.categories.colors
+        this.sortingOptions = result.filters.sorting.options
       }
     },
 
     async fetchNavigation(): Promise<void> {
-      this.loading = true
-      this.error = null
-      try {
+      const asyncOperation = async () => {
         const response = await fetch('/data/navigation.json')
         if (!response.ok) {
           throw new Error('Failed to fetch navigation')
         }
-        const data = await response.json()
-        this.navLinks = data.nav.links
-      } catch (err: any) {
-        this.error = err.message || 'Error fetching navigation'
-        throw err
-      } finally {
-        this.loading = false
+        return response.json()
+      }
+
+      const result = await handleApiCall<NavigationResponse>(
+        asyncOperation,
+        (loading) => {
+          this.loading = loading
+        },
+        (message) => {
+          this.error = message
+        }
+      )
+
+      if (result) {
+        this.navLinks = result.nav.links
       }
     },
 
     async fetchFooter(): Promise<void> {
-      this.loading = true
-      this.error = null
-      try {
+      const asyncOperation = async () => {
         const response = await fetch('/data/footer.json')
         if (!response.ok) {
           throw new Error('Failed to fetch footer')
         }
-        const { footer, contactInfo, social, copyright } = await response.json()
+        return response.json()
+      }
 
-        this.footerData = {
-          sections: footer,
-          contactInfo,
-          social,
-          copyright,
+      const result = await handleApiCall<FooterResponse>(
+        asyncOperation,
+        (loading) => {
+          this.loading = loading
+        },
+        (message) => {
+          this.error = message
         }
-      } catch (err: any) {
-        this.error = err.message || 'Error fetching footer'
-        throw err
-      } finally {
-        this.loading = false
+      )
+
+      if (result) {
+        this.footerData = {
+          sections: result.footer,
+          contactInfo: result.contactInfo,
+          social: result.social,
+          copyright: result.copyright,
+        }
       }
     },
 

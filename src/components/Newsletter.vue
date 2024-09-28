@@ -1,8 +1,17 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const isSubmitted = ref(false)
+
+function submit(): void {
+  isSubmitted.value = true
+}
+</script>
+
 <template>
   <section class="newsletter-area">
     <div class="container">
       <div class="columns is-justify-content-space-between">
-        <!-- Newsletter Text -->
         <div class="column is-full-mobile">
           <div class="newsletter-text">
             <h2 class="title is-3">Join our Newsletter</h2>
@@ -10,9 +19,8 @@
           </div>
         </div>
 
-        <!-- Newsletter Form -->
         <div class="column is-full-mobile">
-          <div class="newsletter-form">
+          <div class="newsletter-form" v-if="!isSubmitted">
             <form @submit.prevent="submit">
               <input
                 class="input"
@@ -23,17 +31,15 @@
               <button class="submit-button is-dark input-button">Submit</button>
             </form>
           </div>
+
+          <div v-else class="thank-you-message">
+            <p>Thank you for subscribing!</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 </template>
-
-<script setup lang="ts">
-function submit(): void {
-  alert('Thank you for subscribing')
-}
-</script>
 
 <style scoped lang="scss">
 .newsletter-area {
@@ -47,12 +53,12 @@ function submit(): void {
 
 .newsletter-text {
   h2 {
-    color: #2c3539;
-    margin-bottom: 10px;
+    color: $color-black;
+    margin-bottom: $spacing-3;
   }
 
   p {
-    color: #2c3539;
+    color: $color-black;
     margin-bottom: 0;
   }
 }
@@ -81,10 +87,18 @@ function submit(): void {
       &:hover,
       &:focus {
         background-color: inherit;
-        color: black;
+        color: $color-black;
         border: 1px solid $color-black;
       }
     }
   }
+}
+
+.thank-you-message {
+  padding: $spacing-base;
+  background-color: $light-blue;
+  text-align: center;
+  font-size: $font-size-lg;
+  color: $color-black;
 }
 </style>

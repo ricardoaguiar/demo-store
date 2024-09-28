@@ -46,7 +46,7 @@ function deleteOrder(): void {
   purchasedItems.value = []
 }
 
-function goShopping(): string {
+function goShopping(): void {
   router.push({ path: '/products' })
 }
 </script>
@@ -119,12 +119,11 @@ function goShopping(): string {
 
   @include responsive(mobile, max) {
     width: 90%;
-    //padding-inline: $spacing-base;
   }
 }
 
 .nothing-here {
-  margin-bottom: 1.5rem;
+  margin-bottom: $spacing-6;
 }
 
 .nothing-here-img {
@@ -136,13 +135,11 @@ function goShopping(): string {
 }
 
 .order-total .subtitle {
-  font-weight: bold;
+  font-weight: $bold;
 }
 
 .action-buttons {
-  display: flex;
-  flex-direction: row;
-  gap: $spacing-base;
+  @include flex($direction: row, $gap: $spacing-base);
 }
 
 .product-list {
@@ -166,6 +163,8 @@ function goShopping(): string {
 }
 
 .product-list-tile {
+  border-radius: 2px;
+
   @include flex($direction: column);
   border: 1px solid $color-grey;
   padding: 0 $spacing-base $spacing-base;
@@ -187,14 +186,14 @@ function goShopping(): string {
 
 .delete-order,
 .go-shopping {
-  background-color: #000000;
-  color: white;
-  font-weight: bold;
+  background-color: $color-black;
+  color: $color-white;
+  font-weight: $bold;
+  padding: $spacing-2 $spacing-base;
   border-radius: 2px;
-  padding: 0.5rem 1rem;
 }
 
 .delete-order {
-  background-color: #aa0808;
+  background-color: $color-red;
 }
 </style>

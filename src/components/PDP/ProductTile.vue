@@ -171,19 +171,19 @@ function handleClick(actionType: string, product?: Product): void {
   font-size: 1.8rem;
 
   @include responsive(mobile) {
-    font-size: 1.25rem;
+    font-size: $font-size-xl;
     margin: 0;
   }
 }
 
 .price {
-  font-size: 1.2rem;
-  font-weight: bolder;
+  font-size: $font-size-lg;
+  font-weight: $bolder;
 }
 
 .product-info {
+  gap: $spacing-3;
   width: 100%;
-  gap: 0.75rem;
 
   @include flex(
     $direction: column,
@@ -193,7 +193,7 @@ function handleClick(actionType: string, product?: Product): void {
   );
 
   @include responsive(mobile) {
-    gap: 0.75rem;
+    gap: $spacing-3;
   }
 }
 
@@ -203,7 +203,8 @@ function handleClick(actionType: string, product?: Product): void {
   width: 100%;
   margin: auto;
 
-  @include flex($direction: row, $gap: 2rem);
+  @include flex($direction: row, $gap: $spacing-8);
+
   @include responsive(mobile) {
     @include flex($direction: column);
 
@@ -226,12 +227,12 @@ function handleClick(actionType: string, product?: Product): void {
   @include flex($direction: column, $alignItems: center);
 
   .product-info {
+    margin: 0 0 $spacing-base 0;
     align-items: center;
-    margin: 0 0 1rem 0;
   }
   .counter-container {
-    flex-direction: column;
     gap: $spacing-2;
+    flex-direction: column;
   }
 }
 
@@ -239,41 +240,22 @@ function handleClick(actionType: string, product?: Product): void {
   width: 100%;
 }
 
-.control {
-  .number {
-    border: 0.2px solid lightgrey;
-    font-size: 19px;
-    font-weight: bold;
-    margin-bottom: 30px;
-  }
-
-  .button {
-    border: none;
-    background: inherit;
-    outline: none;
-
-    &:active {
-      background-color: lightgrey;
-    }
-  }
-}
-
 .add-to-cart-button {
-  transition-duration: 500ms;
   background-color: $color-black;
-  color: #fff;
+  color: $color-white;
+  line-height: $line-height-xl;
+  transition-duration: 500ms;
   font-size: 15px;
   cursor: pointer;
   border: none;
   border-radius: 2px;
-  line-height: $line-height-xl;
   text-transform: uppercase;
 
   &:hover,
   &:focus {
-    background-color: inherit;
-    color: black;
+    color: $color-black;
     outline: 1px solid $color-black;
+    background-color: inherit;
   }
 }
 </style>
