@@ -31,6 +31,7 @@ onMounted(() => {
   } catch (error) {
     console.error('Error retrieving order data from localStorage:', error)
   }
+  window.scrollTo({ top: 0, behavior: 'smooth' })
 })
 
 const orderTotal = computed((): number => {
