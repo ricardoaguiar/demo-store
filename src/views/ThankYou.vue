@@ -53,7 +53,7 @@ function goShopping(): void {
 </script>
 
 <template>
-  <div class="thank-you-page">
+  <div :class="['thank-you-page', { 'has-order-id': orderId }]">
     <template v-if="orderId">
       <h1 class="title pb-3">Thank you for your purchase!</h1>
       <p class="subtitle">Here are the items you purchased:</p>
@@ -89,13 +89,10 @@ function goShopping(): void {
 
     <div v-else class="nothing-here">
       <h2 class="title">Nothing here. Go shopping!</h2>
-      <div
-        class="nothing-here-img"
-        :style="{ backgroundImage: `url(${useAsset('empty-basket', 'jpg')})` }"
-      />
+      <div class="nothing-here-img" />
     </div>
 
-    <div class="action-buttons">
+    <div :class="['action-buttons', { 'order-deleted': !orderId }]">
       <ButtonComponent
         v-if="purchasedItems.length !== 0"
         buttonClass="delete-order"
@@ -106,8 +103,9 @@ function goShopping(): void {
 
       <ButtonComponent
         buttonText="Continue Shopping"
-        buttonClass="empty-basket__go-shopping"
+        buttonClass="go-shopping"
         @click="goShopping"
+        :class="{ 'deleted-order': !orderId }"
       />
     </div>
   </div>
@@ -115,24 +113,26 @@ function goShopping(): void {
 
 <style scoped lang="scss">
 .thank-you-page {
-  width: 80%;
-  margin: $spacing-8;
+  width: 100%;
+}
 
-  @include responsive(mobile, max) {
-    width: 90%;
-  }
+.has-order-id {
+  padding: $spacing-8 $spacing-6;
 }
 
 .nothing-here {
-  margin-bottom: $spacing-6;
+  margin-block: $spacing-8;
+
+  h2 {
+    margin-inline: $spacing-6;
+  }
 }
 
 .nothing-here-img {
-  margin-left: calc(-1 * (100vw - 100%) / 2);
-  width: 100vw;
+  background-image: url('@/assets/img/empty-basket.jpg');
   height: 30rem;
   background-size: cover;
-  background-position: top left;
+  background-position: center;
 }
 
 .order-total .subtitle {
@@ -141,6 +141,11 @@ function goShopping(): void {
 
 .action-buttons {
   @include flex($direction: row, $gap: $spacing-base);
+}
+
+.order-deleted {
+  justify-content: center;
+  margin-bottom: $spacing-8;
 }
 
 .product-list {
