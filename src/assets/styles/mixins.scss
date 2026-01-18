@@ -14,8 +14,10 @@ $breakpoints: (
 @mixin responsive($breakpoint, $direction: max, $max-breakpoint: null) {
   // Look up the breakpoint in the map
   $size: map.get($breakpoints, $breakpoint);
-  $max-size: if($max-breakpoint, map.get($breakpoints, $max-breakpoint), null);
-
+  $max-size: null;
+  @if $max-breakpoint != null {
+    $max-size: map.get($breakpoints, $max-breakpoint);
+  }
   // Apply media query based on direction (max-width or min-width)
   @if $size {
     @if $max-size {
