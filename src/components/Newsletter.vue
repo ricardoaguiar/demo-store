@@ -10,7 +10,7 @@ function submit(): void {
 
 <template>
   <section class="newsletter-area">
-    <div class="container">
+    <div class="header-container">
       <div class="columns is-justify-content-space-between">
         <div class="column is-full-mobile">
           <div class="newsletter-text">
@@ -22,12 +22,7 @@ function submit(): void {
         <div class="column is-full-mobile">
           <div v-if="!isSubmitted" class="newsletter-form">
             <form @submit.prevent="submit">
-              <input
-                class="input"
-                placeholder="Your E-mail"
-                required
-                type="email"
-              />
+              <input class="input" placeholder="Your E-mail" required type="email" />
               <button class="submit-button is-dark input-button">Submit</button>
             </form>
           </div>
