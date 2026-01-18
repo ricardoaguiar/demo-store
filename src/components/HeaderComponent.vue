@@ -9,14 +9,11 @@ import Basket from '@/components/Header/Basket.vue'
 
 <template>
   <header class="header">
-    <nav
-      class="navbar is-flex is-align-items-center is-justify-content-space-between"
-    >
+    <nav class="navbar is-flex is-align-items-center is-justify-content-space-between">
       <div class="navbar-group left-side is-flex is-align-items-center">
         <MobileMenu />
         <Logo class="logo" />
         <NavLinks :is-header-navigation="true" />
-        <a href="https://rba.dev" target="_blank" rel="noopener noreferrer">Blog</a>
       </div>
 
       <div class="navbar-group right-side is-flex is-align-items-center">
