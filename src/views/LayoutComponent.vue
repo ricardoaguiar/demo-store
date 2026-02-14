@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import { useRoute } from 'vue-router'
 import HeaderComponent from '@/components/HeaderComponent.vue'
 import FooterComponent from '@/components/FooterComponent.vue'
@@ -8,7 +8,7 @@ const route = useRoute()
 </script>
 
 <template>
-  <div class="wrapper" :key="route.fullPath">
+  <div :key="route.fullPath" class="wrapper">
     <HeaderComponent />
 
     <main>
@@ -25,5 +25,8 @@ const route = useRoute()
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
 }
 </style>
