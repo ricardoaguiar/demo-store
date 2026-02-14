@@ -12,6 +12,10 @@
       {
         "name": "Contact",
         "url": "/contact"
+      },
+      {
+        "name": "Blog",
+        "url": "https://rba.dev"
       }
     ]
   }

@@ -9,14 +9,11 @@ import Basket from '@/components/Header/Basket.vue'
 
 <template>
   <header class="header">
-    <nav
-      class="navbar is-flex is-align-items-center is-justify-content-space-between"
-    >
+    <nav class="navbar is-flex is-align-items-center is-justify-content-space-between flex-1">
       <div class="navbar-group left-side is-flex is-align-items-center">
         <MobileMenu />
         <Logo class="logo" />
         <NavLinks :is-header-navigation="true" />
-        <a href="https://rba.dev" target="_blank" rel="noopener noreferrer">Blog</a>
       </div>
 
       <div class="navbar-group right-side is-flex is-align-items-center">
@@ -29,13 +26,20 @@ import Basket from '@/components/Header/Basket.vue'
 
 <style lang="scss" scoped>
 .header {
+  background: var(--bulma-scheme-main);
   margin: 0 auto;
-  padding-inline: $spacing-8;
   width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 1;
 
   @include responsive(mobile, max) {
     padding-inline: $spacing-3;
   }
+}
+
+.navbar {
+  margin-inline: $spacing-8;
 }
 
 .navbar-group {

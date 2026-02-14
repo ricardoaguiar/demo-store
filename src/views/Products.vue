@@ -1,5 +1,5 @@
 <template>
-  <section class="products-page-view container py-5">
+  <section class="products-page-view header-container py-5">
     <div>
       <h1 class="title pt-3 has-text-centered">New Arrivals</h1>
       <BreadCrumbs />
@@ -25,9 +25,7 @@ useHead({
       content: 'Explore our wide range of products at Vue Demo Store.',
     },
   ],
-  link: [
-    { rel: 'canonical', href: 'https://vue-demo-store.pages.dev/products' },
-  ],
+  link: [{ rel: 'canonical', href: 'https://vue-demo-store.pages.dev/products' }],
 })
 </script>
 

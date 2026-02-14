@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import { useMainStore } from '@/store'
 import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
@@ -16,7 +16,15 @@ const { isHeaderNavigation } = defineProps({
   },
 })
 
+function isExternalLink(url: string): boolean {
+  return url.startsWith('http://') || url.startsWith('https://')
+}
+
 function navigateTo(path: string): void {
+  if (isExternalLink(path)) {
+    window.open(path, '_blank', 'noopener,noreferrer')
+    return
+  }
   const isSamePath = router.currentRoute.value.fullPath === path
   const shouldToggleMenu = !isHeaderNavigation
 
@@ -35,17 +43,14 @@ function navigateTo(path: string): void {
 <template>
   <div class="nav-container">
     <template v-for="(link, i) in store.navLinks" :key="i">
-      <ButtonComponent
-        @click="navigateTo(link.url)"
-        buttonClass="nav-link-button"
-      >
+      <ButtonComponent buttonClass="nav-link-button" @click="navigateTo(link.url)">
         {{ link.name }}
       </ButtonComponent>
     </template>
   </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .nav-container {
   @include flex($justifyContent: space-between, $gap: $spacing-base);
   @include responsive(mobile, max) {
