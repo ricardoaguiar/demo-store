@@ -63,9 +63,7 @@ const routes = [
 
           // Safely retrieve purchasedItems from the store or localStorage
           const purchasedItems = store.purchasedItems || []
-          const localStorageItems = JSON.parse(
-            localStorage.getItem('purchasedItems') || '[]'
-          )
+          const localStorageItems = JSON.parse(localStorage.getItem('purchasedItems') || '[]')
 
           // Check if purchasedItems exist in either the store or localStorage
           if (purchasedItems.length === 0 && localStorageItems.length === 0) {

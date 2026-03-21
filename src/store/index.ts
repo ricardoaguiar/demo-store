@@ -13,12 +13,12 @@ import {
 export const useMainStore = defineStore('main', {
   state: (): State => ({
     productInfo: null,
-    cartItems: (
-      JSON.parse(localStorage.getItem('cartItems') || '[]') as CartItems[]
-    ).map((item: Product) => ({
-      ...item,
-      quantity: item.quantity || 1, // Ensure quantity is present if not already
-    })),
+    cartItems: (JSON.parse(localStorage.getItem('cartItems') || '[]') as CartItems[]).map(
+      (item: Product) => ({
+        ...item,
+        quantity: item.quantity || 1, // Ensure quantity is present if not already
+      })
+    ),
     products: [],
     loading: false,
     error: null,
@@ -40,13 +40,10 @@ export const useMainStore = defineStore('main', {
   }),
 
   getters: {
-    itemsNumber: (state) =>
-      state.cartItems.reduce(
-        (total, product) => total + (product.quantity || 0),
-        0
-      ),
+    itemsNumber: state =>
+      state.cartItems.reduce((total, product) => total + (product.quantity || 0), 0),
 
-    totalPrice: (state) => {
+    totalPrice: state => {
       return state.cartItems.reduce(
         (acc, product) => acc + (product.price || 0) * (product.quantity || 1),
         0
@@ -56,16 +53,13 @@ export const useMainStore = defineStore('main', {
     filteredProducts(state) {
       let filtered = [...state.products]
       if (state.selectedCategory) {
-        filtered = filtered.filter(
-          (product) => product.categoryName === state.selectedCategory
-        )
+        filtered = filtered.filter(product => product.categoryName === state.selectedCategory)
         this.isFilterSet = true
       }
 
       if (state.selectedColor) {
         filtered = filtered.filter(
-          (product) =>
-            product.color?.toLowerCase() === state.selectedColor?.toLowerCase()
+          product => product.color?.toLowerCase() === state.selectedColor?.toLowerCase()
         )
 
         this.isFilterSet = true
@@ -101,10 +95,10 @@ export const useMainStore = defineStore('main', {
 
       const result = await handleApiCall<AboutUs>(
         asyncOperation,
-        (loading) => {
+        loading => {
           this.loading = loading
         },
-        (message) => {
+        message => {
           this.error = message
         }
       )
@@ -125,10 +119,10 @@ export const useMainStore = defineStore('main', {
 
       const result = await handleApiCall<Product[]>(
         asyncOperation,
-        (loading) => {
+        loading => {
           this.loading = loading
         },
-        (message) => {
+        message => {
           this.error = message
         }
       )
@@ -149,10 +143,10 @@ export const useMainStore = defineStore('main', {
 
       const result = await handleApiCall<Filters>(
         asyncOperation,
-        (loading) => {
+        loading => {
           this.loading = loading
         },
-        (message) => {
+        message => {
           this.error = message
         }
       )
@@ -175,10 +169,10 @@ export const useMainStore = defineStore('main', {
 
       const result = await handleApiCall<NavigationResponse>(
         asyncOperation,
-        (loading) => {
+        loading => {
           this.loading = loading
         },
-        (message) => {
+        message => {
           this.error = message
         }
       )
@@ -199,10 +193,10 @@ export const useMainStore = defineStore('main', {
 
       const result = await handleApiCall<FooterResponse>(
         asyncOperation,
-        (loading) => {
+        loading => {
           this.loading = loading
         },
-        (message) => {
+        message => {
           this.error = message
         }
       )
@@ -237,9 +231,7 @@ export const useMainStore = defineStore('main', {
     },
 
     inCart(product: Product): void {
-      const existingItem = this.cartItems.find(
-        (cartItem): boolean => cartItem.id === product.id
-      )
+      const existingItem = this.cartItems.find((cartItem): boolean => cartItem.id === product.id)
       if (existingItem) {
         existingItem.quantity = (existingItem.quantity || 0) + 1 // Increment quantity if item already exists
       } else {
@@ -250,9 +242,7 @@ export const useMainStore = defineStore('main', {
     },
 
     outCart(productId: number): void {
-      this.cartItems = this.cartItems.filter(
-        (product) => product.id !== productId
-      ) // Remove item if only 1 left
+      this.cartItems = this.cartItems.filter(product => product.id !== productId) // Remove item if only 1 left
       this.updateLocalStorage()
     },
 
