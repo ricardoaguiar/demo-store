@@ -1,5 +1,5 @@
-@use "@/assets/styles/variables.scss" as *;
-@use "@/assets/styles/mixins.scss" as *;
+@use '@/assets/styles/variables.scss' as *;
+@use '@/assets/styles/mixins.scss' as *;
 @import url('https://fonts.googleapis.com/css?family=Exo+2');
 
 :root {
@@ -18,17 +18,19 @@
   min-height: 100vh;
 }
 
-a, a:hover, a:visited {
+a,
+a:hover,
+a:visited {
   font-weight: $medium;
   color: $color-black;
   text-decoration: inherit;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   min-height: 100%;
-  padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0)
-  env(safe-area-inset-bottom, 0) env(safe-area-inset-left, 0);
+  padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0) env(safe-area-inset-bottom, 0) env(safe-area-inset-left, 0);
 }
 
 main {
@@ -45,9 +47,12 @@ h1 {
   text-transform: capitalize;
 }
 
-.input, .textarea, input, select, textarea {
+.input,
+.textarea,
+input,
+select,
+textarea {
   font-size: max($font-size-base, $font-root-size);
-
 
   & {
     outline: none;
@@ -61,7 +66,8 @@ h1 {
   }
 }
 
-li, ol {
+li,
+ol {
   list-style: none;
 }
 
